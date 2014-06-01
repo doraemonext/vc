@@ -49,8 +49,10 @@ class AccountController extends BaseController {
 
         try {
             $user = Sentry::findUserById($input['id']);
+            $group = Sentry::findGroupByName('normal');
 
             if ($user->attemptActivation($input['code'])) {
+                $user->addGroup($group);
                 $data['error'] = '您的账户已成功激活';
             } else {
                 $data['error'] = '激活链接无效';
@@ -59,6 +61,8 @@ class AccountController extends BaseController {
             $data['error'] = '激活链接无效，该用户未找到';
         } catch (Cartalyst\Sentry\Users\UserAlreadyActivatedException $e) {
             $data['error'] = '激活链接无效，该用户已经被激活，请直接登陆';
+        } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
+            $data['error'] = '用户组未找到，请联系管理员';
         } finally {
             return View::make('active', $data);
         }
