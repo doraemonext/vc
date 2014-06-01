@@ -12,9 +12,14 @@
         @else
             <p>{{ Session::get('error') }}</p>
             {{ Form::open(array('action' => 'AccountController@submitLogin')) }}
-                <input type="text" name="username" value="{{ $username or '' }}" />
-                <input type="password" name="password" />
-                <input type="submit" />
+                {{ Form::text('username', isset($username) ? $username : '') }}
+                {{ Form::password('password') }}
+                @if (isset($remember) && $remember === 'on')
+                    {{ Form::checkbox('remember', 'on', true) }}
+                @else
+                    {{ Form::checkbox('remember', 'on') }}
+                @endif
+                {{ Form::submit('登陆') }}
             {{ Form::close() }}
         @endif
     </body>

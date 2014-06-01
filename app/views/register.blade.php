@@ -12,10 +12,10 @@
         @else
             <p>{{ Session::get('error') }}</p>
             {{ Form::open(array('action' => 'AccountController@submitRegister')) }}
-                <input type="text" name="username" value="{{ $username or '' }}" />
-                <input type="email" name="email" value="{{ $email or '' }}" />
-                <input type="password" name="password" />
-                <input type="submit" />
+                {{ Form::text('username', isset($username) ? $username : '') }}
+                {{ Form::email('email', isset($email) ? $email : '') }}
+                {{ Form::password('password') }}
+                {{ Form::submit('注册') }}
             {{ Form::close() }}
         @endif
     </body>

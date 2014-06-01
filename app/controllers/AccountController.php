@@ -55,6 +55,11 @@ class AccountController extends BaseController {
     {
         $input = Input::only('username', 'email', 'password');
 
+        if (empty($input['email'])) {
+            Session::flash('error', '电子邮件不能为空');
+            return Redirect::route('register')->withInput(Input::except('password'));
+        }
+
         try {
             $user = Sentry::register(array(
                 'username' => $input['username'],
