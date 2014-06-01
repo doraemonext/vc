@@ -10,7 +10,7 @@ class AccountController extends BaseController {
 
         $data = Input::old();
 
-        return View::make('login', $data);
+        return View::make('account.login', $data);
     }
 
     public function showRegister()
@@ -21,7 +21,7 @@ class AccountController extends BaseController {
 
         $data = Input::old();
 
-        return View::make('register', $data);
+        return View::make('account.register', $data);
     }
 
     public function showLogout()
@@ -37,13 +37,13 @@ class AccountController extends BaseController {
 
         if (Sentry::check()) {
             $data['error'] = '您当前已登陆，激活无效';
-            return View::make('active', $data);
+            return View::make('account.active', $data);
         }
 
         $input = Input::only('id', 'code');
         if (empty($input['id']) || empty($input['code']) || $input['id'] != intval($input['id'])) {
             $data['error'] = '激活链接无效';
-            return View::make('active', $data);
+            return View::make('account.active', $data);
         }
         $input['id'] = intval($input['id']);
 
@@ -64,7 +64,7 @@ class AccountController extends BaseController {
         } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
             $data['error'] = '用户组未找到，请联系管理员';
         } finally {
-            return View::make('active', $data);
+            return View::make('account.active', $data);
         }
     }
 
@@ -76,7 +76,7 @@ class AccountController extends BaseController {
 
         $data = Input::old();
 
-        return View::make('forgotten', $data);
+        return View::make('account.forgotten', $data);
     }
 
     public function showForgottenReset()
@@ -86,19 +86,19 @@ class AccountController extends BaseController {
                 return Redirect::route('home');
             }
 
-            return View::make('forgotten_reset');
+            return View::make('account.forgotten_reset');
         } else {
             $data = array();
 
             if (Sentry::check()) {
                 $data['error'] = '您当前已登陆，重置无效';
-                return View::make('forgotten_reset', $data);
+                return View::make('account.forgotten_reset', $data);
             }
 
             $input = Input::only('id', 'code');
             if (empty($input['id']) || empty($input['code']) || $input['id'] != intval($input['id'])) {
                 $data['error'] = '重置链接无效';
-                return View::make('forgotten_reset', $data);
+                return View::make('account.forgotten_reset', $data);
             }
             $input['id'] = intval($input['id']);
 
@@ -109,14 +109,14 @@ class AccountController extends BaseController {
                     $data['success'] = '重置链接验证成功';
                     $data['id'] = $input['id'];
                     $data['code'] = $input['code'];
-                    return View::make('forgotten_reset', $data);
+                    return View::make('account.forgotten_reset', $data);
                 } else {
                     $data['error'] = '重置链接无效';
-                    return View::make('forgotten_reset', $data);
+                    return View::make('account.forgotten_reset', $data);
                 }
             } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
                 $data['error'] = '用户名不存在';
-                return View::make('forgotten_reset', $data);
+                return View::make('account.forgotten_reset', $data);
             }
         }
     }
