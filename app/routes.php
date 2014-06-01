@@ -20,11 +20,16 @@ Route::group(array('prefix' => 'account'), function()
         Route::get('/', array('uses' => 'AccountController@showLogin', 'as' => 'login'));
         Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitLogin'));
     });
-
     Route::group(array('prefix' => 'register'), function()
     {
         Route::get('/', array('uses' => 'AccountController@showRegister', 'as' => 'register'));
         Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitRegister'));
+    });
+    Route::get('/logout', array('uses' => 'AccountController@showLogout', 'as' => 'logout'));
+    Route::get('/active', array('uses' => 'AccountController@showActive', 'as' => 'active'));
+    Route::group(array('prefix' => 'forgotten'), function()
+    {
+        Route::get('/', array('uses' => 'AccountController@showForgotten', 'as' => 'forgotten'));
     });
 });
 

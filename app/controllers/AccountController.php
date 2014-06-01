@@ -4,6 +4,10 @@ class AccountController extends BaseController {
 
     public function showLogin()
     {
+        if (Sentry::check()) {
+            return Redirect::route('home');
+        }
+
         $data = Input::old();
 
         return View::make('login', $data);
@@ -11,9 +15,62 @@ class AccountController extends BaseController {
 
     public function showRegister()
     {
+        if (Sentry::check()) {
+            return Redirect::route('home');
+        }
+
         $data = Input::old();
 
         return View::make('register', $data);
+    }
+
+    public function showLogout()
+    {
+        Sentry::logout();
+
+        return Redirect::route('home');
+    }
+
+    public function showActive()
+    {
+        if (Sentry::check()) {
+            return Redirect::route('home');
+        }
+
+        $data = array();
+        $input = Input::only('id', 'code');
+        if (empty($input['id']) || empty($input['code']) || $input['id'] != intval($input['id'])) {
+            $data['error'] = '激活链接无效';
+            return View::make('active', $data);
+        }
+        $input['id'] = intval($input['id']);
+
+        try {
+            $user = Sentry::findUserById($input['id']);
+
+            if ($user->attemptActivation($input['code'])) {
+                $data['error'] = '您的账户已成功激活';
+            } else {
+                $data['error'] = '激活链接无效';
+            }
+        } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            $data['error'] = '激活链接无效，该用户未找到';
+        } catch (Cartalyst\Sentry\Users\UserAlreadyActivatedException $e) {
+            $data['error'] = '激活链接无效，该用户已经被激活，请直接登陆';
+        } finally {
+            return View::make('active', $data);
+        }
+    }
+
+    public function showForgotten()
+    {
+        if (Sentry::check()) {
+            return Redirect::route('home');
+        }
+
+        $data = Input::old();
+
+        return View::make('forgotten', $data);
     }
 
     public function submitLogin()
@@ -26,7 +83,7 @@ class AccountController extends BaseController {
                 'password' => $input['password'],
             );
 
-            if (is_null($input['remember'])) {
+            if (empty($input['remember'])) {
                 $user = Sentry::authenticate($credentials, false);
             } elseif ($input['remember'] === 'on') {
                 $user = Sentry::authenticate($credentials, true);
@@ -67,7 +124,11 @@ class AccountController extends BaseController {
                 'password' => $input['password'],
             ));
 
-            $activationCode = $user->getActivationCode();
+            $data = array('id' => $user->id, 'code' => $user->getActivationCode());
+            Mail::queue('emails.auth.active', $data, function($message) use($input)
+            {
+                $message->to($input['email'], $input['username'])->subject('激活邮件');
+            });
 
             Session::flash('success', '您已成功注册，请点击您邮箱中的链接来激活此账户');
             return Redirect::route('register');
@@ -82,5 +143,7 @@ class AccountController extends BaseController {
             return Redirect::route('register')->withInput(Input::except('password'));
         }
     }
+
+
 
 }
