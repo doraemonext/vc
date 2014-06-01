@@ -1,3 +1,5 @@
+@extends('account.templates.base')
+
 <!DOCTYPE html>
 
 <html>
