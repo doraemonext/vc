@@ -30,6 +30,9 @@ Route::group(array('prefix' => 'account'), function()
     Route::group(array('prefix' => 'forgotten'), function()
     {
         Route::get('/', array('uses' => 'AccountController@showForgotten', 'as' => 'forgotten'));
+        Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitForgotten'));
+        Route::get('/reset/', array('uses' => 'AccountController@showForgottenReset', 'as' => 'forgotten_reset'));
+        Route::post('/reset/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitForgottenReset'));
     });
 });
 
