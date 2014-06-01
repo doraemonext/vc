@@ -11,7 +11,20 @@
 |
 */
 
-Route::get('/', function()
+Route::get('/', array('uses' => 'HomeController@showHome', 'as' => 'home'));
+
+Route::group(array('prefix' => 'account'), function()
 {
-	return View::make('hello');
+    Route::group(array('prefix' => 'login'), function()
+    {
+        Route::get('/', array('uses' => 'AccountController@showLogin', 'as' => 'login'));
+        Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitLogin'));
+    });
+
+    Route::group(array('prefix' => 'register'), function()
+    {
+        Route::get('/', array('uses' => 'AccountController@showRegister', 'as' => 'register'));
+        Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitRegister'));
+    });
 });
+
