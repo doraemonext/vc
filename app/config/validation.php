@@ -6,4 +6,6 @@ return array(
     'password.required' => '请输入您的密码',
     'email.required' => '请输入您的电子邮件',
     'email.email' => '请输入一个合法的电子邮件地址',
+    'confirm_password.required' => '请输入确认密码',
+    'confirm_password.same' => '两次密码输入不一致'
 );

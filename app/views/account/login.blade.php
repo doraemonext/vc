@@ -52,6 +52,14 @@
                                 {{ Form::checkbox('remember', 'on') }}
                             @endif
                             <i></i>下次自动登陆</label>
+
+
+                            @if (Session::has('success'))
+                            <br>
+                            <div class="alert alert-success fade in">
+                                <li>{{ Session::get('success') }}</li>
+                            </div>
+                            @endif
                     </section>
                 </fieldset>
                 <footer>

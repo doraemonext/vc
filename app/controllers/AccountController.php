@@ -81,7 +81,7 @@ class AccountController extends BaseController {
 
     public function showForgottenReset()
     {
-        if (Session::has('success') || Session::has('error')) {
+        if (Session::has('error')) {
             if (Sentry::check()) {
                 return Redirect::route('home');
             }
@@ -240,15 +240,25 @@ class AccountController extends BaseController {
 
     public function submitForgottenReset()
     {
-        $input = Input::only('id', 'code', 'password');
+        $input = Input::only('id', 'code', 'password', 'confirm_password');
+
+        // 对提交信息进行验证
+        $rules = array(
+            'password' => 'required',
+            'confirm_password' => 'required|same:password'
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::to(URL::route('forgotten_reset').'?id='.$input['id'].'&code='.$input['code'])->withErrors($validator);
+        }
 
         try {
             $user = Sentry::findUserById($input['id']);
 
             if ($user->checkResetPasswordCode($input['code'])) {
                 if ($user->attemptResetPassword($input['code'], $input['password'])) {
-                    Session::flash('success', '您已成功重置密码');
-                    return Redirect::route('forgotten_reset');
+                    Session::flash('success', '您已成功重置密码，请重新登陆');
+                    return Redirect::route('login');
                 } else {
                     Session::flash('error', '出现意外错误，未成功重置密码，请重试');
                     return Redirect::route('forgotten_reset');
