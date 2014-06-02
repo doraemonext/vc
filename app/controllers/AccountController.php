@@ -31,6 +31,7 @@ class AccountController extends BaseController {
         return Redirect::route('home');
     }
 
+    /*
     public function showActive()
     {
         $data = array();
@@ -67,6 +68,7 @@ class AccountController extends BaseController {
             return View::make('account.active', $data);
         }
     }
+    */
 
     public function showForgotten()
     {
@@ -176,20 +178,19 @@ class AccountController extends BaseController {
         }
 
         try {
-            $user = Sentry::register(array(
+            $user = Sentry::createUser(array(
                 'username' => $input['username'],
                 'email' => $input['email'],
                 'password' => $input['password'],
+                'activated' => true
             ));
+            $group = Sentry::findGroupByName('normal');
 
-            $data = array('id' => $user->id, 'code' => $user->getActivationCode());
-            Mail::queue('emails.auth.active', $data, function($message) use($input)
-            {
-                $message->to($input['email'], $input['username'])->subject('激活邮件');
-            });
+            $user->addGroup($group);
+            Sentry::login($user, false);
 
-            Session::flash('success', '您已成功注册，请点击您邮箱中的链接来激活此账户');
-            return Redirect::route('register');
+            Session::flash('success', '您已成功注册');
+            return Redirect::route('home');
         } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
             Session::flash('error', '用户名不能为空');
             return Redirect::route('register')->withInput(Input::except('password'));
@@ -198,6 +199,9 @@ class AccountController extends BaseController {
             return Redirect::route('register')->withInput(Input::except('password'));
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
             Session::flash('error', '该用户名已存在');
+            return Redirect::route('register')->withInput(Input::except('password'));
+        } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            Session::flash('error', '发生系统错误，请重试');
             return Redirect::route('register')->withInput(Input::except('password'));
         }
     }
