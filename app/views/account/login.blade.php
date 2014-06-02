@@ -30,14 +30,14 @@
                                 @foreach ($errors->all('<li>:message</li>') as $message)
                                     {{ $message }}
                                 @endforeach
-			    </div>
+                            </div>
                             @endif
 
                             @if (Session::has('error'))
                             <br>
                             <div class="alert alert-danger fade in">
-				<li>{{ Session::get('error') }}</li>
-			    </div>
+                                <li>{{ Session::get('error') }}</li>
+                            </div>
                             @endif
 
                             <div class="note">
@@ -61,23 +61,3 @@
         </div>
     </div>
 @stop
-
-{{--
-    <body>
-        @if (Session::has('success'))
-            <p>{{ Session::get('success') }}</p>
-        @else
-            <p>{{ Session::get('error') }}</p>
-            {{ Form::open(array('action' => 'AccountController@submitLogin')) }}
-                {{ Form::text('username', isset($username) ? $username : '') }}
-                {{ Form::password('password') }}
-                @if (isset($remember) && $remember === 'on')
-                    {{ Form::checkbox('remember', 'on', true) }}
-                @else
-                    {{ Form::checkbox('remember', 'on') }}
-                @endif
-                {{ Form::submit('登陆') }}
-            {{ Form::close() }}
-        @endif
-    </body>
---}}

@@ -204,10 +204,25 @@ class AccountController extends BaseController {
 
     public function submitForgotten()
     {
-        $input = Input::only('username');
+        $input = Input::only('username', 'email');
+
+        // 对提交信息进行验证
+        $rules = array(
+            'username' => 'required|alpha_dash',
+            'email' => 'required|email'
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('forgotten')->withErrors($validator)->withInput(Input::all());
+        }
 
         try {
             $user = Sentry::findUserByLogin($input['username']);
+
+            if ($user->email !== $input['email']) {
+                Session::flash('error', '您输入的电子邮件地址和用户名不匹配');
+                return;
+            }
 
             $data = array('id' => $user->id, 'code' => $user->getResetPasswordCode());
             Mail::queue('emails.auth.reminder', $data, function($message) use($user)
