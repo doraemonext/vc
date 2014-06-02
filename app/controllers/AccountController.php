@@ -125,6 +125,16 @@ class AccountController extends BaseController {
     {
         $input = Input::only('username', 'password', 'remember');
 
+        // 对提交信息进行验证
+        $rules = array(
+            'username' => 'required|alpha_dash',
+            'password' => 'required'
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('login')->withErrors($validator)->withInput(Input::except('password'));
+        }
+
         try {
             $credentials = array(
                 'username' => $input['username'],
