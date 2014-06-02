@@ -178,10 +178,10 @@ class AccountController extends BaseController {
             'email' => 'required|email|max:255',
             'password' => 'required|min:6|max:64',
             'confirm_password' => 'required|min:6|max:64|same:password',
-            'job' => 'alpha_dash|max:255',
-            'name' => 'alpha_dash|max:255',
-            'contact' => 'alpha_dash|max:255',
-            'company' => 'alpha_dash|max:255',
+            'job' => 'max:255',
+            'name' => 'max:255',
+            'contact' => 'max:255',
+            'company' => 'max:255',
             'website' => 'url|max:255',
             'agree' => 'accepted'
         );
