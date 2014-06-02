@@ -34,19 +34,7 @@
             <div id="content" class="container">
                 <div class="row">
                     @section('content')
-                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-                        <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
-                        <div class="hero">
-                            <div class="pull-left login-desc-box-l">
-                                <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin, everywhere you go!</h4>
-                                <div class="login-app-icons">
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>
-                                </div>
-                            </div>
-                            <img src="{{ asset('smartadmin/img/demo/iphoneview.png') }}" class="pull-right display-image" alt="" style="width:210px">
-                        </div>
-                    </div>
+
                     @show
                 </div>
             </div>

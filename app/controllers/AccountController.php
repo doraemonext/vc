@@ -129,8 +129,8 @@ class AccountController extends BaseController {
 
         // 对提交信息进行验证
         $rules = array(
-            'username' => 'required|alpha_dash',
-            'password' => 'required'
+            'username' => 'required|alpha_dash|max:64',
+            'password' => 'required|max:64'
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
         if ($validator->fails()) {
@@ -170,11 +170,24 @@ class AccountController extends BaseController {
 
     public function submitRegister()
     {
-        $input = Input::only('username', 'email', 'password');
+        $input = Input::only('username', 'email', 'password', 'confirm_password', 'agree', 'job', 'name', 'contact', 'company', 'website');
 
-        if (empty($input['email'])) {
-            Session::flash('error', '电子邮件不能为空');
-            return Redirect::route('register')->withInput(Input::except('password'));
+        // 对提交信息进行验证
+        $rules = array(
+            'username' => 'required|alpha_dash|max:64',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6|max:64',
+            'confirm_password' => 'required|min:6|max:64|same:password',
+            'job' => 'alpha_dash|max:255',
+            'name' => 'alpha_dash|max:255',
+            'contact' => 'alpha_dash|max:255',
+            'company' => 'alpha_dash|max:255',
+            'website' => 'url|max:255',
+            'agree' => 'accepted'
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('register')->withErrors($validator)->withInput(Input::except(array('password', 'confirm_password')));
         }
 
         try {
@@ -182,7 +195,12 @@ class AccountController extends BaseController {
                 'username' => $input['username'],
                 'email' => $input['email'],
                 'password' => $input['password'],
-                'activated' => true
+                'activated' => true,
+                'job' => $input['job'],
+                'name' => $input['name'],
+                'contact' => $input['contact'],
+                'company' => $input['company'],
+                'website' => $input['website']
             ));
             $group = Sentry::findGroupByName('normal');
 
@@ -193,16 +211,16 @@ class AccountController extends BaseController {
             return Redirect::route('home');
         } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
             Session::flash('error', '用户名不能为空');
-            return Redirect::route('register')->withInput(Input::except('password'));
+            return Redirect::route('register')->withInput(Input::except(array('password', 'confirm_password')));
         } catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
             Session::flash('error', '密码不能为空');
-            return Redirect::route('register')->withInput(Input::except('password'));
+            return Redirect::route('register')->withInput(Input::except(array('password', 'confirm_password')));
         } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
             Session::flash('error', '该用户名已存在');
-            return Redirect::route('register')->withInput(Input::except('password'));
+            return Redirect::route('register')->withInput(Input::except(array('password', 'confirm_password')));
         } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
             Session::flash('error', '发生系统错误，请重试');
-            return Redirect::route('register')->withInput(Input::except('password'));
+            return Redirect::route('register')->withInput(Input::except(array('password', 'confirm_password')));
         }
     }
 
@@ -212,8 +230,8 @@ class AccountController extends BaseController {
 
         // 对提交信息进行验证
         $rules = array(
-            'username' => 'required|alpha_dash',
-            'email' => 'required|email'
+            'username' => 'required|alpha_dash|max:64',
+            'email' => 'required|email|max:255'
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
         if ($validator->fails()) {
@@ -248,8 +266,8 @@ class AccountController extends BaseController {
 
         // 对提交信息进行验证
         $rules = array(
-            'password' => 'required',
-            'confirm_password' => 'required|same:password'
+            'password' => 'required|max:64',
+            'confirm_password' => 'required|same:password|max:64'
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
         if ($validator->fails()) {
