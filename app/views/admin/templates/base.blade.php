@@ -72,10 +72,13 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">投资方管理</span></a>
                         <ul>
                             <li>
-                                <a href="">投资方列表</a>
+                                <a href="{{ route('admin.vc') }}">投资方列表</a>
                             </li>
                             <li>
                                 <a href="">投资方评论管理</a>
+                            </li>
+                            <li>
+                                <a href="">评分分类管理</a>
                             </li>
                         </ul>
                     </li>
@@ -134,7 +137,6 @@
                 <ol class="breadcrumb">
                     <i class="fa fa-lg fa-fw fa-home"></i>
                     @section('breadcrumb')
-                    <li>Blank Page</li>
                     @show
                 </ol>
                 <!-- end breadcrumb -->
@@ -142,10 +144,8 @@
             <!-- END RIBBON -->
 
             <!-- MAIN CONTENT -->
-            <div id="content">
-                @section('content')
-                @show
-            </div>
+            @section('content')
+            @show
             <!-- END MAIN CONTENT -->
 
         </div>

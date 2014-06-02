@@ -39,4 +39,8 @@ Route::group(array('prefix' => 'account'), function()
 Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()
 {
     Route::get('/', array('uses' => 'AdminHomeController@showHome', 'as' => 'admin.home'));
+    Route::group(array('prefix' => 'vc'), function()
+    {
+        Route::get('/', array('uses' => 'AdminVcController@showVc', 'as' => 'admin.vc'));
+    });
 });
