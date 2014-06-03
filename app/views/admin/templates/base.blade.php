@@ -72,7 +72,7 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">投资方管理</span></a>
                         <ul>
                             <li>
-                                <a href="{{ route('admin.vc') }}">投资方列表</a>
+                                <a href="{{ route('admin.vc') }}">投资方管理</a>
                             </li>
                             <li>
                                 <a href="">投资方评论管理</a>
@@ -86,7 +86,7 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">项目管理</span></a>
                         <ul>
                             <li>
-                                <a href="">项目列表</a>
+                                <a href="">项目管理</a>
                             </li>
                             <li>
                                 <a href="">分类管理</a>
@@ -133,6 +133,7 @@
 
             <!-- RIBBON -->
             <div id="ribbon">
+                <span class="ribbon-button-alignment"> <span id="refresh" class="btn btn-ribbon" data-title="refresh" rel="tooltip" data-placement="bottom" data-original-title="<i class='text-warning fa fa-warning'></i> 警告！这将会清除所有的本地缓存" data-html="true"><i class="fa fa-refresh"></i></span> </span>
                 <!-- breadcrumb -->
                 <ol class="breadcrumb">
                     <i class="fa fa-lg fa-fw fa-home"></i>

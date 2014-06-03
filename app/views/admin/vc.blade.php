@@ -12,7 +12,7 @@
             <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 投资方管理 <span>&gt; 投资方列表 </span></h1>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-	    <a data-toggle="modal" href="#myModal" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 添加新投资方</a>
+	    <a data-toggle="modal" href="{{ route('admin.vc.new') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 添加新投资方</a>
 	</div>
     </div>
 

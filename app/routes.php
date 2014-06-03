@@ -42,6 +42,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
     Route::group(array('prefix' => 'vc'), function()
     {
         Route::get('/', array('uses' => 'AdminVcController@showVc', 'as' => 'admin.vc'));
+        Route::group(array('prefix' => 'new'), function()
+        {
+            Route::get('/', array('uses' => 'AdminVcController@showNew', 'as' => 'admin.vc.new'));
+            Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AdminVcController@submitNew'));
+        });
         Route::group(array('prefix' => 'ajax'), function()
         {
             Route::get('/delete/{id?}', array('uses' => 'AdminVcController@ajaxDeleteVc', 'as' => 'admin.vc.ajax.delete'));
