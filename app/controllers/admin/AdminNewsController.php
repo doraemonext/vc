@@ -59,6 +59,7 @@ class AdminNewsController extends BaseController {
     public function submitNew()
     {
         $config = Config::get('upload');
+        
         $input = Input::only('title', 'summary', 'ckeditor');
         $input['title'] = addslashes(strip_tags($input['title']));
         $input['summary'] = strip_tags($input['summary'], '<br>');
@@ -73,7 +74,7 @@ class AdminNewsController extends BaseController {
             return Redirect::route('admin.news.new')->withErrors($validator)->withInput($input);
         }
 
-        // 对picture图片进行处理
+        // 对图片进行处理
         $input['picture'] = Input::file('picture');
         $filename = '';
         if (!is_null($input['picture'])) {
@@ -144,10 +145,9 @@ class AdminNewsController extends BaseController {
             return Redirect::route('admin.news.edit', $news->id)->withErrors($validator)->withInput($input);
         }
 
-        // 对picture图片进行处理
+        // 对图片进行处理
         $input['picture'] = Input::file('picture');
         $filename = '';
-        $config = Config::get('upload', array('vc.picture', 'vc.picture.default'));
         if (!is_null($input['picture'])) {
             if ($input['picture']->getError()) {
                 Session::flash('error', $input['picture']->getErrorMessage());
