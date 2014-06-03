@@ -94,7 +94,7 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">其他管理</span></a>
                         <ul>
                             <li>
-                                <a href="">新闻列表</a>
+                                <a href="{{ route('admin.news') }}">新闻列表</a>
                             </li>
                             <li>
                                 <a href="">新闻评论管理</a>

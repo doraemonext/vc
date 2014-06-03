@@ -84,4 +84,4 @@ App::missing(function($e) {
 
 require app_path().'/filters.php';
 
-
+date_default_timezone_set('PRC');

@@ -74,4 +74,24 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
             Route::get('/delete/{id?}', array('uses' => 'AdminShowcaseController@ajaxDeleteShowcase', 'as' => 'admin.showcase.ajax.delete'));
         });
     });
+
+    // 新闻管理
+    Route::group(array('prefix' => 'news'), function()
+    {
+        Route::get('/', array('uses' => 'AdminNewsController@showNews', 'as' => 'admin.news'));
+        Route::group(array('prefix' => 'new'), function()
+        {
+            Route::get('/', array('uses' => 'AdminNewsController@showNew', 'as' => 'admin.news.new'));
+            Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AdminNewsController@submitNew'));
+        });
+        Route::group(array('prefix' => 'edit'), function()
+        {
+            Route::get('/{id?}/', array('uses' => 'AdminNewsController@showEdit', 'as' => 'admin.news.edit'));
+            Route::post('/{id?}/submit/', array('uses' => 'AdminNewsController@submitEdit'));
+        });
+        Route::group(array('prefix' => 'ajax'), function()
+        {
+            Route::get('/delete/{id?}', array('uses' => 'AdminNewsController@ajaxDeleteNews', 'as' => 'admin.news.ajax.delete'));
+        });
+    });
 });

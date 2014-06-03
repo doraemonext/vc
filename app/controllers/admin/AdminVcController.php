@@ -105,7 +105,7 @@ class AdminVcController extends BaseController {
             $destination = $config['vc.logo'];
             do {
                 $filename = str_random(64);
-            } while (file_exists($destination.$filename));
+            } while (file_exists('public/'.$destination.$filename));
 
             $mime = $input['logo']->getMimeType();
             if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
@@ -113,7 +113,7 @@ class AdminVcController extends BaseController {
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
 
-            $status = $input['logo']->move($destination, $filename);
+            $status = $input['logo']->move('public/'.$destination, $filename);
             if (!$status) {
                 Session::flash('error', '上传Logo失败，请联系管理员处理');
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
@@ -184,7 +184,7 @@ class AdminVcController extends BaseController {
             $destination = $config['vc.logo'];
             do {
                 $filename = str_random(64);
-            } while (file_exists($destination.$filename));
+            } while (file_exists('public/'.$destination.$filename));
 
             $mime = $input['logo']->getMimeType();
             if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
@@ -192,7 +192,7 @@ class AdminVcController extends BaseController {
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
 
-            $status = $input['logo']->move($destination, $filename);
+            $status = $input['logo']->move('public/'.$destination, $filename);
             if (!$status) {
                 Session::flash('error', '上传Logo失败，请联系管理员处理');
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
