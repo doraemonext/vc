@@ -13,6 +13,7 @@ class AdminNewsController extends BaseController {
         {
             $view->with('user', Sentry::getUser());
             $view->with('config_upload', Config::get('upload'));
+            $view->with('action_name', explode('@', Route::getCurrentRoute()->getActionName()));
         });
     }
 
@@ -59,7 +60,7 @@ class AdminNewsController extends BaseController {
     public function submitNew()
     {
         $config = Config::get('upload');
-        
+
         $input = Input::only('title', 'summary', 'ckeditor');
         $input['title'] = addslashes(strip_tags($input['title']));
         $input['summary'] = strip_tags($input['summary'], '<br>');

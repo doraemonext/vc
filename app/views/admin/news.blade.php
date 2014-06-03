@@ -6,7 +6,6 @@
 @stop
 
 @section('content')
-<?php echo URL::current(); ?>
 <div id="content">
     <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">

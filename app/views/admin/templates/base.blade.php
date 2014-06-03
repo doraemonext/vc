@@ -65,13 +65,13 @@
 
             <nav>
                 <ul>
-                    <li>
+                    <li <?php if($action_name[0]==='AdminHomeController') echo 'class="active"'; ?>>
                         <a href="{{ route('admin.home') }}" title="系统概览"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">系统概览</span></a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">投资方管理</span></a>
                         <ul>
-                            <li>
+                            <li <?php if($action_name[0]==='AdminVcController') echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.vc') }}">投资方管理</a>
                             </li>
                             <li>
@@ -82,7 +82,7 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">项目管理</span></a>
                         <ul>
-                            <li>
+                            <li <?php if($action_name[0]==='AdminShowcaseController') echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.showcase') }}">项目管理</a>
                             </li>
                             <li>
@@ -93,7 +93,7 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">其他管理</span></a>
                         <ul>
-                            <li>
+                            <li <?php if($action_name[0]==='AdminNewsController') echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.news') }}">新闻列表</a>
                             </li>
                             <li>
