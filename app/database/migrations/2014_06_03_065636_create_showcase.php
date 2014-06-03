@@ -15,8 +15,15 @@ class CreateShowcase extends Migration {
 		Schema::create('showcase', function($table)
         {
             $table->increments('id');
-            $table->string('name', 256);
-            $table->string('intro_pic', 256);
+            $table->string('name', 255);
+            $table->string('company', 255);
+            $table->string('contact_person', 255);
+            $table->string('contact_email', 255);
+            $table->string('contact_phone', 255);
+            $table->unsignedInteger('category_id');
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->string('operation_time', 255);
+            $table->text('summary');
             $table->longText('content');
             $table->timestamps();
         });

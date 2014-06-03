@@ -83,7 +83,7 @@
                         <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">项目管理</span></a>
                         <ul>
                             <li>
-                                <a href="">项目管理</a>
+                                <a href="{{ route('admin.showcase') }}">项目管理</a>
                             </li>
                             <li>
                                 <a href="">项目评论管理</a>

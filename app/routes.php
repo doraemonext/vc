@@ -39,6 +39,8 @@ Route::group(array('prefix' => 'account'), function()
 Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()
 {
     Route::get('/', array('uses' => 'AdminHomeController@showHome', 'as' => 'admin.home'));
+
+    // 投资方管理
     Route::group(array('prefix' => 'vc'), function()
     {
         Route::get('/', array('uses' => 'AdminVcController@showVc', 'as' => 'admin.vc'));
@@ -55,6 +57,21 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         Route::group(array('prefix' => 'ajax'), function()
         {
             Route::get('/delete/{id?}', array('uses' => 'AdminVcController@ajaxDeleteVc', 'as' => 'admin.vc.ajax.delete'));
+        });
+    });
+
+    // 项目管理
+    Route::group(array('prefix' => 'showcase'), function()
+    {
+        Route::get('/', array('uses' => 'AdminShowcaseController@showShowcase', 'as' => 'admin.showcase'));
+        Route::group(array('prefix' => 'edit'), function()
+        {
+            Route::get('/{id?}/', array('uses' => 'AdminShowcaseController@showEdit', 'as' => 'admin.showcase.edit'));
+            Route::post('/{id?}/submit/', array('uses' => 'AdminShowcaseController@submitEdit'));
+        });
+        Route::group(array('prefix' => 'ajax'), function()
+        {
+            Route::get('/delete/{id?}', array('uses' => 'AdminShowcaseController@ajaxDeleteShowcase', 'as' => 'admin.showcase.ajax.delete'));
         });
     });
 });
