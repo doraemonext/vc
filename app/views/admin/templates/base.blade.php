@@ -202,6 +202,7 @@
 	<!-- MAIN APP JS FILE -->
 	<script src="{{ asset('smartadmin/js/app.js') }}"></script>
 
+        @section('custom_js')
 	<script type="text/javascript">
 
 	// DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -211,6 +212,7 @@
 	})
 
 	</script>
+        @show
         </script>
 
     </body>

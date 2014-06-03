@@ -25,6 +25,14 @@
             <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12 sortable-grid ui-sortable">
 
+                @if (Session::has('status'))
+                <div class="alert alert-{{ Session::get('status') }} fade in">
+                    <button class="close" data-dismiss="alert">×</button>
+                    <i class="fa-fw fa fa-info"></i>
+                    {{ Session::get('message') }}
+                </div>
+                @endif
+
                 <!-- Widget ID (each widget will need unique ID)-->
 
                 <!-- end widget -->
@@ -93,7 +101,7 @@
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-info btn-xs">查看</button>
                                                 <button type="button" class="btn btn-success btn-xs">编辑</button>
-                                                <button type="button" class="btn btn-danger btn-xs">删除</button>
+                                                <button type="button" class="btn btn-danger btn-xs ajax-delete" data-id="{{ $vc->id }}">删除</button>
                                             </div>
                                         </td>
                                     </tr>
@@ -111,4 +119,47 @@
         </div>
     </section>
 </div>
+@stop
+
+@section('custom_js')
+<script type="text/javascript">
+$(document).ready(function() {
+    pageSetUp();
+
+    $(".ajax-delete").click(function(e) {
+        var id = $(this).data('id');
+
+        $.SmartMessageBox({
+            title : "确认删除",
+            content : "您确认要删除该条记录吗？",
+            buttons : '[取消][确认]'
+        }, function(ButtonPressed) {
+                if (ButtonPressed === "确认") {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('admin.vc.ajax.delete') }}/" + id,
+                        dataType: "json",
+                        async: "true",
+                        success: function(data, textStatus){
+                            location.reload();
+                        }, error: function(data){
+                            $.smallBox({
+                                title : "发生错误",
+                                content : "在发送请求时出现错误，请刷新页面后重试",
+                                color : "#C46A69",
+                                iconSmall : "fa fa-lock fa-2x fadeInRight animated",
+                                timeout : 4000
+                            });
+                        }
+                    });
+                }
+                if (ButtonPressed === "取消") {
+
+                }
+
+            });
+            e.preventDefault();
+        });
+    });
+</script>
 @stop

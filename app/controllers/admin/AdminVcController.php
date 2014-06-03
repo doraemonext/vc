@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class AdminVcController extends BaseController {
 
     public function __construct() {
@@ -43,6 +45,28 @@ class AdminVcController extends BaseController {
         }
 
         return View::make('admin.vc')->with('input', $input)->with('vcs', $vcs);
+    }
+
+    public function ajaxDeleteVc($id = null)
+    {
+        $id = intval($id);
+
+        try {
+            $vc = Vc::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1000,
+                'message' => '您提供的ID无效',
+            ));
+        }
+
+        $vc->delete();
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功删除该条VC记录');
+
+        return Response::json(array(
+            'code' => 0,
+        ));
     }
 
 }
