@@ -73,18 +73,18 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-1">ID</th>
                                         <th class="col-md-3">新闻标题</th>
                                         <th class="col-md-6">内容摘要</th>
+                                        <th class="col-md-1">发表时间</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($news as $new)
                                     <tr>
-                                        <td>{{ $new->id }}</td>
                                         <td>{{ $new->title }}</td>
                                         <td>{{ nl2br($new->summary) }}</td>
+                                        <td>{{ $new->datetime }}</td>
                                         <td>
                                                 <button type="button" class="btn btn-info btn-xs">查看</button>
                                                 <a href="{{ route('admin.news.edit', $new->id) }}" class="btn btn-success btn-xs">编辑</a>
