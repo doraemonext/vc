@@ -98,11 +98,9 @@
                                         <td><a href="{{ $vc->website }}">{{ $vc->website }}</a></td>
                                         <td>总评分：{{ $vc->rating }}  （<a href="javascript:void(0);" rel="popover-hover" data-placement="right" data-original-title="{{ $vc->name }}" data-content="<p>总评分：{{ $vc->rating }}</p><p>评分第一项：3.2</p>" data-html="true">查看详细</a>）</td>
                                         <td>
-                                            <div class="btn-group">
                                                 <button type="button" class="btn btn-info btn-xs">查看</button>
-                                                <button type="button" class="btn btn-success btn-xs">编辑</button>
-                                                <button type="button" class="btn btn-danger btn-xs ajax-delete" data-id="{{ $vc->id }}">删除</button>
-                                            </div>
+                                                <a href="{{ route('admin.vc.edit', $vc->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                                <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $vc->id }}">删除</a>
                                         </td>
                                     </tr>
                                     @endforeach
