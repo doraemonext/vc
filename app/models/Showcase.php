@@ -6,7 +6,7 @@ class Showcase extends Eloquent {
 
     public function category()
     {
-        return $this->belongsTo('Category');
+        return $this->belongsTo('ShowcaseCategory');
     }
 
     public function user()

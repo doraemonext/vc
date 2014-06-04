@@ -1,0 +1,69 @@
+body {
+  margin-top: 82px;
+  background-color: gray;
+}
+
+#footer {
+  margin-top: 0;
+}
+
+#main {
+}
+
+#b_leftbar {
+  float: left;
+  width: 30%;
+}
+
+#b_rightbar {
+  float: left;
+  min-height: 450px;
+  width: 70%;
+  background-color: #fff;
+}
+
+.tabs {
+  float: right;
+  margin-right: 100px;
+}
+
+.tabs li {
+  margin: 35px 0;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.tabs li:hover {
+  color: #f0f0f0;
+}
+
+.business_article {
+  margin: 40px;
+  width: 680px;
+}
+
+.business_title {
+  margin: 20px 0;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.business_content p {
+  margin: 0.5em 0;
+  font-size: 16px;
+  text-indent: 2em;
+  line-height: 1.5em;
+  color: #666;
+}
+
+@media screen and (max-width: 1190px) {
+  #b_leftbar {
+    width: 25%;
+  }
+
+  #b_rightbar {
+    width: 75%
+  }
+}

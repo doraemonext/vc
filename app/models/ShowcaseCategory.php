@@ -1,8 +1,8 @@
 <?php
 
-class Category extends Eloquent {
+class ShowcaseCategory extends Eloquent {
 
-    protected $table = 'category';
+    protected $table = 'showcase_category';
 
     public function showcases()
     {

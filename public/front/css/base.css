@@ -1,0 +1,91 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-family: "微软雅黑", "microsoft yahei", "WenQuanYi Micro Hei", "黑体", "arial";
+}
+
+#nav > li > a {
+  color: #000;
+  font-size: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+textarea {
+  resize: none;
+  outline:none;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 1150px;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.icon {
+  background-image: url(../images/icons.png);
+}
+
+.icon_forward {
+  background-image: url(../images/forward.png);
+}
+
+.icon_search {
+  background-image: url(../images/search.png);
+}
+
+.icon_reply {
+  background-image: url(../images/reply.png);
+}
+
+.icon_like {
+  background-image: url(../images/like.png);
+}
+
+#leftbar {
+  float: left;
+  width: 250px;
+  margin-right: 35px;
+}
+
+#mainbar {
+  float: left;
+  width: 550px;
+}
+
+#content {
+  width: 100%;
+}
+
+#rightbar {
+  float: right;
+  width: 280px;
+}
+
+@media screen and (max-width: 1190px) {
+  #rightbar {
+    display: none;
+  }
+
+  .wrapper {
+    width: 850px;
+  }
+}

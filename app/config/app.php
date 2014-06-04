@@ -121,6 +121,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
         'Cartalyst\Sentry\SentryServiceProvider',
+        'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
 
 	),
 
@@ -189,6 +190,7 @@ return array(
 		'View'            => 'Illuminate\Support\Facades\View',
 
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
+        'Gravatar'        => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
 
 	),
 

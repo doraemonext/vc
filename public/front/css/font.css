@@ -1,0 +1,9 @@
+* {
+	font-size: 14px;
+	font-family: "微软雅黑", "microsoft yahei", "黑体", "arial";
+}
+
+#nav > li > a {
+	color: #000;
+	font-size: 20px;
+}

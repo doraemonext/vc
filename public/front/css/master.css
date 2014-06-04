@@ -1,0 +1,308 @@
+body {
+  padding-top: 112px;
+}
+
+#header {
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  padding: 12px 0;
+
+  background-color: #fff;
+  box-shadow: 0 2px 5px #666;
+}
+
+#header .wrapper {
+  width: 980px;
+}
+
+.logo {
+  float: left;
+
+  width: 149px;
+  height: 58px;
+
+  background-image: url(../images/logo.png);
+}
+
+#nav {
+  float: left;
+  margin-top: 25px;
+}
+
+#nav li {
+  float: left;
+}
+
+#nav > li > a {
+  display: block;
+
+  width: 95px;
+  height: 32px;
+
+  line-height: 32px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.search {
+  float: left;
+  position: relative;
+  margin-top: 23px;
+  margin-left: 30px;
+}
+
+.search_input {
+  padding: 6px 20px;
+  width: 130px;
+  height: 19px;
+
+  line-height: 19px;
+
+  background-color: #eee;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px #ccc inset;
+  outline: none;
+}
+
+.icon_search {
+  display: block;
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  width: 20px;
+  height: 20px;
+}
+
+.login {
+  float: right;
+  display: block;
+
+  margin-top: 27px;
+  margin-left: 20px;
+  width: 60px;
+  height: 25px;
+
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  text-align: center;
+
+  border-radius: 2px;
+  background-color: #0070cc;
+}
+
+#drop {
+  position: relative;
+}
+
+#drop:hover .dropdown{
+  display: block;
+}
+
+.dropdown:hover {
+  display: block;
+}
+
+#drop > a:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-left: 8px;
+
+  border-color: transparent;
+  border-style: solid;
+  border-width: 4px;
+  border-top-color: #000;
+}
+
+#drop.active ul{
+  display: block;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 27px;
+
+  padding: 8px 0;
+  width: 124px;
+
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 3px #808080;
+}
+
+.dropdown > li {
+  width: 100%;
+}
+
+.dropdown > li > a {
+  display: block;
+  height: 30px;
+  width: 100%;
+
+  line-height: 30px;
+  text-align: center;
+  color: #000;
+  font-weight: 900;
+}
+
+.user {
+  display: block;
+  margin-top: 22px;
+  color: #333;
+}
+
+.user_photo {
+  display: block;
+  float: right;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.user_name {
+  float: right;
+  line-height: 36px;
+}
+
+.code_2d {
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 200px;
+  height: 200px;
+}
+
+.code_2d img {
+  display: block;
+}
+
+#footer {
+  margin-top: 60px;
+  padding: 60px 0;
+  background-color: #494949;
+}
+
+#footer .wrapper {
+  width: 950px;
+}
+
+.column_footer {
+  float: left;
+  width: 33%;
+}
+
+#footer h3 {
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 2em;
+  color: #fff;
+}
+
+#footer a, #footer p {
+  color: #d0d0d0;
+  line-height: 1.5em;
+}
+
+.page {
+  width: 390px;
+  margin: 0 auto;
+}
+
+.sidepage {
+  width: 100%;
+}
+
+.sidepage .nextpage {
+  float: right;
+}
+
+.page li {
+  float: left;
+  margin-right: 6px;
+}
+
+.page a {
+  display: block;
+  width: 30px;
+  text-align: center;
+  line-height: 33px;
+  color: #0070cc;
+}
+
+.prevpage a, .nextpage a {
+  display: block;
+  width: 80px;
+  height: 29px;
+
+  text-align: center;
+  line-height: 29px;
+  color: #0070cc;
+
+  border: 2px solid #0070cc;
+  border-radius: 16px;
+}
+
+.page .prevpage {
+  margin-right: 20px;
+}
+
+.nextpage {
+  margin-left: 15px;
+}
+
+.page .disabled a {
+  color: #666;
+  border-color: #666;
+  cursor: default;
+}
+
+.prevpage a:hover, .nextpage a:hover {
+  color: #fff;
+  background-color: #0070cc;
+}
+
+.page .disabled a:hover {
+  color: #666;
+  background-color: #fff;
+}
+
+.alert {
+  margin: 20px 0;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+
+.alert_error {
+  background-color: #F2DEDE;
+  color: #A94442;
+  border-color: #EBCCD1;
+}
+
+.alert_success {
+  background-color: #DFF0D8;
+  color: #3C763D;
+  border-color: #D6E9C6;
+}
+
+.alert_info {
+  background-color: #FCF8E3;
+  color: #8A6D3B;
+  border-color: #FAEBCC;
+}
+
+.close {
+  float: right;
+  padding: 0 3px;
+  color: inherit;
+  font-weight: 900;
+  border: 0;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+}
