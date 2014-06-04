@@ -227,7 +227,7 @@
                         <span class="score_value"></span>
                 </li>
             </ul>
-            <a class="grade_submit" href="">提交评分</a>
+            <button class="grade_submit">提交评分</button>
             <div class="clear"></div>
         </div>
         <div class="comment_box">
@@ -235,16 +235,20 @@
                 <span class="comment_count">项目评论({{ $comment_count }})</span>
                 <a class="comment_like" href="">赞({{ $vc->vote }})<span class="icon_like"></span></a>
             </div>
-            <textarea class="comment_text">你怎么看？</textarea>
-            <div class="alert alert_error">error<button class="close">x</button></div>
-            <div class="alert alert_success">success<button class="close">x</button></div>
-            <div class="alert alert_info">info<button class="close">x</button></div>
+            <textarea class="comment_text" id="comment_text"></textarea>
+            <div id="comment_error" class="alert alert_error" style="display: none"></div>
+            @if (Session::has('status'))
+            <div class="alert alert_{{ Session::get('status') }}">
+                <button class="close">x</button>
+                {{ Session::get('message') }}
+            </div>
+            @endif
             <div class="comment_undertext">
                 <a class="user left" href="">
                     <span class="user_name">{{ $user->username }}</span>
                     <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
                 </a>
-                <a class="comment_submit right" href="">提交评论</a>
+                <button class="comment_submit right" id="comment_submit">提交评论</button>
             </div>
             <div class="clear"></div>
         </div>
@@ -329,4 +333,37 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('custom_js')
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#comment_submit").click(function() {
+        $.ajax({
+            type: "GET",
+            url: "{{ route('vc.item.ajax.comment.submit', $vc->id) }}",
+            data: {
+                content: $("#comment_text").val(),
+            },
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    content = '';
+                    for (index = 0; index < data['message'].length; ++index) {
+                        content += data['message'][index];
+                    }
+                    $("#comment_error").html(content);
+                    $("#comment_error").css('display', 'block');
+                } else {
+                    $("#comment_error").css('display', 'none');
+                    location.reload();
+                }
+            }, error: function(data) {
+                $("#comment_error").html('网络错误，请刷新页面后重试');
+                $("#comment_error").css('display', 'block');
+            }
+        });
+    });
+});
+</script>
 @stop

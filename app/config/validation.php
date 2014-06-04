@@ -34,4 +34,6 @@ return array(
     'website.max' => '您的公司网址输入过长',
 
     'agree.accepted' => '您必须同意注册许可协议方可注册',
+
+    'content.required' => '您必须要填写内容',
 );

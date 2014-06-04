@@ -69,4 +69,51 @@ class VcController extends BaseController {
         return View::make('front.vc_item', $data);
     }
 
+    public function ajaxCommentSubmit($id)
+    {
+        $id = intval($id);
+
+        try {
+            Vc::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1000,
+                'message' => '您提供的ID无效',
+            ));
+        }
+
+        $input = Input::only('content');
+        $input['content'] = strip_tags($input['content'], '<br>');
+
+        // 对提交信息进行验证
+        $rules = array(
+            'content' => 'required|max:1024',
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Response::json(array(
+                'code' => 1001,
+                'message' => $validator->messages()->all('<li>:message</li>'),
+            ));
+        }
+
+        // 在数据库中插入新评论
+        $comment = new VcComment;
+        $comment->vc_id = $id;
+        $comment->user_id = Sentry::getUser()->id;
+        $comment->author_ip = Request::getClientIp();
+        $comment->datetime = date("Y-m-d H:i:s");
+        $comment->content = $input['content'];
+        $comment->agree = 0;
+        $comment->disagree = 0;
+        $comment->parent = 0;
+        $comment->save();
+
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功添加评论');
+        return Response::json(array(
+            'code' => 0,
+        ));
+    }
+
 }

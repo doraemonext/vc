@@ -100,5 +100,8 @@
             <div class="clear"></div>
         </div>
         @show
+
+        @section('custom_js')
+        @show
     </body>
 </html>
