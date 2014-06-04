@@ -94,4 +94,24 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
             Route::get('/delete/{id?}', array('uses' => 'AdminNewsController@ajaxDeleteNews', 'as' => 'admin.news.ajax.delete'));
         });
     });
+
+    // 会员管理
+    Route::group(array('prefix' => 'user'), function()
+    {
+        Route::get('/', array('uses' => 'AdminUserController@showUser', 'as' => 'admin.user'));
+        Route::group(array('prefix' => 'new'), function()
+        {
+            Route::get('/', array('uses' => 'AdminUserController@showNew', 'as' => 'admin.user.new'));
+            Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AdminUserController@submitNew'));
+        });
+        Route::group(array('prefix' => 'edit'), function()
+        {
+            Route::get('/{id?}/', array('uses' => 'AdminUserController@showEdit', 'as' => 'admin.user.edit'));
+            Route::post('/{id?}/submit/', array('uses' => 'AdminUserController@submitEdit'));
+        });
+        Route::group(array('prefix' => 'ajax'), function()
+        {
+            Route::get('/delete/{id?}', array('uses' => 'AdminUserController@ajaxDeleteUser', 'as' => 'admin.user.ajax.delete'));
+        });
+    });
 });

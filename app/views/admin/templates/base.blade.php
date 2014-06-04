@@ -99,8 +99,8 @@
                             <li>
                                 <a href="">新闻评论管理</a>
                             </li>
-                            <li>
-                                <a href="">会员管理</a>
+                            <li <?php if($action_name[0]==='AdminUserController') echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.user') }}">会员管理</a>
                             </li>
                             <li>
                                 <a href="">广告管理</a>
