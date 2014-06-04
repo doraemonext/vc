@@ -119,6 +119,9 @@
                                         <label class="col-md-2 control-label">新密码</label>
                                         <div class="col-md-9">
                                             {{ Form::password('password', array('class' => 'form-control')) }}
+                                            @if (isset($edit_user))
+                                            <p class="help-block">如果您不想改动该用户密码，请保持新密码和确认新密码为空</p>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
