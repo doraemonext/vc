@@ -103,7 +103,7 @@
                                             @endforeach
                                             " data-html="true">查看详细</a>）</td>
                                         <td>
-                                                <button type="button" class="btn btn-info btn-xs">查看</button>
+                                                <a href="{{ route('vc.item', $vc->id) }}" class="btn btn-info btn-xs">查看</a>
                                                 <a href="{{ route('admin.vc.edit', $vc->id) }}" class="btn btn-success btn-xs">编辑</a>
                                                 <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $vc->id }}">删除</a>
                                         </td>
