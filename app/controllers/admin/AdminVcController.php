@@ -130,6 +130,10 @@ class AdminVcController extends BaseController {
                 Session::flash('error', '上传Logo失败，请联系管理员处理');
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
+
+            $img = Image::make('public/'.$destination.$filename);
+            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
+            $img->resize(140, 140)->save('public/'.$destination.$filename.'-140x140');
         }
 
         $vc = new Vc;
@@ -209,6 +213,10 @@ class AdminVcController extends BaseController {
                 Session::flash('error', '上传Logo失败，请联系管理员处理');
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
+
+            $img = Image::make('public/'.$destination.$filename);
+            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
+            $img->resize(140, 140)->save('public/'.$destination.$filename.'-140x140');
         }
 
         $vc->name = $input['name'];

@@ -59,7 +59,7 @@
                     <div class="vc_commentnum">评论({{ $vc->comment_count }})</div>
                 </div>
                 <div class="vc_img">
-                    <img src="{{ asset($config_upload['vc.logo'].$vc->logo) }}" width="140" height="140">
+                    <img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-140x140') }}">
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">
@@ -95,7 +95,7 @@
                     <div class="vc_commentnum">评论({{ $vc->comment_count }})</div>
                 </div>
                 <div class="vc_img">
-                    <img src="{{ asset($config_upload['vc.logo'].$vc->logo) }}" width="140" height="140">
+                    <img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-140x140') }}">
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">

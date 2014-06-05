@@ -32,7 +32,7 @@
     <div class="wrapper">
         <span class="ad_data">已入驻VC {{ $count['vc'] }}</span>
         <span class="ad_data">已入驻联合创始人 {{ $count['user'] }}</span>
-        <span class="ad_data">已有评论 33,233,233,233</span>
+        <span class="ad_data">已有评论 {{ $count['vc_comment'] }}</span>
     </div>
 </div>
 @stop
@@ -44,66 +44,27 @@
             <div class="column_side_title">推荐投资方</div>
         </div>
         <div class="column_content">
+            @foreach ($vc_recommend as $vc)
             <div class="investor_item">
-                <a class="item_investor" href="">
+                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
+                        <span class="investor_name">{{ $vc->name }}</span>
+                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
                     </div>
                     <div class="investor_content">
                         <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
+                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                            <div class="investor_np">{{ $vc->ratings()->count() }}人打分</div>
                         </div>
                         <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
+                            @foreach ($rating_category as $category)
+                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </a>
             </div>
-            <div class="investor_item">
-                <a class="item_investor" href="">
-                    <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-            <div class="investor_item">
-                <a class="item_investor" href="">
-                    <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="column_side">
@@ -111,106 +72,27 @@
             <div class="column_side_title">投资方排名</div>
         </div>
         <div class="column_content">
+            @foreach ($vc_list as $vc)
             <div class="investor_item">
-                <a class="item_investor" href="">
+                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
+                        <span class="investor_name">{{ $vc->name }}</span>
+                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
                     </div>
                     <div class="investor_content">
                         <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
+                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
                         </div>
                         <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
+                            @foreach ($rating_category as $category)
+                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </a>
             </div>
-            <div class="investor_item">
-                <a class="item_investor" href="">
-                    <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-            <div class="investor_item">
-                <a class="item_investor" href="">
-                    <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-            <div class="investor_item">
-                <a class="item_investor" href="">
-                    <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-            <div class="investor_item">
-                <a class="item_investor" href="">
-                    <div class="investor_head">
-                        <span class="investor_name">红杉资本</span>
-                        <span class="investor_update">6/1 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">4.5</div>
-                            <div class="investor_np">249人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            <li>沟通顺畅 4.2</li>
-                            <li>权益合理 4.1</li>
-                            <li>投资效率 4.0</li>
-                            <li>资源协助 4.9</li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
         <div class="page sidepage">
             <ul>
@@ -237,46 +119,31 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                        @foreach ($vc_recommend as $index => $vc)
+                        @if ($index == 0)
+                        <li data-target="#carousel-example-generic" data-slide-to="{{ $index }}" class="active"></li>
+                        @else
+                        <li data-target="#carousel-example-generic" data-slide-to="{{ $index }}"></li>
+                        @endif
+                        @endforeach
                     </ol>
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
+                        @foreach ($vc_recommend as $index => $vc)
+                        @if ($index == 0)
                         <div class="item active">
-                            <img src="{{ asset('front/images/project_slider1.png') }}" alt="">
-                            <div class="carousel-caption">
-                                <div class="project_title"><a href="">电子温度计nest横空出世 小编随记者深入访问耶鲁大学ever团队</a></div>
-                                <div class="project_subtitle">nest可以穿戴，便于携带，我们的团队励志创造新一代电子携带产品的工业革命……</div>
-                                <div class="project_info">小编a 20:10 05/10</div>
-                            </div>
-                        </div>
+                        @else
                         <div class="item">
-                            <img src="{{ asset('front/images/project_slider2.png') }}" alt="">
+                        @endif
+                            <img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-526x320') }}">
                             <div class="carousel-caption">
-                                <div class="project_title"><a href="">第二个项目的标题222222222222</a></div>
-                                <div class="project_subtitle">第二个项目的描述2222222222222</div>
-                                <div class="project_info">小编a 20:10 05/10</div>
+                                <div class="project_title"><a href="{{ route('vc.item', $vc->id) }}">{{ $vc->name }}</a></div>
+                                <div class="project_subtitle">{{ mb_substr($vc->summary, 0, 50, 'utf-8') }}...</div>
+                                <div class="project_info">{{ $vc->datetime }}</div>
                             </div>
                         </div>
-                        <div class="item">
-                            <img src="{{ asset('front/images/project_slider3.png') }}" alt="">
-                            <div class="carousel-caption">
-                                <div class="project_title"><a href="">第三个项目的标题3333333333</a></div>
-                                <div class="project_subtitle">第三个项目的描述3333333333333</div>
-                                <div class="project_info">小编a 20:10 05/10</div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="{{ asset('front/images/project_slider4.png') }}" alt="">
-                            <div class="carousel-caption">
-                                <div class="project_title"><a href="">第四个项目的标题44444444444</a></div>
-                                <div class="project_subtitle">第四个项目的描述4444444444444</div>
-                                <div class="project_info">小编a 20:10 05/10</div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <!-- Controls -->

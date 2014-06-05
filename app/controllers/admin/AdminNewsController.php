@@ -100,6 +100,11 @@ class AdminNewsController extends BaseController {
                 Session::flash('error', '上传图片失败，请联系管理员处理');
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
+
+            $img = Image::make('public/'.$destination.$filename);
+            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
+            $img->resize(160, 110)->save('public/'.$destination.$filename.'-160x110');
+            $img->resize(60, 60)->save('public/'.$destination.$filename.'-60x60');
         }
 
         $news = new News;
@@ -171,6 +176,11 @@ class AdminNewsController extends BaseController {
                 Session::flash('error', '上传图片失败，请联系管理员处理');
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
+
+            $img = Image::make('public/'.$destination.$filename);
+            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
+            $img->resize(160, 110)->save('public/'.$destination.$filename.'-160x110');
+            $img->resize(60, 60)->save('public/'.$destination.$filename.'-60x60');
         }
 
         $news->title = $input['title'];

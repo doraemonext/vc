@@ -122,6 +122,7 @@ return array(
 
         'Cartalyst\Sentry\SentryServiceProvider',
         'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
 
 	),
 
@@ -191,6 +192,7 @@ return array(
 
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         'Gravatar'        => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
+        'Image'           => 'Intervention\Image\Facades\Image'
 
 	),
 

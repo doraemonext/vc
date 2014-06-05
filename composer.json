@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.1.*",
         "cartalyst/sentry": "2.1.*",
-        "thomaswelton/laravel-gravatar": "0.0.x"
+        "thomaswelton/laravel-gravatar": "0.0.x",
+        "intervention/image": "2.*"
 	},
 	"autoload": {
 		"classmap": [

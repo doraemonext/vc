@@ -24,7 +24,7 @@
             <div class="wrapper">
                 <a class="logo"></a>
                 <ul id="nav">
-                    <li><a href="">首页</a></li>
+                    <li><a href="{{ route('home') }}">首页</a></li>
                     <li><a href="">项目展示</a></li>
                     <li><a href="{{ route('vc.list') }}">VC展示</a></li>
                     <li><a href="">讨论区</a></li>
