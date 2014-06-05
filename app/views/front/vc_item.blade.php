@@ -83,152 +83,21 @@
         <div class="grade">
             <div class="grade_title">你的评分：</div>
             <ul class="stars">
-                <li class="score1">
-                    <span class="star_label">沟通顺畅</span>
+                @foreach ($rating_category as $category)
+                <li class="score{{ $category->id }}">
+                    <span class="star_label">{{ $category->title }}</span>
                     <span class="stars_item">
+                        @for ($i = 1; $i <= 10; $i++)
                         <label>
-                            <input type="radio" value="0.5" name="score1">
+                            <input type="radio" value="{{ round($i * 0.5, 1) }}" name="rating_{{ $category->id }}">
                         </label>
-                        <label>
-                            <input type="radio" value="1.0" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.5" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.0" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.5" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.0" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.5" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.0" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.5" name="score1">
-                        </label>
-                        <label>
-                            <input type="radio" value="5.0" name="score1">
-                        </label>
+                        @endfor
                         <span class="star_bg"></span></span>
                         <span class="score_value"></span>
                 </li>
-                <li class="score2">
-                    <span class="star_label">权益合理</span>
-                    <span class="stars_item">
-                        <label>
-                            <input type="radio" value="0.5" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.0" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.5" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.0" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.5" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.0" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.5" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.0" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.5" name="score2">
-                        </label>
-                        <label>
-                            <input type="radio" value="5.0" name="score2">
-                        </label>
-                        <span class="star_bg"></span></span>
-                        <span class="score_value"></span>
-                </li>
-                <li class="score3">
-                    <span class="star_label">投资效率</span>
-                    <span class="stars_item">
-                        <label>
-                            <input type="radio" value="0.5" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.0" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.5" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.0" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.5" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.0" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.5" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.0" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.5" name="score3">
-                        </label>
-                        <label>
-                            <input type="radio" value="5.0" name="score3">
-                        </label>
-                        <span class="star_bg"></span></span>
-                        <span class="score_value"></span>
-                </li>
-                <li class="score4">
-                    <span class="star_label">资源协助</span>
-                    <span class="stars_item">
-                        <label>
-                            <input type="radio" value="0.5" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.0" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="1.5" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.0" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="2.5" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.0" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="3.5" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.0" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="4.5" name="score4">
-                        </label>
-                        <label>
-                            <input type="radio" value="5.0" name="score4">
-                        </label>
-                        <span class="star_bg"></span></span>
-                        <span class="score_value"></span>
-                </li>
+                @endforeach
             </ul>
-            <button class="grade_submit">提交评分</button>
+            <button class="grade_submit" id="rating_submit">提交评分</button>
             <div class="clear"></div>
         </div>
         <div class="comment_box">
@@ -354,6 +223,31 @@ $(document).ready(function() {
                         content += data['message'][index];
                     }
                     $("#comment_error").html(content);
+                    $("#comment_error").css('display', 'block');
+                } else {
+                    $("#comment_error").css('display', 'none');
+                    location.reload();
+                }
+            }, error: function(data) {
+                $("#comment_error").html('网络错误，请刷新页面后重试');
+                $("#comment_error").css('display', 'block');
+            }
+        });
+    });
+
+    $("#rating_submit").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('vc.item.ajax.rating', $vc->id) }}",
+            data: {
+                @foreach ($rating_category as $category)
+                rating_{{ $category->id }}: $("input[name=rating_{{ $category->id }}]:checked").val(),
+                @endforeach
+            },
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    $("#comment_error").html(data['message']);
                     $("#comment_error").css('display', 'block');
                 } else {
                     $("#comment_error").css('display', 'none');

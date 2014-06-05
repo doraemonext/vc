@@ -74,6 +74,13 @@ class VcController extends BaseController {
 
     public function ajaxCommentSubmit($id)
     {
+        if (!Sentry::check()) {
+            return Response::json(array(
+                'code' => 1002,
+                'message' => '您尚未登陆，请登陆后重试',
+            ));
+        }
+
         $id = intval($id);
 
         try {
@@ -114,6 +121,49 @@ class VcController extends BaseController {
 
         Session::flash('status', 'success');
         Session::flash('message', '您已成功添加评论');
+        return Response::json(array(
+            'code' => 0,
+        ));
+    }
+
+    public function ajaxRating($id)
+    {
+        if (!Sentry::check()) {
+            return Response::json(array(
+                'code' => 1002,
+                'message' => '您尚未登陆，请登陆后重试',
+            ));
+        }
+
+        $id = intval($id);
+
+        try {
+            $vc = Vc::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1000,
+                'message' => '您提供的ID无效',
+            ));
+        }
+        $rating_category = VcRatingCategory::all();
+        foreach ($rating_category as $category) {
+            $score = floatval(Input::get('rating_'.$category->id));
+            if ($score < 0.0 || $score > 5.0) {
+                return Response::json(array(
+                    'code' => 1003,
+                    'message' => '您的评分有误，范围为０~5',
+                ));
+            }
+
+            $rating = new VcRating;
+            $rating->vc_id = $id;
+            $rating->vc_rating_category_id = $category->id;
+            $rating->score = $score;
+            $rating->save();
+        }
+
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功评分');
         return Response::json(array(
             'code' => 0,
         ));
