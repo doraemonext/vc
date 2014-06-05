@@ -169,118 +169,22 @@
             <div class="column_main_title">新闻 News</div>
         </div>
         <div class="column_content">
+            @foreach ($news_latest as $latest)
             <div class="news_item">
                 <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
+                    <a href="{{ route('news.item', $latest->id) }}"><img src="{{ asset($config_upload['news.picture'].$latest->picture.'-160x110') }}"></a>
+                    <a class="news_forward" title="回应人数" href="{{ route('news.item', $latest->id) }}">
                         <span class="icon icon_forward"></span>
-                    233
+                        {{ $latest->comment_count }}
                     </a>
                 </div>
                 <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
+                    <div class="news_title"><a href="{{ route('news.item', $latest->id) }}">{{ $latest->title }}</a></div>
+                    <div class="news_subtitle">{{ mb_substr($latest->summary, 0, 50, 'utf-8') }}...</div>
+                    <div class="news_info">{{ $latest->datetime }}</div>
                 </div>
             </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
-            <div class="news_item">
-                <div class="news_left">
-                    <img src="{{ asset('front/images/news_img_main.png') }}">
-                    <a class="news_forward" title="回应人数" href="">
-                        <span class="icon icon_forward"></span>
-                    233
-                    </a>
-                </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="">谈谈唱吧并购线下KTV的逻辑启示：并购一家线下量贩式连锁KTV，唱吧这一步迈得...</a></div>
-                    <div class="news_subtitle">唱吧将并购一家线下量贩式连锁KTV，这一步迈得漂亮。</div>
-                    <div class="news_info">小编a  20:10  05/10</div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="page">
@@ -304,54 +208,16 @@
             <div class="column_side_title">热门新闻</div>
         </div>
         <div class="column_content">
+            @foreach ($news_hot as $hot)
             <div class="hotnews_item">
                 <div class="hotnews_img">
-                    <img src="{{ asset('front/images/news_img.png') }}">
+                    <a href="{{ route('news.item', $hot->id) }}"><img src="{{ asset($config_upload['news.picture'].$hot->picture.'-60x60') }}"></a>
                 </div>
                 <div class="hotnews_title">
-                    <a href="">微信封杀人工智能机器人“微软小冰”，两家公司各执一词</a>
+                    <a href="{{ route('news.item', $hot->id) }}">{{ $hot->title }}</a>
                 </div>
             </div>
-            <div class="hotnews_item">
-                <div class="hotnews_img">
-                    <img src="{{ asset('front/images/news_img.png') }}">
-                </div>
-                <div class="hotnews_title">
-                    <a href="">微信封杀人工智能机器人“微软小冰”，两家公司各执一词</a>
-                </div>
-            </div>
-            <div class="hotnews_item">
-                <div class="hotnews_img">
-                    <img src="{{ asset('front/images/news_img.png') }}">
-                </div>
-                <div class="hotnews_title">
-                    <a href="">微信封杀人工智能机器人“微软小冰”，两家公司各执一词</a>
-                </div>
-            </div>
-            <div class="hotnews_item">
-                <div class="hotnews_img">
-                    <img src="{{ asset('front/images/news_img.png') }}">
-                </div>
-                <div class="hotnews_title">
-                    <a href="">微信封杀人工智能机器人“微软小冰”，两家公司各执一词</a>
-                </div>
-            </div>
-            <div class="hotnews_item">
-                <div class="hotnews_img">
-                    <img src="{{ asset('front/images/news_img.png') }}">
-                </div>
-                <div class="hotnews_title">
-                    <a href="">微信封杀人工智能机器人“微软小冰”，两家公司各执一词</a>
-                </div>
-            </div>
-            <div class="hotnews_item">
-                <div class="hotnews_img">
-                    <img src="{{ asset('front/images/news_img.png') }}">
-                </div>
-                <div class="hotnews_title">
-                    <a href="">微信封杀人工智能机器人“微软小冰”，两家公司各执一词</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="column_side">

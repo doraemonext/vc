@@ -11,30 +11,11 @@
             <div class="column_side_title">VC动态</div>
         </div>
         <div class="column_content">
+            @foreach ($news_list as $news)
             <div class="newproj_item">
-                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
+                <a href="{{ route('news.item', $news->id) }}">{{ $news->title }}</a>
             </div>
-            <div class="newproj_item">
-                <a href="">懒人电脑桌，专为懒人设计</a>
-            </div>
-            <div class="newproj_item">
-                <a href="">懒人电脑桌，专为懒人设计</a>
-            </div>
-            <div class="newproj_item">
-                <a href="">懒人电脑桌，专为懒人设计</a>
-            </div>
-            <div class="newproj_item">
-                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
-            </div>
-            <div class="newproj_item">
-                <a href="">懒人电脑桌，专为懒人设计</a>
-            </div>
-            <div class="newproj_item">
-                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
-            </div>
-            <div class="newproj_item">
-                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
-            </div>
+            @endforeach
         </div>
     </div>
     <div class="clear"></div>

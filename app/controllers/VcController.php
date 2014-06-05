@@ -33,10 +33,15 @@ class VcController extends BaseController {
             $vc->score = $this->getRatingByVC($vc->id);
         }
 
+        // 获取VC动态
+        $news_category = NewsCategory::where('title', '=', 'VC动态')->get()->first()->id;
+        $news_list = News::where('category_id', '=', $news_category)->orderBy('datetime', 'DESC')->take(8)->get();
+
         $data = array(
             'vc_recommend' => $vc_recommend,
             'vc_list' => $vc_list,
             'rating_category' => VcRatingCategory::all(),
+            'news_list' => $news_list,
         );
 
         return View::make('front.vc_list', $data);
@@ -56,6 +61,10 @@ class VcController extends BaseController {
             return Redirect::route('vc.list');
         }
 
+        // 获取VC动态
+        $news_category = NewsCategory::where('title', '=', 'VC动态')->get()->first()->id;
+        $news_list = News::where('category_id', '=', $news_category)->orderBy('datetime', 'DESC')->take(8)->get();
+
         // 获取评论信息
         $comment = VcComment::where('vc_id', '=', $vc->id)->orderBy('datetime');
         $comment_count = $comment->count();
@@ -67,6 +76,7 @@ class VcController extends BaseController {
             'comment_paginate' => $comment_paginate,
             'rating_category' => VcRatingCategory::all(),
             'rating' => $this->getRatingByVC($vc->id),
+            'news_list' => $news_list,
         );
 
         return View::make('front.vc_item', $data);

@@ -29,6 +29,8 @@ class HomeController extends BaseController {
             'vc_recommend' => Vc::getRecommendWithRating(),
             'vc_list' => Vc::getListOrderByRatingWithRating(),
             'rating_category' => VcRatingCategory::all(),
+            'news_hot' => News::orderBy('comment_count', 'DESC')->take(6)->get(),
+            'news_latest' => News::orderBy('datetime', 'DESC')->take(8)->get(),
         );
 
 		return View::make('front.home', $data);

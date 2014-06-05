@@ -1,21 +1,36 @@
-@extends('front.templates.base')
-
-@section('custom_css')
-
-@stop
+@extends('front/templates/base')
 
 @section('leftbar')
 <div id="leftbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">VC动态</div>
+            <div class="column_side_title">最新项目</div>
         </div>
         <div class="column_content">
-            @foreach ($news_list as $news)
             <div class="newproj_item">
-                <a href="{{ route('news.item', $news->id) }}">{{ $news->title }}</a>
+                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
             </div>
-            @endforeach
+            <div class="newproj_item">
+                <a href="">懒人电脑桌，专为懒人设计</a>
+            </div>
+            <div class="newproj_item">
+                <a href="">懒人电脑桌，专为懒人设计</a>
+            </div>
+            <div class="newproj_item">
+                <a href="">懒人电脑桌，专为懒人设计</a>
+            </div>
+            <div class="newproj_item">
+                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
+            </div>
+            <div class="newproj_item">
+                <a href="">懒人电脑桌，专为懒人设计</a>
+            </div>
+            <div class="newproj_item">
+                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
+            </div>
+            <div class="newproj_item">
+                <a href="">机器人eden问世，世界上第一款仿生学机器人</a>
+            </div>
         </div>
     </div>
     <div class="clear"></div>
@@ -29,62 +44,27 @@
 <div id="mainbar">
     <div class="column_main">
         <div class="column_main_head">
-            <div class="column_main_title">VC信息 Information of VC</div>
+            <div class="column_main_title">新闻 News</div>
         </div>
-        <div class="column_content vcitem">
-            <div class="vcitem_title">{{ $vc->name }}</div>
-            <div class="vcitem_condition">
-                <div class="vc_img">
-                    <a href="{{ $vc->website }}"><img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-140x140') }}"></a>
-                </div>
-                <ul class="vc_score">
-                    <li class="vctotal">
-                        <span class="vcbar_head">总分</span>
-                        <span class="vcscore">{{ round($rating[0], 1) }}</span>
-                        <span class="vc_bar" style="width:{{ $rating[0] * 18 }}px"></span>
-                    </li>
-                    @foreach ($rating_category as $category)
-                    <li>
-                        <span class="vcbar_head">{{ $category->title }}</span>
-                        <span class="vcscore">{{ round($rating[$category->id], 1) }}</span>
-                        <span class="vc_bar" style="width:{{ $rating[$category->id] * 18 }}px"></span>
-                    </li>
-                    @endforeach
-                </ul>
+        <div class="column_content newsitem">
+            <div class="newsitem_img">
+                <img src="{{ asset($config_upload['news.picture'].$news->picture.'-526x320') }}">
             </div>
-            <div class="vcitem_article">
-                <div class="vcitem_content">
-                    {{ $vc->content }}
+            <div class="newsitem_article">
+                <div class="newsitem_title">{{ $news->title }}</div>
+                <div class="newsitem_content">
+                    {{ $news->content }}
+                </div>
+                <div class="newsitem_info">
+                    {{ $news->datetime }}
                 </div>
             </div>
         </div>
     </div>
-
     <div id="comment">
-        <div class="grade">
-            <div class="grade_title">你的评分：</div>
-            <ul class="stars">
-                @foreach ($rating_category as $category)
-                <li class="score{{ $category->id }}">
-                    <span class="star_label">{{ $category->title }}</span>
-                    <span class="stars_item">
-                        @for ($i = 1; $i <= 50; $i++)
-                        <label>
-                            <input type="radio" value="{{ round($i * 0.1, 1) }}" name="rating_{{ $category->id }}">
-                        </label>
-                        @endfor
-                        <span class="star_bg"></span></span>
-                        <span class="score_value"></span>
-                </li>
-                @endforeach
-            </ul>
-            <button class="grade_submit" id="rating_submit">提交评分</button>
-            <div class="clear"></div>
-        </div>
         <div class="comment_box">
             <div class="comment_info">
-                <span class="comment_count">项目评论({{ $comment_count }})</span>
-                <a class="comment_like" id="vote" href="##">赞(<span id="vote_count">{{ $vc->vote }}</span>)<span class="icon_like"></span></a>
+                <span class="comment_count">新闻评论({{ $comment_count }})</span>
             </div>
             <textarea class="comment_text" id="comment_text"></textarea>
             <div id="comment_error" class="alert alert_error" style="display: none"></div>
@@ -168,28 +148,40 @@
 <div id="rightbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">投资案例</div>
+            <div class="column_side_title">热门新闻</div>
         </div>
-        <div class="column_content investment">
+        <div class="column_content">
+            @foreach ($news_hot as $hot)
+            <div class="hotnews_item">
+                <div class="hotnews_img">
+                    <img src="{{ asset($config_upload['news.picture'].$hot->picture.'-60x60') }}">
+                </div>
+                <div class="hotnews_title">
+                    <a href="{{ route('news.item', $hot->id) }}">{{ $hot->title }}</a>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="column_side">
+        <div class="column_side_head">
+            <div class="column_side_title">最新话题</div>
+        </div>
+        <div class="column_content">
             <a class="topic_item" href="">
                 <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
                 <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
+                <div class="topic_info">赞(13) 回复(5) 20:21</div>
+            </a>
+            <a class="topic_item" href="">
+                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
+                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
+                <div class="topic_info">赞(13) 回复(5) 20:21</div>
             </a>
             <a class="topic_item" href="">
                 <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
                 <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
+                <div class="topic_info">赞(13) 回复(5) 20:21</div>
             </a>
         </div>
     </div>
@@ -202,7 +194,7 @@ $(document).ready(function() {
     $("#comment_submit").click(function() {
         $.ajax({
             type: "POST",
-            url: "{{ route('vc.item.ajax.comment.submit', $vc->id) }}",
+            url: "{{ route('news.item.ajax.comment.submit', $news->id) }}",
             data: {
                 content: $("#comment_text").val(),
             },
@@ -218,51 +210,6 @@ $(document).ready(function() {
                 } else {
                     $("#comment_error").css('display', 'none');
                     location.reload();
-                }
-            }, error: function(data) {
-                $("#comment_error").html('网络错误，请刷新页面后重试');
-                $("#comment_error").css('display', 'block');
-            }
-        });
-    });
-
-    $("#rating_submit").click(function() {
-        $.ajax({
-            type: "POST",
-            url: "{{ route('vc.item.ajax.rating', $vc->id) }}",
-            data: {
-                @foreach ($rating_category as $category)
-                rating_{{ $category->id }}: $("input[name=rating_{{ $category->id }}]:checked").val(),
-                @endforeach
-            },
-            dataType: "json",
-            success: function(data, textStatus) {
-                if (data['code'] != 0) {
-                    $("#comment_error").html(data['message']);
-                    $("#comment_error").css('display', 'block');
-                } else {
-                    $("#comment_error").css('display', 'none');
-                    location.reload();
-                }
-            }, error: function(data) {
-                $("#comment_error").html('网络错误，请刷新页面后重试');
-                $("#comment_error").css('display', 'block');
-            }
-        });
-    });
-
-    $("#vote").click(function() {
-        $.ajax({
-            type: "POST",
-            url: "{{ route('vc.item.ajax.vote', $vc->id) }}",
-            dataType: "json",
-            success: function(data, textStatus) {
-                if (data['code'] != 0) {
-                    $("#comment_error").html(data['message']);
-                    $("#comment_error").css('display', 'block');
-                } else {
-                    $("#comment_error").css('display', 'none');
-                    $("#vote_count").html(data['vote_count']);
                 }
             }, error: function(data) {
                 $("#comment_error").html('网络错误，请刷新页面后重试');
