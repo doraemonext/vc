@@ -116,4 +116,33 @@ class VcController extends BaseController {
         ));
     }
 
+    public function ajaxVote($id)
+    {
+        if (!Sentry::check()) {
+            return Response::json(array(
+                'code' => 1002,
+                'message' => '您尚未登陆，请登陆后重试',
+            ));
+        }
+
+        $id = intval($id);
+
+        try {
+            $vc = Vc::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1000,
+                'message' => '您提供的ID无效',
+            ));
+        }
+
+        $vc->vote = $vc->vote + 1;
+        $vc->save();
+
+        return Response::json(array(
+            'code' => 0,
+            'vote_count' => $vc->vote,
+        ));
+    }
+
 }

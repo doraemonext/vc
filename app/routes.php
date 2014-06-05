@@ -14,7 +14,8 @@
 Route::get('/', array('uses' => 'HomeController@showHome', 'as' => 'home'));
 Route::get('/vc/list/', array('uses' => 'VcController@showList', 'as' => 'vc.list'));
 Route::get('/vc/item/{id?}/', array('uses' => 'VcController@showItem', 'as' => 'vc.item'));
-Route::get('/vc/item/ajax/comment_submit/{id?}/', array('uses' => 'VcController@ajaxCommentSubmit', 'as' => 'vc.item.ajax.comment.submit'));
+Route::post('/vc/item/ajax/comment_submit/{id?}/', array('uses' => 'VcController@ajaxCommentSubmit', 'as' => 'vc.item.ajax.comment.submit'));
+Route::post('/vc/item/ajax/vote/{id?}/', array('uses' => 'VcController@ajaxVote', 'as' => 'vc.item.ajax.vote'));
 
 Route::group(array('prefix' => 'account'), function()
 {

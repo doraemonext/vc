@@ -233,7 +233,7 @@
         <div class="comment_box">
             <div class="comment_info">
                 <span class="comment_count">项目评论({{ $comment_count }})</span>
-                <a class="comment_like" href="">赞({{ $vc->vote }})<span class="icon_like"></span></a>
+                <a class="comment_like" id="vote" href="##">赞(<span id="vote_count">{{ $vc->vote }}</span>)<span class="icon_like"></span></a>
             </div>
             <textarea class="comment_text" id="comment_text"></textarea>
             <div id="comment_error" class="alert alert_error" style="display: none"></div>
@@ -256,7 +256,7 @@
             @foreach ($comment_paginate as $index => $comment)
             <div class="comment_item">
                 <div class="comment_userphoto">
-                    <a href=""><img src="{{ Gravatar::src($user->email, 50) }}"></a>
+                    <a href=""><img src="{{ Gravatar::src(Sentry::findUserByID($comment->user_id)->email, 50) }}"></a>
                 </div>
                 <div class="comment_right">
                     <div class="comment_username">
@@ -340,7 +340,7 @@
 $(document).ready(function() {
     $("#comment_submit").click(function() {
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "{{ route('vc.item.ajax.comment.submit', $vc->id) }}",
             data: {
                 content: $("#comment_text").val(),
@@ -357,6 +357,26 @@ $(document).ready(function() {
                 } else {
                     $("#comment_error").css('display', 'none');
                     location.reload();
+                }
+            }, error: function(data) {
+                $("#comment_error").html('网络错误，请刷新页面后重试');
+                $("#comment_error").css('display', 'block');
+            }
+        });
+    });
+
+    $("#vote").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('vc.item.ajax.vote', $vc->id) }}",
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    $("#comment_error").html(data['message']);
+                    $("#comment_error").css('display', 'block');
+                } else {
+                    $("#comment_error").css('display', 'none');
+                    $("#vote_count").html(data['vote_count']);
                 }
             }, error: function(data) {
                 $("#comment_error").html('网络错误，请刷新页面后重试');
