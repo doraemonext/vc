@@ -87,9 +87,9 @@
                 <li class="score{{ $category->id }}">
                     <span class="star_label">{{ $category->title }}</span>
                     <span class="stars_item">
-                        @for ($i = 1; $i <= 10; $i++)
+                        @for ($i = 1; $i <= 50; $i++)
                         <label>
-                            <input type="radio" value="{{ round($i * 0.5, 1) }}" name="rating_{{ $category->id }}">
+                            <input type="radio" value="{{ round($i * 0.1, 1) }}" name="rating_{{ $category->id }}">
                         </label>
                         @endfor
                         <span class="star_bg"></span></span>

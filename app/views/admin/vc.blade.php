@@ -96,7 +96,12 @@
                                         <td>{{ $vc->invest_field }}</td>
                                         <td>{{ $vc->invest_scale }}</td>
                                         <td><a href="{{ $vc->website }}">{{ $vc->website }}</a></td>
-                                        <td>总评分：{{ $vc->rating }}  （<a href="javascript:void(0);" rel="popover-hover" data-placement="right" data-original-title="{{ $vc->name }}" data-content="<p>总评分：{{ $vc->rating }}</p><p>评分第一项：3.2</p>" data-html="true">查看详细</a>）</td>
+                                        <td>总评分：{{ round($vc->rating, 1) }}  （<a href="javascript:void(0);" rel="popover-hover" data-placement="right" data-original-title="{{ $vc->name }}" data-content="
+                                            <p><strong>总评分：{{ round($vc->rating, 1) }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                                            @foreach ($rating_category as $category)
+                                            <p>{{ $category->title }}：{{ round($vc->score[$category->id], 1) }}</p>
+                                            @endforeach
+                                            " data-html="true">查看详细</a>）</td>
                                         <td>
                                                 <button type="button" class="btn btn-info btn-xs">查看</button>
                                                 <a href="{{ route('admin.vc.edit', $vc->id) }}" class="btn btn-success btn-xs">编辑</a>

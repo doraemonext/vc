@@ -327,7 +327,7 @@
 .comment_like {
   display: inline-block;
   font-size: inherit;
-  width: 80px;
+  width: 90px;
   color: #e2003e;
 }
 
@@ -392,6 +392,11 @@
   color: #0070cc;
 }
 
+.comment_box .login {
+  margin: 0;
+  margin-left: 10px;
+}
+
 .comment_content {
   margin-bottom: 8px;
   font-size: 18px;
@@ -449,7 +454,7 @@
 .stars_item label {
   float: left;
   display: block;
-  width: 15px;
+  width: 3px;
   height: 100%;
 }
 
@@ -550,6 +555,7 @@
   float: left;
   margin: 0 8px;
   height: 140px;
+  width: 220px;
 }
 
 .vc_score li {
@@ -612,7 +618,7 @@
 .vc_description {
   float: left;
   overflow: hidden;
-  width: 240px;
+  width: 235px;
   height: 140px;
 }
 

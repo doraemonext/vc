@@ -50,7 +50,17 @@ class AdminVcController extends BaseController {
             }
         }
 
-        return View::make('admin.vc')->with('input', $input)->with('vcs', $vcs);
+        foreach ($vcs as $vc) {
+            $vc->score = $this->getRatingByVC($vc->id);
+        }
+
+        $data = array(
+            'input' => $input,
+            'vcs' => $vcs,
+            'rating_category' => VcRatingCategory::all(),
+        );
+
+        return View::make('admin.vc', $data);
     }
 
     public function showNew()
