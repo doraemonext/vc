@@ -78,7 +78,7 @@
             </div>
         </div>
     </div>
-    @if (isset($user))
+
     <div id="comment">
         <div class="grade">
             <div class="grade_title">你的评分：</div>
@@ -113,6 +113,8 @@
                 {{ Session::get('message') }}
             </div>
             @endif
+
+            @if (isset($user))
             <div class="comment_undertext">
                 <a class="user left" href="">
                     <span class="user_name">{{ $user->username }}</span>
@@ -120,6 +122,15 @@
                 </a>
                 <button class="comment_submit right" id="comment_submit">提交评论</button>
             </div>
+            @else
+            <div class="comment_undertext">
+                <span>没有账号？</span>
+                <a class="register" href="{{ route('register') }}">注册&gt;&gt;</a>
+                <a class="login" href="{{ route('login') }}">登录</a>
+                <span class="right">登录后可以评论</span>
+            </div>
+            @endif
+
             <div class="clear"></div>
         </div>
         <div class="comment_comments">
@@ -169,7 +180,6 @@
             @endif
         </ul>
     </div>
-    @endif
 </div>
 @stop
 
