@@ -57,14 +57,15 @@
                     <a href="{{ $vc->website }}"><img src="{{ asset($config_upload['vc.logo'].$vc->logo) }}" height="140" width="140"></a>
                 </div>
                 <ul class="vc_score">
-                    @foreach ($rating_category as $category)
-                    @if ($category->id == 1)
                     <li class="vctotal">
-                    @else
+                        <span class="vcbar_head">总分</span>
+                        <span class="vcscore">{{ round($rating[0], 1) }}</span>
+                        <span class="vc_bar" style="width:{{ $rating[0] * 18 }}px"></span>
+                    </li>
+                    @foreach ($rating_category as $category)
                     <li>
-                    @endif
                         <span class="vcbar_head">{{ $category->title }}</span>
-                        <span class="vcscore">{{ $rating[$category->id] }}</span>
+                        <span class="vcscore">{{ round($rating[$category->id], 1) }}</span>
                         <span class="vc_bar" style="width:{{ $rating[$category->id] * 18 }}px"></span>
                     </li>
                     @endforeach

@@ -47,6 +47,7 @@ class VcController extends BaseController {
         $rating = VcRating::where('vc_id', '=', $vc->id);
         $rating_category = VcRatingCategory::all();
         $score_result = array();
+        $score_result[0] = 0.0;
         foreach ($rating_category as $category) {
             $total = DB::table($rating->getModel()->getTable())->where('vc_rating_category_id', '=', $category->id)->sum('score');
             $count = DB::table($rating->getModel()->getTable())->where('vc_rating_category_id', '=', $category->id)->count();
@@ -56,7 +57,9 @@ class VcController extends BaseController {
                 $score = 0.0;
             }
             $score_result[$category->id] = $score;
+            $score_result[0] += $score;
         }
+        $score_result[0] /= $rating_category->count();
 
         $data = array(
             'vc' => $vc,
