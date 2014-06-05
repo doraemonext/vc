@@ -21,7 +21,25 @@ class VcController extends BaseController {
 
     public function showList()
     {
-        return View::make('front.vc_list');
+        $paginateNumber = 10;
+
+        // 获取VC信息
+        $vc_recommend = Vc::where('recommended', '=', '1')->get();
+        $vc_list = Vc::orderBy('rating', 'DESC')->paginate($paginateNumber);
+        foreach ($vc_recommend as $vc) {
+            $vc->score = $this->getRatingByVC($vc->id);
+        }
+        foreach ($vc_list as $vc) {
+            $vc->score = $this->getRatingByVC($vc->id);
+        }
+
+        $data = array(
+            'vc_recommend' => $vc_recommend,
+            'vc_list' => $vc_list,
+            'rating_category' => VcRatingCategory::all(),
+        );
+
+        return View::make('front.vc_list', $data);
     }
 
     public function showItem($id)
@@ -43,30 +61,12 @@ class VcController extends BaseController {
         $comment_count = $comment->count();
         $comment_paginate = $comment->paginate($paginateNumber);
 
-        // 获取评分信息
-        $rating = VcRating::where('vc_id', '=', $vc->id);
-        $rating_category = VcRatingCategory::all();
-        $score_result = array();
-        $score_result[0] = 0.0;
-        foreach ($rating_category as $category) {
-            $total = DB::table($rating->getModel()->getTable())->where('vc_rating_category_id', '=', $category->id)->sum('score');
-            $count = DB::table($rating->getModel()->getTable())->where('vc_rating_category_id', '=', $category->id)->count();
-            if ($count > 0) {
-                $score = $total / $count;
-            } else {
-                $score = 0.0;
-            }
-            $score_result[$category->id] = $score;
-            $score_result[0] += $score;
-        }
-        $score_result[0] /= $rating_category->count();
-
         $data = array(
             'vc' => $vc,
             'comment_count' => $comment_count,
             'comment_paginate' => $comment_paginate,
-            'rating_category' => $rating_category,
-            'rating' => $score_result,
+            'rating_category' => VcRatingCategory::all(),
+            'rating' => $this->getRatingByVC($vc->id),
         );
 
         return View::make('front.vc_item', $data);
@@ -84,7 +84,7 @@ class VcController extends BaseController {
         $id = intval($id);
 
         try {
-            Vc::findOrFail($id);
+            $vc = Vc::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return Response::json(array(
                 'code' => 1000,
@@ -118,6 +118,8 @@ class VcController extends BaseController {
         $comment->disagree = 0;
         $comment->parent = 0;
         $comment->save();
+        $vc->comment_count = $vc->comment_count + 1;
+        $vc->save();
 
         Session::flash('status', 'success');
         Session::flash('message', '您已成功添加评论');
@@ -162,6 +164,9 @@ class VcController extends BaseController {
             $rating->save();
         }
 
+        $vc->rating = $this->getRatingByVC($vc->id)[0];
+        $vc->save();
+
         Session::flash('status', 'success');
         Session::flash('message', '您已成功评分');
         return Response::json(array(
@@ -196,6 +201,31 @@ class VcController extends BaseController {
             'code' => 0,
             'vote_count' => $vc->vote,
         ));
+    }
+
+    protected function getRatingByVC($id)
+    {
+        $id = intval($id);
+        $vc = Vc::findOrFail($id);
+
+        $rating = $vc->ratings();
+        $rating_category = VcRatingCategory::all();
+        $score_result = array();
+        $score_result[0] = 0.0;
+        foreach ($rating_category as $category) {
+            $total = DB::table($rating->getModel()->getTable())->where('vc_id', '=', $vc->id)->where('vc_rating_category_id', '=', $category->id)->sum('score');
+            $count = DB::table($rating->getModel()->getTable())->where('vc_id', '=', $vc->id)->where('vc_rating_category_id', '=', $category->id)->count();
+            if ($count > 0) {
+                $score = $total / $count;
+            } else {
+                $score = 0.0;
+            }
+            $score_result[$category->id] = $score;
+            $score_result[0] += $score;
+        }
+        $score_result[0] /= $rating_category->count();
+
+        return $score_result;
     }
 
 }

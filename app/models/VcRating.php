@@ -9,4 +9,14 @@ class VcRating extends Eloquent {
         return $this->table;
     }
 
+    public function vc()
+    {
+        return $this->belongsTo('Vc');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo('VcRatingCategory', 'vc_rating_category_id');
+    }
+
 }
