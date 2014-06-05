@@ -39,7 +39,14 @@ class AdminNewsController extends BaseController {
 
     public function showNew()
     {
-        return View::make('admin.news_edit');
+        // 生成分类列表，供view使用
+        $category = NewsCategory::all();
+        $category_select = array();
+        foreach ($category as $k) {
+            $category_select[$k->id] = $k->title;
+        }
+
+        return View::make('admin.news_edit')->with('category_select', $category_select);
     }
 
     public function showEdit($id)
@@ -54,20 +61,29 @@ class AdminNewsController extends BaseController {
             return Redirect::route('admin.news');
         }
 
-        return View::make('admin.news_edit')->with('news', $news);
+        // 生成分类列表，供view使用
+        $category = $news->category->all();
+        $category_select = array();
+        foreach ($category as $k) {
+            $category_select[$k->id] = $k->title;
+        }
+
+        return View::make('admin.news_edit')->with('news', $news)->with('category_select', $category_select);
     }
 
     public function submitNew()
     {
         $config = Config::get('upload');
 
-        $input = Input::only('title', 'summary', 'ckeditor');
+        $input = Input::only('title', 'category_id', 'summary', 'ckeditor');
         $input['title'] = addslashes(strip_tags($input['title']));
+        $input['category_id'] = addslashes(strip_tags($input['category_id']));
         $input['summary'] = strip_tags($input['summary'], '<br>');
 
         // 对提交信息进行验证
         $rules = array(
             'title' => 'required|max:255',
+            'category_id' => 'required|max:255',
             'ckeditor' => 'required',
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
@@ -109,6 +125,7 @@ class AdminNewsController extends BaseController {
 
         $news = new News;
         $news->title = $input['title'];
+        $news->category_id = $input['category_id'];
         if (!is_null($input['picture'])) {
             $news->picture = $filename;
         } else {
@@ -137,13 +154,15 @@ class AdminNewsController extends BaseController {
             return Redirect::route('admin.news');
         }
 
-        $input = Input::only('title', 'summary', 'ckeditor');
+        $input = Input::only('title', 'category_id', 'summary', 'ckeditor');
         $input['title'] = addslashes(strip_tags($input['title']));
+        $input['category_id'] = addslashes(strip_tags($input['category_id']));
         $input['summary'] = strip_tags($input['summary'], '<br>');
 
         // 对提交信息进行验证
         $rules = array(
             'title' => 'required|max:255',
+            'category_id' => 'max:255',
             'ckeditor' => 'required',
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
@@ -184,6 +203,7 @@ class AdminNewsController extends BaseController {
         }
 
         $news->title = $input['title'];
+        $news->category_id = $input['category_id'];
         if (!is_null($input['picture'])) {
             $news->picture = $filename;
         }

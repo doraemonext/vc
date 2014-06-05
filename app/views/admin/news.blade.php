@@ -73,8 +73,9 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
+                                        <th class="col-md-1">新闻分类</th>
                                         <th class="col-md-3">新闻标题</th>
-                                        <th class="col-md-6">内容摘要</th>
+                                        <th class="col-md-5">内容摘要</th>
                                         <th class="col-md-1">发表时间</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
@@ -82,6 +83,7 @@
                                 <tbody>
                                     @foreach ($news as $new)
                                     <tr>
+                                        <td>{{ $new->category->title }}</td>
                                         <td>{{ $new->title }}</td>
                                         <td>{{ nl2br($new->summary) }}</td>
                                         <td>{{ $new->datetime }}</td>

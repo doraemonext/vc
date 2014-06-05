@@ -112,6 +112,16 @@
                                             <p class="help-block">支持格式：jpg, gif, png，大小 2MB 以内</p>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">新闻分类</label>
+                                        <div class="col-md-9">
+                                            @if (isset($news))
+                                            {{ Form::select('category_id', $category_select, $news->category_id, array('class' => 'form-control')) }}
+                                            @else
+                                            {{ Form::select('category_id', $category_select, 1, array('class' => 'form-control')) }}
+                                            @endif
+                                        </div>
+                                    </div>
                                 </fieldset>
                                 <fieldset>
                                     <legend>详细信息</legend>
