@@ -45,7 +45,7 @@
                     </form>
                 </div>
                 @if (isset($user))
-                <a class="user right" href="">
+                <a class="user right" href="{{ route('user.home') }}">
                     <span class="user_name">{{ $user->username }}</span>
                     <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
                 </a>
