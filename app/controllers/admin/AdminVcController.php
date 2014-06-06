@@ -117,7 +117,7 @@ class AdminVcController extends BaseController {
             $destination = $config['vc.logo'];
             do {
                 $filename = str_random(64);
-            } while (file_exists('public/'.$destination.$filename));
+            } while (file_exists($destination.$filename));
 
             $mime = $input['logo']->getMimeType();
             if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
@@ -125,15 +125,16 @@ class AdminVcController extends BaseController {
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
 
-            $status = $input['logo']->move('public/'.$destination, $filename);
-            if (!$status) {
-                Session::flash('error', '上传Logo失败，请联系管理员处理');
+            try {
+                $status = $input['logo']->move($destination, $filename);
+            } catch (Exception $e) {
+                Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
 
-            $img = Image::make('public/'.$destination.$filename);
-            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
-            $img->resize(140, 140)->save('public/'.$destination.$filename.'-140x140');
+            $img = Image::make($destination.$filename);
+            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $vc = new Vc;
@@ -200,7 +201,7 @@ class AdminVcController extends BaseController {
             $destination = $config['vc.logo'];
             do {
                 $filename = str_random(64);
-            } while (file_exists('public/'.$destination.$filename));
+            } while (file_exists($destination.$filename));
 
             $mime = $input['logo']->getMimeType();
             if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
@@ -208,15 +209,16 @@ class AdminVcController extends BaseController {
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
 
-            $status = $input['logo']->move('public/'.$destination, $filename);
-            if (!$status) {
-                Session::flash('error', '上传Logo失败，请联系管理员处理');
-                return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
+            try {
+                $status = $input['logo']->move($destination, $filename);
+            } catch (Exception $e) {
+                Session::flash('error', $e->getMessage());
+                return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
 
-            $img = Image::make('public/'.$destination.$filename);
-            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
-            $img->resize(140, 140)->save('public/'.$destination.$filename.'-140x140');
+            $img = Image::make($destination.$filename);
+            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $vc->name = $input['name'];

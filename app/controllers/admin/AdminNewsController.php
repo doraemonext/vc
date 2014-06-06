@@ -103,7 +103,7 @@ class AdminNewsController extends BaseController {
             $destination = $config['news.picture'];
             do {
                 $filename = str_random(64);
-            } while (file_exists('public/'.$destination.$filename));
+            } while (file_exists($destination.$filename));
 
             $mime = $input['picture']->getMimeType();
             if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
@@ -111,16 +111,16 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
 
-            $status = $input['picture']->move('public/'.$destination, $filename);
+            $status = $input['picture']->move($destination, $filename);
             if (!$status) {
                 Session::flash('error', '上传图片失败，请联系管理员处理');
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
 
-            $img = Image::make('public/'.$destination.$filename);
-            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
-            $img->resize(160, 110)->save('public/'.$destination.$filename.'-160x110');
-            $img->resize(60, 60)->save('public/'.$destination.$filename.'-60x60');
+            $img = Image::make($destination.$filename);
+            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+            $img->resize(160, 110)->save($destination.$filename.'-160x110');
+            $img->resize(60, 60)->save($destination.$filename.'-60x60');
         }
 
         $news = new News;
@@ -182,7 +182,7 @@ class AdminNewsController extends BaseController {
             $destination = $config['news.picture'];
             do {
                 $filename = str_random(64);
-            } while (file_exists('public/'.$destination.$filename));
+            } while (file_exists($destination.$filename));
 
             $mime = $input['picture']->getMimeType();
             if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
@@ -190,16 +190,16 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
 
-            $status = $input['picture']->move('public/'.$destination, $filename);
+            $status = $input['picture']->move($destination, $filename);
             if (!$status) {
                 Session::flash('error', '上传图片失败，请联系管理员处理');
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
 
-            $img = Image::make('public/'.$destination.$filename);
-            $img->resize(526, 320)->save('public/'.$destination.$filename.'-526x320');
-            $img->resize(160, 110)->save('public/'.$destination.$filename.'-160x110');
-            $img->resize(60, 60)->save('public/'.$destination.$filename.'-60x60');
+            $img = Image::make($destination.$filename);
+            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+            $img->resize(160, 110)->save($destination.$filename.'-160x110');
+            $img->resize(60, 60)->save($destination.$filename.'-60x60');
         }
 
         $news->title = $input['title'];
