@@ -107,9 +107,10 @@ class AdminShowcaseController extends BaseController {
                 return Redirect::route('admin.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
 
-            $status = $input['logo']->move($destination, $filename);
-            if (!$status) {
-                Session::flash('error', '上传Logo失败，请联系管理员处理');
+            try {
+                $input['logo']->move($destination, $filename);
+            } catch (Exception $e) {
+                Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
 

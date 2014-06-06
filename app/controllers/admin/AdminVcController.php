@@ -126,7 +126,7 @@ class AdminVcController extends BaseController {
             }
 
             try {
-                $status = $input['logo']->move($destination, $filename);
+                $input['logo']->move($destination, $filename);
             } catch (Exception $e) {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
@@ -210,10 +210,10 @@ class AdminVcController extends BaseController {
             }
 
             try {
-                $status = $input['logo']->move($destination, $filename);
+                $input['logo']->move($destination, $filename);
             } catch (Exception $e) {
                 Session::flash('error', $e->getMessage());
-                return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
+                return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
 
             $img = Image::make($destination.$filename);

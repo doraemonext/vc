@@ -111,9 +111,10 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
 
-            $status = $input['picture']->move($destination, $filename);
-            if (!$status) {
-                Session::flash('error', '上传图片失败，请联系管理员处理');
+            try {
+                $input['picture']->move($destination, $filename);
+            } catch (Exception $e) {
+                Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
 
@@ -190,9 +191,10 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
 
-            $status = $input['picture']->move($destination, $filename);
-            if (!$status) {
-                Session::flash('error', '上传图片失败，请联系管理员处理');
+            try {
+                $input['picture']->move($destination, $filename);
+            } catch (Exception $e) {
+                Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
 
