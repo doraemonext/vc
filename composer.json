@@ -8,7 +8,8 @@
         "cartalyst/sentry": "2.1.*",
         "thomaswelton/laravel-gravatar": "0.0.x",
         "intervention/image": "2.*",
-        "barryvdh/laravel-ide-helper": "1.*"
+        "barryvdh/laravel-ide-helper": "1.*",
+        "bkwld/croppa": "~3.0"
 	},
 	"autoload": {
 		"classmap": [

@@ -50,6 +50,24 @@ Route::group(array('prefix' => 'account'), function()
 Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
 {
     Route::get('/', array('uses' => 'UserHomeController@showHome', 'as' => 'user.home'));
+    Route::group(array('prefix' => 'showcase'), function()
+    {
+        Route::get('/', array('uses' => 'UserShowcaseController@showShowcase', 'as' => 'user.showcase'));
+        Route::group(array('prefix' => 'new'), function()
+        {
+            Route::get('/', array('uses' => 'UserShowcaseController@showNew', 'as' => 'user.showcase.new'));
+            Route::post('/submit/', array('uses' => 'UserShowcaseController@submitNew'));
+        });
+        Route::group(array('prefix' => 'edit'), function()
+        {
+            Route::get('/{id?}/', array('uses' => 'UserShowcaseController@showEdit', 'as' => 'user.showcase.edit'));
+            Route::post('/{id?}/submit/', array('uses' => 'UserShowcaseController@submitEdit'));
+        });
+        Route::group(array('prefix' => 'ajax'), function()
+        {
+            Route::get('/delete/{id?}', array('uses' => 'UserShowcaseController@ajaxDeleteShowcase', 'as' => 'user.showcase.ajax.delete'));
+        });
+    });
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()

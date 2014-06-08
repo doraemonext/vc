@@ -124,6 +124,7 @@ return array(
         'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
+        'Bkwld\Croppa\ServiceProvider',
 
 	),
 
@@ -193,7 +194,8 @@ return array(
 
         'Sentry'          => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
         'Gravatar'        => 'Thomaswelton\LaravelGravatar\Facades\Gravatar',
-        'Image'           => 'Intervention\Image\Facades\Image'
+        'Image'           => 'Intervention\Image\Facades\Image',
+        'Croppa'          => 'Bkwld\Croppa\Facade'
 
 	),
 

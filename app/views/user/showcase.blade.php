@@ -1,18 +1,18 @@
-@extends('admin.templates.base')
+@extends('user.templates.base')
 
 @section('breadcrumb')
-<li>其他管理</li>
-<li>会员管理</li>
+<li>我的项目</li>
+<li>已发布的项目</li>
 @stop
 
 @section('content')
 <div id="content">
     <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 其他管理 <span>&gt; 会员管理 </span></h1>
+            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的项目 <span>&gt; 已发布的项目 </span></h1>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-            <a data-toggle="modal" href="{{ route('admin.user.new') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 添加会员</a>
+            <a data-toggle="modal" href="{{ route('user.showcase.new') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 添加项目</a>
         </div>
     </div>
 
@@ -44,7 +44,7 @@
                 <div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>会员管理</h2>
+                        <h2>已发布的项目</h2>
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
 
@@ -59,55 +59,37 @@
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
-                            <div class="alert alert-info no-margin fade in">
-                                <form class="form-inline" role="form">
-                                    <fieldset>
-                                        <div class="form-group">
-                                            {{ Form::text('search', $input['search'], array('class' => 'form-control input-sm', 'placeholder' => '输入您要搜索的内容')); }}
-                                        </div>
-                                        <button type="submit" class="btn btn-primary btn-sm">应用</button>
-                                    </fieldset>
-                                </form>
-                            </div>
-
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-1">用户名</th>
-                                        <th class="col-md-1">Email</th>
-                                        <th class="col-md-1">用户权限</th>
-                                        <th class="col-md-1">角色</th>
-                                        <th class="col-md-1">姓名</th>
-                                        <th class="col-md-1">联系方式</th>
-                                        <th class="col-md-1">公司</th>
-                                        <th class="col-md-1">网站</th>
-                                        <th class="col-md-1">上次登陆</th>
-                                        <th class="col-md-1">注册时间</th>
+                                        <th class="col-md-1">项目名称</th>
+                                        <th class="col-md-1">公司名称</th>
+                                        <th class="col-md-1">联系人</th>
+                                        <th class="col-md-1">联系方式(电话)</th>
+                                        <th class="col-md-1">联系方式(邮箱)</th>
+                                        <th class="col-md-1">项目领域</th>
+                                        <th class="col-md-1">项目运营时间</th>
+                                        <th class="col-md-1">支持数</th>
+                                        <th class="col-md-1">添加时间</th>
                                         <th class="col-md-1">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($showcases as $showcase)
                                     <tr>
-                                        <td>{{ $user->username }}</td>
-                                        <td><a href="mailto::{{ $user->email }}">{{ $user->email }}</a></td>
+                                        <td>{{ $showcase->name }}</td>
+                                        <td>{{ $showcase->company }}</td>
+                                        <td>{{ $showcase->contact_person }}</td>
+                                        <td>{{ $showcase->contact_phone }}</td>
+                                        <td>{{ $showcase->contact_email }}</td>
+                                        <td>{{ $showcase->category->title }}</td>
+                                        <td>{{ $showcase->operation_time }}</td>
+                                        <td>{{ $showcase->vote }}</td>
+                                        <td>{{ $showcase->datetime }}</td>
                                         <td>
-                                            @if (Sentry::findUserByID($user->id)->inGroup(Sentry::findGroupByName('admin')))
-                                                <strong>管理员</strong>
-                                            @elseif (Sentry::findUserByID($user->id)->inGroup(Sentry::findGroupByName('normal')))
-                                                普通用户
-                                            @endif
-                                        </td>
-                                        <td>{{ $user->job }}</td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->contact }}</td>
-                                        <td>{{ $user->company }}</td>
-                                        <td><a href="{{ $user->website }}">{{ $user->website }}</a></td>
-                                        <td>{{ $user->last_login }}</td>
-                                        <td>{{ $user->created_at }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.user.edit', $user->id) }}" class="btn btn-success btn-xs">编辑</a>
-                                            <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $user->id }}">删除</a>
+                                            <button type="button" class="btn btn-info btn-xs">查看</button>
+                                            <a href="{{ route('user.showcase.edit', $showcase->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $showcase->id }}">删除</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -117,7 +99,7 @@
                     </div>
 
                     <div class="text-center">
-                        {{ $users->appends(array('search' => $input['search']))->links() }}
+                        {{ $showcases->links() }}
                     </div>
                 </div>
             </article>
@@ -142,7 +124,7 @@ $(document).ready(function() {
                 if (ButtonPressed === "确认") {
                     $.ajax({
                         type: "GET",
-                        url: "{{ route('admin.user.ajax.delete') }}/" + id,
+                        url: "{{ route('user.showcase.ajax.delete') }}/" + id,
                         dataType: "json",
                         async: "true",
                         success: function(data, textStatus){
