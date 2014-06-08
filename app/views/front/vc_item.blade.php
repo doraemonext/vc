@@ -128,7 +128,7 @@
                         {{ $comment->content }}
                     </div>
                     <div class="comment_floor">
-                        <a href="">{{ ($comment_paginate->getCurrentPage() - 1) * $comment_paginate->getPerPage() + $index + 1 }}楼</a>
+                        <a href="##">{{ ($comment_paginate->getCurrentPage() - 1) * $comment_paginate->getPerPage() + $index + 1 }}楼</a>
                     </div>
                 </div>
             </div>
