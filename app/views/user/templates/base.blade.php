@@ -71,11 +71,11 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">我的项目</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='UserShowcaseController') echo 'class="active"'; ?>>
+                            <li <?php if($action_name[0]==='UserShowcaseController'&&($action_name[1]==='showShowcase'||$action_name[1]==='showEdit')) echo 'class="active"'; ?>>
                                 <a href="{{ route('user.showcase') }}">已发布的项目</a>
                             </li>
-                            <li>
-                                <a href="">添加项目</a>
+                            <li <?php if($action_name[0]==='UserShowcaseController'&&$action_name[1]==='showNew') echo 'class="active"'; ?>>
+                                <a href="{{ route('user.showcase.new') }}">新建项目</a>
                             </li>
                         </ul>
                     </li>

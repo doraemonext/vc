@@ -12,7 +12,7 @@
             <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的项目 <span>&gt; 已发布的项目 </span></h1>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-            <a data-toggle="modal" href="{{ route('user.showcase.new') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 添加项目</a>
+            <a data-toggle="modal" href="{{ route('user.showcase.new') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 新建项目</a>
         </div>
     </div>
 

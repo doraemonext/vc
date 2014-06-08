@@ -36,4 +36,8 @@ return array(
     'agree.accepted' => '您必须同意注册许可协议方可注册',
 
     'content.required' => '您必须要填写内容',
+
+    'name.required' => '请输入名称',
+    'contact_email.required' => '请输入联系人邮箱',
+    'contact_email.email' => '请输入一个合法的电子邮件地址',
 );
