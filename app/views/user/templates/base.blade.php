@@ -71,7 +71,7 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">我的项目</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='AdminVcController') echo 'class="active"'; ?>>
+                            <li <?php if($action_name[0]==='UserShowcaseController') echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.vc') }}">已发布的项目</a>
                             </li>
                             <li>
@@ -80,41 +80,30 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">项目管理</span></a>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">我的评价</span></a>
                         <ul>
                             <li <?php if($action_name[0]==='AdminShowcaseController') echo 'class="active"'; ?>>
-                                <a href="{{ route('admin.showcase') }}">项目管理</a>
+                                <a href="{{ route('admin.showcase') }}">我的评分列表</a>
                             </li>
                             <li>
-                                <a href="">项目评论管理</a>
+                                <a href="">我的评论列表</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">其他管理</span></a>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">我的讨论区</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='AdminNewsController') echo 'class="active"'; ?>>
-                                <a href="{{ route('admin.news') }}">新闻列表</a>
+                            <li>
+                                <a href="">我的主题</a>
                             </li>
                             <li>
-                                <a href="">新闻评论管理</a>
-                            </li>
-                            <li <?php if($action_name[0]==='AdminUserController') echo 'class="active"'; ?>>
-                                <a href="{{ route('admin.user') }}">会员管理</a>
-                            </li>
-                            <li>
-                                <a href="">广告管理</a>
+                                <a href="">我的回复</a>
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">系统设置</span></a>
-                        <ul>
-                            <li>
-                                <a href="">系统设置</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <li <?php if($action_name[0]==='UserAccountController') echo 'class="active"'; ?>>
+                        <a href="{{ route('user.home') }}" title="个人设置"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">个人设置</span></a>
+                    </li>                    
                 </ul>
             </nav>
             <span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>

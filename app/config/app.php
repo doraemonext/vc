@@ -123,6 +123,7 @@ return array(
         'Cartalyst\Sentry\SentryServiceProvider',
         'Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider',
         'Intervention\Image\ImageServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 
 	),
 
