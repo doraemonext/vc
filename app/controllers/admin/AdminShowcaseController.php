@@ -102,7 +102,13 @@ class AdminShowcaseController extends BaseController {
             } while (file_exists($destination.$filename));
 
             $mime = $input['logo']->getMimeType();
-            if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
+            if ($mime === 'image/gif') {
+                $filename .= '.gif';
+            } elseif ($mime === 'image/jpeg') {
+                $filename .= '.jpg';
+            } elseif ($mime === 'image/png') {
+                $filename .= '.png';
+            } else {
                 Session::flash('error', '您上传的不是图片文件');
                 return Redirect::route('admin.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
@@ -114,9 +120,9 @@ class AdminShowcaseController extends BaseController {
                 return Redirect::route('admin.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
 
-            $img = Image::make($destination.$filename);
-            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-            $img->resize(140, 140)->save($destination.$filename.'-140x140');
+//            $img = Image::make($destination.$filename);
+//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+//            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $showcase->name = $input['name'];

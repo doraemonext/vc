@@ -40,7 +40,7 @@
                     <div class="vc_commentnum">评论({{ $vc->comment_count }})</div>
                 </div>
                 <div class="vc_img">
-                    <img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-140x140') }}">
+                    <img src="{{ Croppa::url($config_upload['vc.logo'].$vc->logo, 140, 140) }}">
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">
@@ -76,7 +76,7 @@
                     <div class="vc_commentnum">评论({{ $vc->comment_count }})</div>
                 </div>
                 <div class="vc_img">
-                    <img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-140x140') }}">
+                    <img src="{{ Croppa::url($config_upload['vc.logo'].$vc->logo, 140, 140) }}">
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">

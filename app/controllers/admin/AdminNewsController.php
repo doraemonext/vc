@@ -111,6 +111,18 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
 
+            $mime = $input['picture']->getMimeType();
+            if ($mime === 'image/gif') {
+                $filename .= '.gif';
+            } elseif ($mime === 'image/jpeg') {
+                $filename .= '.jpg';
+            } elseif ($mime === 'image/png') {
+                $filename .= '.png';
+            } else {
+                Session::flash('error', '您上传的不是图片文件');
+                return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
+            }
+
             try {
                 $input['picture']->move($destination, $filename);
             } catch (Exception $e) {
@@ -118,10 +130,10 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.new')->withInput(Input::except('picture'));
             }
 
-            $img = Image::make($destination.$filename);
-            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-            $img->resize(160, 110)->save($destination.$filename.'-160x110');
-            $img->resize(60, 60)->save($destination.$filename.'-60x60');
+//            $img = Image::make($destination.$filename);
+//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+//            $img->resize(160, 110)->save($destination.$filename.'-160x110');
+//            $img->resize(60, 60)->save($destination.$filename.'-60x60');
         }
 
         $news = new News;
@@ -186,7 +198,13 @@ class AdminNewsController extends BaseController {
             } while (file_exists($destination.$filename));
 
             $mime = $input['picture']->getMimeType();
-            if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
+            if ($mime === 'image/gif') {
+                $filename .= '.gif';
+            } elseif ($mime === 'image/jpeg') {
+                $filename .= '.jpg';
+            } elseif ($mime === 'image/png') {
+                $filename .= '.png';
+            } else {
                 Session::flash('error', '您上传的不是图片文件');
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
@@ -198,10 +216,10 @@ class AdminNewsController extends BaseController {
                 return Redirect::route('admin.news.edit', $news->id)->withInput(Input::except('picture'));
             }
 
-            $img = Image::make($destination.$filename);
-            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-            $img->resize(160, 110)->save($destination.$filename.'-160x110');
-            $img->resize(60, 60)->save($destination.$filename.'-60x60');
+//            $img = Image::make($destination.$filename);
+//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
+//            $img->resize(160, 110)->save($destination.$filename.'-160x110');
+//            $img->resize(60, 60)->save($destination.$filename.'-60x60');
         }
 
         $news->title = $input['title'];

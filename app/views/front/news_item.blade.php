@@ -48,7 +48,7 @@
         </div>
         <div class="column_content newsitem">
             <div class="newsitem_img">
-                <img src="{{ asset($config_upload['news.picture'].$news->picture.'-526x320') }}">
+                <img src="{{ Croppa::url($config_upload['news.picture'].$news->picture, 526, 320) }}">
             </div>
             <div class="newsitem_article">
                 <div class="newsitem_title">{{ $news->title }}</div>
@@ -154,7 +154,7 @@
             @foreach ($news_hot as $hot)
             <div class="hotnews_item">
                 <div class="hotnews_img">
-                    <img src="{{ asset($config_upload['news.picture'].$hot->picture.'-60x60') }}">
+                    <img src="{{ Croppa::url($config_upload['news.picture'].$hot->picture, 60, 60) }}">
                 </div>
                 <div class="hotnews_title">
                     <a href="{{ route('news.item', $hot->id) }}">{{ $hot->title }}</a>

@@ -35,7 +35,7 @@
             <div class="vcitem_title">{{ $vc->name }}</div>
             <div class="vcitem_condition">
                 <div class="vc_img">
-                    <a href="{{ $vc->website }}"><img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-140x140') }}"></a>
+                    <a href="{{ $vc->website }}"><img src="{{ Croppa::url($config_upload['vc.logo'].$vc->logo, 140, 140) }}"></a>
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">

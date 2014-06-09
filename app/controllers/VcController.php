@@ -180,6 +180,7 @@ class VcController extends BaseController {
             $rating->user_id = Sentry::getUser()->getId();
             $rating->vc_rating_category_id = $category->id;
             $rating->score = $score;
+            $rating->datetime = date("Y-m-d H:i:s");
             $rating->save();
         }
 
