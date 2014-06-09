@@ -79,19 +79,18 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-1">ID</th>
                                         <th class="col-md-1">名称</th>
                                         <th class="col-md-2">投资领域</th>
                                         <th class="col-md-2">投资规模</th>
                                         <th class="col-md-2">网站</th>
                                         <th class="col-md-2">评分</th>
+                                        <th class="col-md-1">是否推荐</th>
                                         <th class="col-md-2">操作</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($vcs as $vc)
                                     <tr>
-                                        <td>{{ $vc->id }}</td>
                                         <td>{{ $vc->name }}</td>
                                         <td>{{ $vc->invest_field }}</td>
                                         <td>{{ $vc->invest_scale }}</td>
@@ -101,7 +100,15 @@
                                             @foreach ($rating_category as $category)
                                             <p>{{ $category->title }}：{{ round($vc->score[$category->id], 1) }}</p>
                                             @endforeach
-                                            " data-html="true">查看详细</a>）</td>
+                                            " data-html="true">查看详细</a>）
+                                        </td>
+                                        <td>
+                                            @if ($vc->recommended)
+                                            <span class="label label-success">是</span>
+                                            @else
+                                            <span class="label label-primary">否</span>
+                                            @endif
+                                        </td>
                                         <td>
                                                 <a href="{{ route('vc.item', $vc->id) }}" class="btn btn-info btn-xs">查看</a>
                                                 <a href="{{ route('admin.vc.edit', $vc->id) }}" class="btn btn-success btn-xs">编辑</a>

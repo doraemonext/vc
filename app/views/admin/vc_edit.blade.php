@@ -103,6 +103,16 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-md-2 control-label"><strong>是否推荐</strong></label>
+                                        <div class="col-md-9">
+                                            @if (isset($vc))
+                                            {{ Form::select('recommended', array(1 => '是', 0 => '否'), $vc->recommended, array('class' => 'form-control')) }}
+                                            @else
+                                            {{ Form::select('recommended', array(1 => '是', 0 => '否'), 0, array('class' => 'form-control')) }}
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-2 control-label">公司Logo</label>
                                         <div class="col-md-9">
                                             {{ Form::file('logo', array('class' => 'btn btn-default')) }}

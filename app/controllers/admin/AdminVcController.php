@@ -85,8 +85,9 @@ class AdminVcController extends BaseController {
 
     public function submitNew()
     {
-        $input = Input::only('name', 'invest_field', 'invest_scale', 'website', 'summary', 'ckeditor');
+        $input = Input::only('name', 'recommended', 'invest_field', 'invest_scale', 'website', 'summary', 'ckeditor');
         $input['name'] = addslashes(strip_tags($input['name']));
+        $input['recommended'] = addslashes(strip_tags($input['recommended']));
         $input['invest_field'] = addslashes(strip_tags($input['invest_field']));
         $input['invest_scale'] = addslashes(strip_tags($input['invest_scale']));
         $input['website'] = addslashes(strip_tags($input['website']));
@@ -95,6 +96,7 @@ class AdminVcController extends BaseController {
         // 对提交信息进行验证
         $rules = array(
             'name' => 'required|max:255',
+            'recommended' => 'required',
             'invest_field' => 'max:255',
             'invest_scale' => 'max:255',
             'website' => 'url|max:255',
@@ -145,6 +147,7 @@ class AdminVcController extends BaseController {
 
         $vc = new Vc;
         $vc->name = $input['name'];
+        $vc->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
             $vc->logo = $filename;
         } else {
@@ -175,8 +178,9 @@ class AdminVcController extends BaseController {
             return Redirect::route('admin.vc');
         }
 
-        $input = Input::only('name', 'invest_field', 'invest_scale', 'website', 'summary', 'ckeditor');
+        $input = Input::only('name', 'recommended', 'invest_field', 'invest_scale', 'website', 'summary', 'ckeditor');
         $input['name'] = addslashes(strip_tags($input['name']));
+        $input['recommended'] = addslashes(strip_tags($input['recommended']));
         $input['invest_field'] = addslashes(strip_tags($input['invest_field']));
         $input['invest_scale'] = addslashes(strip_tags($input['invest_scale']));
         $input['website'] = addslashes(strip_tags($input['website']));
@@ -185,6 +189,7 @@ class AdminVcController extends BaseController {
         // 对提交信息进行验证
         $rules = array(
             'name' => 'required|max:255',
+            'recommended' => 'required',
             'invest_field' => 'max:255',
             'invest_scale' => 'max:255',
             'website' => 'url|max:255',
@@ -234,6 +239,7 @@ class AdminVcController extends BaseController {
         }
 
         $vc->name = $input['name'];
+        $vc->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
             $vc->logo = $filename;
         }
