@@ -172,7 +172,7 @@
             @foreach ($news_latest as $latest)
             <div class="news_item">
                 <div class="news_left">
-                    <a href="{{ route('news.item', $latest->id) }}"><img src="{{ asset($config_upload['news.picture'].$latest->picture.'-160x110') }}"></a>
+                    <a href="{{ route('news.item', $latest->id) }}"><img src="{{ Croppa::url($config_upload['news.picture'].$latest->picture, 160, 110) }}"></a>
                     <a class="news_forward" title="回应人数" href="{{ route('news.item', $latest->id) }}">
                         <span class="icon icon_forward"></span>
                         {{ $latest->comment_count }}
@@ -211,7 +211,7 @@
             @foreach ($news_hot as $hot)
             <div class="hotnews_item">
                 <div class="hotnews_img">
-                    <a href="{{ route('news.item', $hot->id) }}"><img src="{{ asset($config_upload['news.picture'].$hot->picture.'-60x60') }}"></a>
+                    <a href="{{ route('news.item', $hot->id) }}"><img src="{{ Croppa::url($config_upload['news.picture'].$hot->picture, 60, 60) }}"></a>
                 </div>
                 <div class="hotnews_title">
                     <a href="{{ route('news.item', $hot->id) }}">{{ $hot->title }}</a>

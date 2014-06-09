@@ -71,7 +71,19 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
     Route::group(array('prefix' => 'evaluate'), function()
     {
         Route::get('/rating/', array('uses' => 'UserEvaluateController@showRating', 'as' => 'user.evaluate.rating'));
-        Route::get('/comment/', array('uses' => 'UserEvaluateController@showComment', 'as' => 'user.evaluate.comment'));
+        Route::group(array('prefix' => 'comment'), function()
+        {
+            Route::get('/', array('uses' => 'UserEvaluateController@showComment', 'as' => 'user.evaluate.comment'));
+            Route::group(array('prefix' => 'edit'), function()
+            {
+                Route::get('/{id?}/', array('uses' => 'UserEvaluateController@showCommentEdit', 'as' => 'user.evaluate.comment.edit'));
+                Route::post('/{id?}/submit/', array('before' => 'csrf', 'uses' => 'UserEvaluateController@submitEditComment'));
+            });
+            Route::group(array('prefix' => 'ajax'), function()
+            {
+                Route::get('/delete/{id?}', array('uses' => 'UserEvaluateController@ajaxDeleteComment', 'as' => 'user.evaluate.comment.ajax.delete'));
+            });
+        });
     });
 });
 

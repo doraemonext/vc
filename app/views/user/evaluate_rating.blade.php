@@ -33,7 +33,7 @@
                                     <li class="message">
                                         <img src="{{ Croppa::url($config_upload['vc.logo'].$r['vc']['logo'], 54, 50) }}">
                                         <span class="message-text"> 
-                                            <a href="javascript:void(0);" class="username">投资方：{{ $r['vc']['name'] }}</a> 
+                                            <a href="{{ route('vc.item', $r['vc']['id']) }}" class="username">投资方：{{ $r['vc']['name'] }}</a> 
                                             <p>{{ $r['vc']['summary'] }}</p>
                                         </span>
 
