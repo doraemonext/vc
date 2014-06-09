@@ -157,6 +157,14 @@ class VcController extends BaseController {
                 'message' => '您提供的ID无效',
             ));
         }
+
+        if (VcRating::where('user_id', '=', Sentry::getUser()->getId())->where('vc_id', '=', $id)->count() > 0) {
+            return Response::json(array(
+                'code' => 1004,
+                'message' => '您已经评分过，不能重复评分',
+            ));
+        }
+
         $rating_category = VcRatingCategory::all();
         foreach ($rating_category as $category) {
             $score = floatval(Input::get('rating_'.$category->id));
@@ -169,6 +177,7 @@ class VcController extends BaseController {
 
             $rating = new VcRating;
             $rating->vc_id = $id;
+            $rating->user_id = Sentry::getUser()->getId();
             $rating->vc_rating_category_id = $category->id;
             $rating->score = $score;
             $rating->save();
