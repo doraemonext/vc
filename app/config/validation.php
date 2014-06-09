@@ -40,4 +40,8 @@ return array(
     'name.required' => '请输入名称',
     'contact_email.required' => '请输入联系人邮箱',
     'contact_email.email' => '请输入一个合法的电子邮件地址',
+
+    'old_password.required' => '请输入原密码',
+    'new_password.min' => '您的新密码输入过短，最少6个字符',
+    'new_password.max' => '您的新密码输入过长',
 );

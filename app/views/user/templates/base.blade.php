@@ -102,8 +102,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li <?php if($action_name[0]==='UserAccountController') echo 'class="active"'; ?>>
-                        <a href="{{ route('user.home') }}" title="个人设置"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">个人设置</span></a>
+                    <li <?php if($action_name[0]==='UserSettingController') echo 'class="active"'; ?>>
+                        <a href="{{ route('user.setting') }}" title="个人设置"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">个人设置</span></a>
                     </li>                    
                 </ul>
             </nav>

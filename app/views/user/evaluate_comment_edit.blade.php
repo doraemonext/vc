@@ -78,7 +78,7 @@
                                 <fieldset>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">评论对象</label>
-                                        <div class="col-md-10">
+                                        <div class="col-md-9">
                                             <input class="form-control" disabled="disabled" placeholder="{{ $comment->vc->name }}" type="text">
                                         </div>
                                     </div>                                    

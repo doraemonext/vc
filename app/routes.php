@@ -85,6 +85,11 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
             });
         });
     });
+    Route::group(array('prefix' => 'setting'), function()
+    {
+        Route::get('/', array('uses' => 'UserSettingController@showSetting', 'as' => 'user.setting'));
+        Route::post('/submit/', array('before' => 'csrf', 'uses' => 'UserSettingController@submitSetting'));
+    });
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()
