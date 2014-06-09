@@ -86,8 +86,14 @@
                             <li <?php if($action_name[0]==='UserEvaluateController'&&$action_name[1]==='showRating') echo 'class="active"'; ?>>
                                 <a href="{{ route('user.evaluate.rating') }}">我的评分列表</a>
                             </li>
-                            <li <?php if($action_name[0]==='UserEvaluateController'&&$action_name[1]==='showComment') echo 'class="active"'; ?>>
-                                <a href="{{ route('user.evaluate.comment') }}">我的评论列表</a>
+                            <li <?php if($action_name[0]==='UserEvaluateController'&&($action_name[1]==='showCommentVc'||$action_name[1]==='showCommentVcEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('user.evaluate.comment.vc') }}">我的评论列表（投资方）</a>
+                            </li>
+                            <li <?php if($action_name[0]==='UserEvaluateController'&&($action_name[1]==='showCommentShowcase'||$action_name[1]==='showCommentShowcaseEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('user.evaluate.comment.showcase') }}">我的评论列表（项目）</a>
+                            </li>
+                            <li <?php if($action_name[0]==='UserEvaluateController'&&($action_name[1]==='showCommentNews'||$action_name[1]==='showCommentNewsEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('user.evaluate.comment.news') }}">我的评论列表（新闻）</a>
                             </li>
                         </ul>
                     </li>
@@ -104,7 +110,7 @@
                     </li>
                     <li <?php if($action_name[0]==='UserSettingController') echo 'class="active"'; ?>>
                         <a href="{{ route('user.setting') }}" title="个人设置"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">个人设置</span></a>
-                    </li>                    
+                    </li>
                 </ul>
             </nav>
             <span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>

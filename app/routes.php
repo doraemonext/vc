@@ -81,16 +81,20 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
         Route::get('/rating/', array('uses' => 'UserEvaluateController@showRating', 'as' => 'user.evaluate.rating'));
         Route::group(array('prefix' => 'comment'), function()
         {
-            Route::get('/', array('uses' => 'UserEvaluateController@showComment', 'as' => 'user.evaluate.comment'));
-            Route::group(array('prefix' => 'edit'), function()
-            {
-                Route::get('/{id?}/', array('uses' => 'UserEvaluateController@showCommentEdit', 'as' => 'user.evaluate.comment.edit'));
-                Route::post('/{id?}/submit/', array('before' => 'csrf', 'uses' => 'UserEvaluateController@submitEditComment'));
-            });
-            Route::group(array('prefix' => 'ajax'), function()
-            {
-                Route::get('/delete/{id?}', array('uses' => 'UserEvaluateController@ajaxDeleteComment', 'as' => 'user.evaluate.comment.ajax.delete'));
-            });
+            Route::get('/vc/', array('uses' => 'UserEvaluateController@showCommentVc', 'as' => 'user.evaluate.comment.vc'));
+            Route::get('/vc/edit/{id?}/', array('uses' => 'UserEvaluateController@showCommentVcEdit', 'as' => 'user.evaluate.comment.vc.edit'));
+            Route::post('/vc/edit/{id?}/submit/', array('before' => 'csrf', 'uses' => 'UserEvaluateController@submitCommentVc'));
+            Route::get('/vc/ajax/delete/{id?}', array('uses' => 'UserEvaluateController@ajaxCommentVcDelete', 'as' => 'user.evaluate.comment.vc.ajax.delete'));
+
+            Route::get('/showcase/', array('uses' => 'UserEvaluateController@showCommentShowcase', 'as' => 'user.evaluate.comment.showcase'));
+            Route::get('/showcase/edit/{id?}/', array('uses' => 'UserEvaluateController@showCommentShowcaseEdit', 'as' => 'user.evaluate.comment.showcase.edit'));
+            Route::post('/showcase/edit/{id?}/submit/', array('before' => 'csrf', 'uses' => 'UserEvaluateController@submitCommentShowcase'));
+            Route::get('/showcase/ajax/delete/{id?}', array('uses' => 'UserEvaluateController@ajaxCommentShowcaseDelete', 'as' => 'user.evaluate.comment.showcase.ajax.delete'));
+
+            Route::get('/news/', array('uses' => 'UserEvaluateController@showCommentNews', 'as' => 'user.evaluate.comment.news'));
+            Route::get('/news/edit/{id?}/', array('uses' => 'UserEvaluateController@showCommentNewsEdit', 'as' => 'user.evaluate.comment.news.edit'));
+            Route::post('/news/edit/{id?}/submit/', array('before' => 'csrf', 'uses' => 'UserEvaluateController@submitCommentNews'));
+            Route::get('/news/ajax/delete/{id?}', array('uses' => 'UserEvaluateController@ajaxCommentNewsDelete', 'as' => 'user.evaluate.comment.news.ajax.delete'));
         });
     });
     Route::group(array('prefix' => 'setting'), function()

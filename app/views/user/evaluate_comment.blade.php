@@ -2,14 +2,28 @@
 
 @section('breadcrumb')
 <li>我的评价</li>
-<li>我的评论列表</li>
+@if ($type == 'vc')
+<li>我的评论列表（投资方）</li>
+@elseif ($type == 'showcase')
+<li>我的评论列表（项目）</li>
+@elseif ($type == 'news')
+<li>我的评论列表（新闻）</li>
+@endif
 @stop
 
 @section('content')
 <div id="content">
     <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的评价 <span>&gt; 我的评论列表 </span></h1>
+            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的评价 <span>&gt;
+                @if ($type == 'vc')
+                我的评论列表（投资方）
+                @elseif ($type == 'showcase')
+                我的评论列表（项目）
+                @elseif ($type == 'news')
+                我的评论列表（新闻）
+                @endif
+            </span></h1>
         </div>
     </div>
 
@@ -41,7 +55,13 @@
                 <div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>我的评论列表</h2>
+                        @if ($type == 'vc')
+                        <h2>我的评论列表（投资方）</h2>
+                        @elseif ($type == 'showcase')
+                        <h2>我的评论列表（项目）</h2>
+                        @elseif ($type == 'news')
+                        <h2>我的评论列表（新闻）</h2>
+                        @endif
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
 
@@ -68,12 +88,27 @@
                                 <tbody>
                                     @foreach ($comments as $comment)
                                     <tr>
+                                        @if ($type == 'vc')
                                         <td><a href="{{ route('vc.item', $comment->vc->id) }}">{{ $comment->vc->name }}</a></td>
+                                        @elseif ($type == 'showcase')
+                                        <td><a href="{{ route('showcase.item', $comment->showcase->id) }}">{{ $comment->showcase->name }}</a></td>
+                                        @elseif ($type == 'news')
+                                        <td><a href="{{ route('news.item', $comment->news->id) }}">{{ $comment->news->title }}</a></td>
+                                        @endif
+
                                         <td>{{ $comment->content }}</td>
                                         <td>{{ $comment->datetime }}</td>
                                         <td>
                                             <button type="button" class="btn btn-info btn-xs">查看</button>
-                                            <a href="{{ route('user.evaluate.comment.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+
+                                            @if ($type == 'vc')
+                                            <a href="{{ route('user.evaluate.comment.vc.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            @elseif ($type == 'showcase')
+                                            <a href="{{ route('user.evaluate.comment.showcase.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            @elseif ($type == 'news')
+                                            <a href="{{ route('user.evaluate.comment.news.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            @endif
+
                                             <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $comment->id }}">删除</a>
                                         </td>
                                     </tr>
@@ -109,7 +144,15 @@ $(document).ready(function() {
                 if (ButtonPressed === "确认") {
                     $.ajax({
                         type: "GET",
-                        url: "{{ route('user.evaluate.comment.ajax.delete') }}/" + id,
+
+                        @if ($type == 'vc')
+                        url: "{{ route('user.evaluate.comment.vc.ajax.delete') }}/" + id,
+                        @elseif ($type == 'showcase')
+                        url: "{{ route('user.evaluate.comment.showcase.ajax.delete') }}/" + id,
+                        @elseif ($type == 'news')
+                        url: "{{ route('user.evaluate.comment.news.ajax.delete') }}/" + id,
+                        @endif
+
                         dataType: "json",
                         async: "true",
                         success: function(data, textStatus){
@@ -122,7 +165,7 @@ $(document).ready(function() {
                                     color : "#C46A69",
                                     iconSmall : "fa fa-lock fa-2x fadeInRight animated",
                                     timeout : 4000
-                                });                                
+                                });
                             }
                         }, error: function(data){
                             $.smallBox({

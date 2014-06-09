@@ -13,7 +13,7 @@
             <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的评价 <span>&gt; 编辑评论 </span></h1>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-            <a data-toggle="modal" href="{{ route('user.evaluate.comment') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 返回我的评论列表</a>
+            <a data-toggle="modal" href="{{ route('user.evaluate.comment.vc') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 返回我的评论列表</a>
         </div>
     </div>
 
@@ -74,14 +74,26 @@
 
                         <!-- widget content -->
                         <div class="widget-body">
-                            {{ Form::open(array('action' => array('UserEvaluateController@submitEditComment', $comment->id), 'class' => 'form-horizontal')) }}
+                            @if ($type == 'vc')
+                            {{ Form::open(array('action' => array('UserEvaluateController@submitCommentVc', $comment->id), 'class' => 'form-horizontal')) }}
+                            @elseif ($type == 'showcase')
+                            {{ Form::open(array('action' => array('UserEvaluateController@submitCommentShowcase', $comment->id), 'class' => 'form-horizontal')) }}
+                            @elseif ($type == 'news')
+                            {{ Form::open(array('action' => array('UserEvaluateController@submitCommentNews', $comment->id), 'class' => 'form-horizontal')) }}
+                            @endif
                                 <fieldset>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">评论对象</label>
                                         <div class="col-md-9">
+                                            @if ($type == 'vc')
                                             <input class="form-control" disabled="disabled" placeholder="{{ $comment->vc->name }}" type="text">
+                                            @elseif ($type == 'showcase')
+                                            <input class="form-control" disabled="disabled" placeholder="{{ $comment->showcase->name }}" type="text">
+                                            @elseif ($type == 'news')
+                                            <input class="form-control" disabled="disabled" placeholder="{{ $comment->news->title }}" type="text">
+                                            @endif
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">评论内容</label>
                                         <div class="col-md-9">
