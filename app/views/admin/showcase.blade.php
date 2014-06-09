@@ -95,7 +95,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-xs">查看</button>
+                                            <a href="{{ route('showcase.item', $showcase->id) }}" class="btn btn-info btn-xs">查看</a>
                                             <a href="{{ route('admin.showcase.edit', $showcase->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $showcase->id }}">删除</a>
                                         </td>

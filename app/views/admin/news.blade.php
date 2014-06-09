@@ -88,9 +88,9 @@
                                         <td>{{ nl2br($new->summary) }}</td>
                                         <td>{{ $new->datetime }}</td>
                                         <td>
-                                                <button type="button" class="btn btn-info btn-xs">查看</button>
-                                                <a href="{{ route('admin.news.edit', $new->id) }}" class="btn btn-success btn-xs">编辑</a>
-                                                <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $new->id }}">删除</a>
+                                            <a href="{{ route('news.item', $new->id) }}" class="btn btn-info btn-xs">查看</a>
+                                            <a href="{{ route('admin.news.edit', $new->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $new->id }}">删除</a>
                                         </td>
                                     </tr>
                                     @endforeach

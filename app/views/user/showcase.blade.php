@@ -87,7 +87,7 @@
                                         <td>{{ $showcase->vote }}</td>
                                         <td>{{ $showcase->datetime }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-xs">查看</button>
+                                            <a href="{{ route('showcase.item', $showcase->id) }}" class="btn btn-info btn-xs">查看</a>
                                             <a href="{{ route('user.showcase.edit', $showcase->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $showcase->id }}">删除</a>
                                         </td>
