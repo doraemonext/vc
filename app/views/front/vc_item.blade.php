@@ -87,13 +87,6 @@
                 <a class="comment_like" id="vote" href="##">赞(<span id="vote_count">{{ $vc->vote }}</span>)<span class="icon_like"></span></a>
             </div>
             <textarea class="comment_text" id="comment_text"></textarea>
-            <div id="comment_error" class="alert alert_error" style="display: none"></div>
-            @if (Session::has('status'))
-            <div class="alert alert_{{ Session::get('status') }}">
-                <button class="close">x</button>
-                {{ Session::get('message') }}
-            </div>
-            @endif
 
             @if (isset($user))
             <div class="comment_undertext">
@@ -199,6 +192,10 @@
 @section('custom_js')
 <script type="text/javascript">
 $(document).ready(function() {
+    @if (Session::has('status'))
+    msg("{{ Session::get('message') }}", "{{ Session::get('status') }}");
+    @endif
+
     $("#comment_submit").click(function() {
         $.ajax({
             type: "POST",
@@ -213,15 +210,12 @@ $(document).ready(function() {
                     for (index = 0; index < data['message'].length; ++index) {
                         content += data['message'][index];
                     }
-                    $("#comment_error").html(content);
-                    $("#comment_error").css('display', 'block');
+                    msg(content, 'error');
                 } else {
-                    $("#comment_error").css('display', 'none');
                     location.reload();
                 }
             }, error: function(data) {
-                $("#comment_error").html('网络错误，请刷新页面后重试');
-                $("#comment_error").css('display', 'block');
+                msg('网络错误，请刷新页面后重试', 'error');
             }
         });
     });
@@ -238,16 +232,13 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
-                    $("#comment_error").html(data['message']);
-                    $("#comment_error").css('display', 'block');
+                    msg(data['message'], 'error');
                 } else {
-                    $("#comment_error").css('display', 'none');
                     location.reload();
                 }
             }, error: function(data) {
-                $("#comment_error").html('网络错误，请刷新页面后重试');
-                $("#comment_error").css('display', 'block');
-            }
+                msg('网络错误，请刷新页面后重试', 'error');
+             }
         });
     });
 
@@ -258,15 +249,12 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
-                    $("#comment_error").html(data['message']);
-                    $("#comment_error").css('display', 'block');
+                    msg(data['message'], 'error');
                 } else {
-                    $("#comment_error").css('display', 'none');
                     $("#vote_count").html(data['vote_count']);
                 }
             }, error: function(data) {
-                $("#comment_error").html('网络错误，请刷新页面后重试');
-                $("#comment_error").css('display', 'block');
+                msg('网络错误，请刷新页面后重试', 'error');
             }
         });
     });

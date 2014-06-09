@@ -24,6 +24,14 @@ Route::group(array('prefix' => 'news'), function()
     Route::post('/item/ajax/comment_submit/{id?}/', array('uses' => 'NewsController@ajaxCommentSubmit', 'as' => 'news.item.ajax.comment.submit'));
 });
 
+Route::group(array('prefix' => 'showcase'), function()
+{
+    Route::get('/list/', array('uses' => 'ShowcaseController@showList', 'as' => 'showcase.list'));
+    Route::get('/item/{id?}/', array('uses' => 'ShowcaseController@showItem', 'as' => 'showcase.item'));
+    Route::post('/item/ajax/comment_submit/{id?}/', array('uses' => 'ShowcaseController@ajaxCommentSubmit', 'as' => 'showcase.item.ajax.comment.submit'));
+    Route::post('/item/ajax/vote/{id?}/', array('uses' => 'ShowcaseController@ajaxVote', 'as' => 'showcase.item.ajax.vote'));
+});
+
 Route::group(array('prefix' => 'account'), function()
 {
     Route::group(array('prefix' => 'login'), function()

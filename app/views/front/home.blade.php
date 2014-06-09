@@ -119,7 +119,7 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <!-- Indicators -->
                     <ol class="carousel-indicators">
-                        @foreach ($vc_recommend as $index => $vc)
+                        @foreach ($showcase_recommend as $index => $showcase)
                         @if ($index == 0)
                         <li data-target="#carousel-example-generic" data-slide-to="{{ $index }}" class="active"></li>
                         @else
@@ -130,17 +130,23 @@
 
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner">
-                        @foreach ($vc_recommend as $index => $vc)
+                        @foreach ($showcase_recommend as $index => $showcase)
                         @if ($index == 0)
                         <div class="item active">
                         @else
                         <div class="item">
                         @endif
-                            <img src="{{ asset($config_upload['vc.logo'].$vc->logo.'-526x320') }}">
+                            <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 526, 320) }}">
                             <div class="carousel-caption">
-                                <div class="project_title"><a href="{{ route('vc.item', $vc->id) }}">{{ $vc->name }}</a></div>
-                                <div class="project_subtitle">{{ mb_substr($vc->summary, 0, 50, 'utf-8') }}...</div>
-                                <div class="project_info">{{ $vc->datetime }}</div>
+                                <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a></div>
+                                <div class="project_subtitle">
+                                    @if (mb_substr($showcase->summary, 0, 50, 'utf-8') != $showcase->summary)
+                                    {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}...
+                                    @else
+                                    {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}
+                                    @endif
+                                </div>
+                                <div class="project_info">{{ $showcase->datetime }}</div>
                             </div>
                         </div>
                         @endforeach
@@ -243,4 +249,14 @@
         </div>
     </div>
 </div>
+@stop
+
+@section('custom_js')
+<script type="text/javascript">
+$(document).ready(function() {
+    @if (Session::has('status'))
+    msg_top("{{ Session::get('message') }}", "{{ Session::get('status') }}");
+    @endif
+});
+</script>
 @stop

@@ -44,4 +44,6 @@ return array(
     'old_password.required' => '请输入原密码',
     'new_password.min' => '您的新密码输入过短，最少6个字符',
     'new_password.max' => '您的新密码输入过长',
+
+    'summary.max' => '您输入的简介过长',
 );

@@ -62,7 +62,6 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-1">ID</th>
                                         <th class="col-md-1">项目名称</th>
                                         <th class="col-md-1">公司名称</th>
                                         <th class="col-md-1">联系人</th>
@@ -70,7 +69,6 @@
                                         <th class="col-md-1">联系方式(邮箱)</th>
                                         <th class="col-md-1">项目领域</th>
                                         <th class="col-md-1">项目运营时间</th>
-                                        <th class="col-md-1">支持数</th>
                                         <th class="col-md-1">所属用户</th>
                                         <th class="col-md-1">添加时间</th>
                                         <th class="col-md-1">操作</th>
@@ -79,7 +77,6 @@
                                 <tbody>
                                     @foreach ($showcases as $showcase)
                                     <tr>
-                                        <td>{{ $showcase->id }}</td>
                                         <td>{{ $showcase->name }}</td>
                                         <td>{{ $showcase->company }}</td>
                                         <td>{{ $showcase->contact_person }}</td>
@@ -87,7 +84,6 @@
                                         <td>{{ $showcase->contact_email }}</td>
                                         <td>{{ $showcase->category->title }}</td>
                                         <td>{{ $showcase->operation_time }}</td>
-                                        <td>{{ $showcase->vote }}</td>
                                         <td>{{ $showcase->user->username }}</td>
                                         <td>{{ $showcase->datetime }}</td>
                                         <td>

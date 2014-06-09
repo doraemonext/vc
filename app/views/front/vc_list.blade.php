@@ -127,3 +127,13 @@
     </div>
 </div>
 @stop
+
+@section('custom_js')
+<script type="text/javascript">
+$(document).ready(function() {
+    @if (Session::has('status'))
+    msg_top("{{ Session::get('message') }}", "{{ Session::get('status') }}");
+    @endif
+});
+</script>
+@stop

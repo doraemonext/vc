@@ -14,4 +14,9 @@ class Showcase extends Eloquent {
         return $this->belongsTo('User');
     }
 
+    public static function getRecommend()
+    {
+        return self::where('recommended', '=', 1)->get();
+    }
+
 }

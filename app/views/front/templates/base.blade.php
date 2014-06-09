@@ -15,6 +15,8 @@
         <!-- 以上是通用的，下面是index才有的 -->
         <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.css') }}">
         <script type="text/javascript" src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('front/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('front/js/noty/tools.js') }}"></script>
         @section('custom_css')
         @show
     </head>
@@ -22,10 +24,10 @@
         @section('header')
         <div id="header">
             <div class="wrapper">
-                <a class="logo"></a>
+                <a href="{{ route('home') }}" class="logo"></a>
                 <ul id="nav">
                     <li><a href="{{ route('home') }}">首页</a></li>
-                    <li><a href="">项目展示</a></li>
+                    <li><a href="{{ route('showcase.list') }}">项目展示</a></li>
                     <li><a href="{{ route('vc.list') }}">VC展示</a></li>
                     <li><a href="">讨论区</a></li>
                     <li id="drop">
@@ -40,7 +42,7 @@
                 </ul>
                 <div class="search">
                     <form action="/search" method="get">
-                        <input class="search_input" name="q" type="text" value="搜索">
+                        <input class="search_input" name="q" type="text">
                         <span class="icon icon_search"></span>
                     </form>
                 </div>
