@@ -60,8 +60,9 @@ class AdminShowcaseController extends BaseController {
             return Redirect::route('admin.showcase');
         }
 
-        $input = Input::only('name', 'company', 'contact_person', 'contact_email', 'contact_phone', 'category_id', 'operation_time', 'summary', 'ckeditor');
+        $input = Input::only('name', 'recommended', 'company', 'contact_person', 'contact_email', 'contact_phone', 'category_id', 'operation_time', 'summary', 'ckeditor');
         $input['name'] = addslashes(strip_tags($input['name']));
+        $input['recommended'] = addslashes(strip_tags($input['recommended']));
         $input['company'] = addslashes(strip_tags($input['company']));
         $input['contact_person'] = addslashes(strip_tags($input['contact_person']));
         $input['contact_email'] = addslashes(strip_tags($input['contact_email']));
@@ -73,6 +74,7 @@ class AdminShowcaseController extends BaseController {
         // 对提交信息进行验证
         $rules = array(
             'name' => 'required|max:255',
+            'recommended' => 'required',
             'company' => 'max:255',
             'contact_person' => 'max:255',
             'contact_email' => 'required|email|max:255',
@@ -126,6 +128,7 @@ class AdminShowcaseController extends BaseController {
         }
 
         $showcase->name = $input['name'];
+        $showcase->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
             $showcase->logo = $filename;
         }

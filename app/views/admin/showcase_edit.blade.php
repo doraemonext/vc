@@ -83,6 +83,12 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="col-md-2 control-label"><strong>是否推荐</strong></label>
+                                        <div class="col-md-9">
+                                            {{ Form::select('recommended', array(1 => '是', 0 => '否'), $showcase->recommended, array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-2 control-label">项目Logo</label>
                                         <div class="col-md-9">
                                             {{ Form::file('logo', array('class' => 'btn btn-default')) }}

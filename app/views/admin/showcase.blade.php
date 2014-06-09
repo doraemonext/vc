@@ -71,6 +71,7 @@
                                         <th class="col-md-1">项目运营时间</th>
                                         <th class="col-md-1">所属用户</th>
                                         <th class="col-md-1">添加时间</th>
+                                        <th class="col-md-1">是否推荐</th>
                                         <th class="col-md-1">操作</th>
                                     </tr>
                                 </thead>
@@ -86,6 +87,13 @@
                                         <td>{{ $showcase->operation_time }}</td>
                                         <td>{{ $showcase->user->username }}</td>
                                         <td>{{ $showcase->datetime }}</td>
+                                        <td>
+                                            @if ($showcase->recommended)
+                                            <span class="label label-success">是</span>
+                                            @else
+                                            <span class="label label-primary">否</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <button type="button" class="btn btn-info btn-xs">查看</button>
                                             <a href="{{ route('admin.showcase.edit', $showcase->id) }}" class="btn btn-success btn-xs">编辑</a>
