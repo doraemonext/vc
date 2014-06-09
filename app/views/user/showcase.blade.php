@@ -128,7 +128,17 @@ $(document).ready(function() {
                         dataType: "json",
                         async: "true",
                         success: function(data, textStatus){
-                            location.reload();
+                            if (data['code'] == 0) {
+                                location.reload();
+                            } else {
+                                $.smallBox({
+                                    title : "发生错误",
+                                    content : data['message'],
+                                    color : "#C46A69",
+                                    iconSmall : "fa fa-lock fa-2x fadeInRight animated",
+                                    timeout : 4000
+                                });
+                            }
                         }, error: function(data){
                             $.smallBox({
                                 title : "发生错误",
