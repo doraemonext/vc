@@ -11818,7 +11818,7 @@ div.wijmo-wijmenu .wijmo-wijmenu-child .wijmo-wijmenu-text {
   width: 35px !important;
 }
 .profile-message li.message.message-reply .message-text {
-  margin-left: 45px !important;
+  margin-left: 0px !important;
 }
 .profile-message .wall-comment-reply {
   margin-left: 85px;

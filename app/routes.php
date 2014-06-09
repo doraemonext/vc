@@ -68,6 +68,11 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
             Route::get('/delete/{id?}', array('uses' => 'UserShowcaseController@ajaxDeleteShowcase', 'as' => 'user.showcase.ajax.delete'));
         });
     });
+    Route::group(array('prefix' => 'evaluate'), function()
+    {
+        Route::get('/rating/', array('uses' => 'UserEvaluateController@showRating', 'as' => 'user.evaluate.rating'));
+        Route::get('/comment/', array('uses' => 'UserEvaluateController@showComment', 'as' => 'user.evaluate.comment'));
+    });
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()

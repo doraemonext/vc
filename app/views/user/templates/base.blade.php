@@ -14,16 +14,19 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('smartadmin/css/font-awesome.min.css') }}">
 
         <!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('smartadmin/css/smartadmin-production.css') }}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('smartadmin/css/smartadmin-production_unminified.css') }}">
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('smartadmin/css/smartadmin-skins.css') }}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('smartadmin/css/custom.css') }}">
         @section('custom_css')
         @show
 
         <!-- FAVICONS -->
         <link rel="shortcut icon" href="{{ asset('smartadmin/img/favicon/favicon.ico') }}" type="image/x-icon">
         <link rel="icon" href="{{ asset('smartadmin/img/favicon/favicon.ico') }}" type="image/x-icon">
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
     </head>
-    <body class="">
+    <body class="smart-style-0">
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group">
@@ -82,11 +85,11 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">我的评价</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='AdminShowcaseController') echo 'class="active"'; ?>>
-                                <a href="{{ route('admin.showcase') }}">我的评分列表</a>
+                            <li <?php if($action_name[0]==='UserEvaluateController'&&$action_name[1]==='showRating') echo 'class="active"'; ?>>
+                                <a href="{{ route('user.evaluate.rating') }}">我的评分列表</a>
                             </li>
-                            <li>
-                                <a href="">我的评论列表</a>
+                            <li <?php if($action_name[0]==='UserEvaluateController'&&$action_name[1]==='showComment') echo 'class="active"'; ?>>
+                                <a href="{{ route('user.evaluate.comment') }}">我的评论列表</a>
                             </li>
                         </ul>
                     </li>
@@ -186,7 +189,7 @@
 	<!-- MAIN APP JS FILE -->
 	<script src="{{ asset('smartadmin/js/app.js') }}"></script>
 
-        @section('custom_js')
+    @section('custom_js')
 	<script type="text/javascript">
 
 	// DO NOT REMOVE : GLOBAL FUNCTIONS!
@@ -196,9 +199,6 @@
 	})
 
 	</script>
-        @show
-        </script>
-
+    @show
     </body>
-
 </html>
