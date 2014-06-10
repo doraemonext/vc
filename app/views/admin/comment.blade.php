@@ -1,13 +1,15 @@
-@extends('user.templates.base')
+@extends('admin.templates.base')
 
 @section('breadcrumb')
-<li>我的评价</li>
 @if ($type == 'vc')
-<li>我的评论列表（投资方）</li>
+<li>投资方管理</li>
+<li>投资方评论管理</li>
 @elseif ($type == 'showcase')
-<li>我的评论列表（项目）</li>
+<li>项目管理</li>
+<li>项目评论管理</li>
 @elseif ($type == 'news')
-<li>我的评论列表（新闻）</li>
+<li>其他管理</li>
+<li>新闻评论管理</li>
 @endif
 @stop
 
@@ -15,13 +17,16 @@
 <div id="content">
     <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的评价 <span>&gt;
+            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i>
                 @if ($type == 'vc')
-                我的评论列表（投资方）
+                投资方管理 <span>&gt;
+                投资方评论管理
                 @elseif ($type == 'showcase')
-                我的评论列表（项目）
+                项目管理 <span>&gt;
+                项目评论管理
                 @elseif ($type == 'news')
-                我的评论列表（新闻）
+                其他管理 <span>&gt;
+                新闻评论管理
                 @endif
             </span></h1>
         </div>
@@ -56,11 +61,11 @@
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                         @if ($type == 'vc')
-                        <h2>我的评论列表（投资方）</h2>
+                        <h2>投资方评论管理</h2>
                         @elseif ($type == 'showcase')
-                        <h2>我的评论列表（项目）</h2>
+                        <h2>项目评论管理</h2>
                         @elseif ($type == 'news')
-                        <h2>我的评论列表（新闻）</h2>
+                        <h2>新闻评论管理</h2>
                         @endif
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
@@ -80,7 +85,8 @@
                                 <thead>
                                     <tr>
                                         <th class="col-md-2">评论对象</th>
-                                        <th class="col-md-8">我的评论</th>
+                                        <th class="col-md-7">评论内容</th>
+                                        <th class="col-md-1">评论用户</th>
                                         <th class="col-md-1">评论时间</th>
                                         <th class="col-md-1">操作</th>
                                     </tr>
@@ -97,16 +103,15 @@
                                         @endif
 
                                         <td>{{ nl2br($comment->content) }}</td>
+                                        <td>{{ $comment->user->username }}</td>
                                         <td>{{ $comment->datetime }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-xs">查看</button>
-
                                             @if ($type == 'vc')
-                                            <a href="{{ route('user.evaluate.comment.vc.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            <a href="{{ route('admin.vc.comment.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             @elseif ($type == 'showcase')
-                                            <a href="{{ route('user.evaluate.comment.showcase.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            <a href="{{ route('admin.showcase.comment.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             @elseif ($type == 'news')
-                                            <a href="{{ route('user.evaluate.comment.news.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
+                                            <a href="{{ route('admin.news.comment.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             @endif
 
                                             <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $comment->id }}">删除</a>
@@ -146,11 +151,11 @@ $(document).ready(function() {
                         type: "GET",
 
                         @if ($type == 'vc')
-                        url: "{{ route('user.evaluate.comment.vc.ajax.delete') }}/" + id,
+                        url: "{{ route('admin.vc.comment.ajax.delete') }}/" + id,
                         @elseif ($type == 'showcase')
-                        url: "{{ route('user.evaluate.comment.showcase.ajax.delete') }}/" + id,
+                        url: "{{ route('admin.showcase.comment.ajax.delete') }}/" + id,
                         @elseif ($type == 'news')
-                        url: "{{ route('user.evaluate.comment.news.ajax.delete') }}/" + id,
+                        url: "{{ route('admin.news.comment.ajax.delete') }}/" + id,
                         @endif
 
                         dataType: "json",

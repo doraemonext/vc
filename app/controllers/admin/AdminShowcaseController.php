@@ -9,6 +9,8 @@ class AdminShowcaseController extends BaseController {
         View::composer(array(
             'admin.showcase',
             'admin.showcase_edit',
+            'admin.comment',
+            'admin.comment_edit',
         ), function($view)
         {
             $view->with('user', Sentry::getUser());
@@ -47,6 +49,40 @@ class AdminShowcaseController extends BaseController {
         }
 
         return View::make('admin.showcase_edit')->with('showcase', $showcase)->with('category_select', $category_select);
+    }
+
+    public function showComment()
+    {
+        $paginateNumber = 10;
+
+        $comments = ShowcaseComment::orderBy('datetime', 'DESC')->paginate($paginateNumber);
+
+        $data = array(
+            'type' => 'showcase',
+            'comments' => $comments,
+        );
+
+        return View::make('admin.comment', $data);
+    }
+
+    public function showCommentEdit($id)
+    {
+        $id = intval($id);
+
+        try {
+            $comment = ShowcaseComment::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '找不到您要编辑的评论信息');
+            return Redirect::route('admin.showcase.comment');
+        }
+
+        $data = array(
+            'type' => 'showcase',
+            'comment' => $comment,
+        );
+
+        return View::make('admin.comment_edit', $data);
     }
 
     public function submitEdit($id)
@@ -147,6 +183,38 @@ class AdminShowcaseController extends BaseController {
         return Redirect::route('admin.showcase');
     }
 
+    public function submitCommentEdit($id)
+    {
+        $id = intval($id);
+
+        try {
+            $comment = ShowcaseComment::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '找不到您要编辑的评论信息');
+            return Redirect::route('admin.showcase.comment');
+        }
+
+        $input = Input::only('content');
+        $input['content'] = addslashes(strip_tags($input['content']));
+
+        // 对提交信息进行验证
+        $rules = array(
+            'content' => 'required|max:2000',
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('admin.showcase.comment.edit', $comment->id)->withErrors($validator)->withInput($input);
+        }
+
+        $comment->content = $input['content'];
+        $comment->save();
+
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功编辑该条评论');
+        return Redirect::route('admin.showcase.comment');
+    }
+
     public function ajaxDeleteShowcase($id = null)
     {
         $id = intval($id);
@@ -163,6 +231,28 @@ class AdminShowcaseController extends BaseController {
         $showcase->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条项目记录');
+
+        return Response::json(array(
+            'code' => 0,
+        ));
+    }
+
+    public function ajaxCommentDelete($id = null)
+    {
+        $id = intval($id);
+
+        try {
+            $comment = ShowcaseComment::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1000,
+                'message' => '您提供的ID无效',
+            ));
+        }
+
+        $comment->delete();
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功删除该条评论');
 
         return Response::json(array(
             'code' => 0,

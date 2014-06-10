@@ -9,4 +9,9 @@ class VcComment extends Eloquent {
         return $this->belongsTo('Vc');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
 }

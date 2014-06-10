@@ -146,6 +146,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         {
             Route::get('/delete/{id?}', array('uses' => 'AdminVcController@ajaxDeleteVc', 'as' => 'admin.vc.ajax.delete'));
         });
+
+        Route::group(array('prefix' => 'comment'), function()
+        {
+            Route::get('/', array('uses' => 'AdminVcController@showComment', 'as' => 'admin.vc.comment'));
+            Route::get('/edit/{id?}/', array('uses' => 'AdminVcController@showCommentEdit', 'as' => 'admin.vc.comment.edit'));
+            Route::post('/edit/{id?}/submit/', array('before' => 'csrf', 'uses' => 'AdminVcController@submitCommentEdit'));
+            Route::get('/ajax/delete/{id?}', array('uses' => 'AdminVcController@ajaxCommentDelete', 'as' => 'admin.vc.comment.ajax.delete'));
+        });
     });
 
     // 项目管理
@@ -160,6 +168,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         Route::group(array('prefix' => 'ajax'), function()
         {
             Route::get('/delete/{id?}', array('uses' => 'AdminShowcaseController@ajaxDeleteShowcase', 'as' => 'admin.showcase.ajax.delete'));
+        });
+
+        Route::group(array('prefix' => 'comment'), function()
+        {
+            Route::get('/', array('uses' => 'AdminShowcaseController@showComment', 'as' => 'admin.showcase.comment'));
+            Route::get('/edit/{id?}/', array('uses' => 'AdminShowcaseController@showCommentEdit', 'as' => 'admin.showcase.comment.edit'));
+            Route::post('/edit/{id?}/submit/', array('before' => 'csrf', 'uses' => 'AdminShowcaseController@submitCommentEdit'));
+            Route::get('/ajax/delete/{id?}', array('uses' => 'AdminShowcaseController@ajaxCommentDelete', 'as' => 'admin.showcase.comment.ajax.delete'));
         });
     });
 

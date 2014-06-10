@@ -9,4 +9,9 @@ class ShowcaseComment extends Eloquent {
         return $this->belongsTo('Showcase');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
 }

@@ -71,22 +71,22 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">投资方管理</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='AdminVcController') echo 'class="active"'; ?>>
+                            <li <?php if($action_name[0]==='AdminVcController'&&($action_name[1]==='showVc'||$action_name[1]==='showNew'||$action_name[1]==='showEdit')) echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.vc') }}">投资方管理</a>
                             </li>
-                            <li>
-                                <a href="">投资方评论管理</a>
+                            <li <?php if($action_name[0]==='AdminVcController'&&($action_name[1]==='showComment'||$action_name[1]==='showCommentEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.vc.comment') }}">投资方评论管理</a>
                             </li>
                         </ul>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-table"></i> <span class="menu-item-parent">项目管理</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='AdminShowcaseController') echo 'class="active"'; ?>>
+                            <li <?php if($action_name[0]==='AdminShowcaseController'&&($action_name[1]==='showShowcase'||$action_name[1]==='showNew'||$action_name[1]==='showEdit')) echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.showcase') }}">项目管理</a>
                             </li>
-                            <li>
-                                <a href="">项目评论管理</a>
+                            <li <?php if($action_name[0]==='AdminShowcaseController'&&($action_name[1]==='showComment'||$action_name[1]==='showCommentEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.showcase.comment') }}">项目评论管理</a>
                             </li>
                         </ul>
                     </li>

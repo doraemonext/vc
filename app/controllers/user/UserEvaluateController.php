@@ -184,6 +184,12 @@ class UserEvaluateController extends BaseController {
             return Redirect::route('user.evaluate.comment.vc');
         }
 
+        if ($comment->user_id !== Sentry::getUser()->getId()) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '您没有权限编辑该条评论');
+            return Redirect::route('user.evaluate.comment.vc');
+        }
+
         $input = Input::only('content');
         $input['content'] = addslashes(strip_tags($input['content']));
 
@@ -216,6 +222,12 @@ class UserEvaluateController extends BaseController {
             return Redirect::route('user.evaluate.comment.showcase');
         }
 
+        if ($comment->user_id !== Sentry::getUser()->getId()) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '您没有权限编辑该条评论');
+            return Redirect::route('user.evaluate.comment.showcase');
+        }
+
         $input = Input::only('content');
         $input['content'] = addslashes(strip_tags($input['content']));
 
@@ -245,6 +257,12 @@ class UserEvaluateController extends BaseController {
         } catch (ModelNotFoundException $e) {
             Session::flash('status', 'danger');
             Session::flash('message', '找不到您要编辑的评论信息');
+            return Redirect::route('user.evaluate.comment.news');
+        }
+
+        if ($comment->user_id !== Sentry::getUser()->getId()) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '您没有权限编辑该条评论');
             return Redirect::route('user.evaluate.comment.news');
         }
 
