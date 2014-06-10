@@ -29,7 +29,7 @@
                     <li><a href="{{ route('home') }}">首页</a></li>
                     <li><a href="{{ route('showcase.list') }}">项目展示</a></li>
                     <li><a href="{{ route('vc.list') }}">VC展示</a></li>
-                    <li><a href="">讨论区</a></li>
+                    <li><a href="{{ route('discuss.list') }}">讨论区</a></li>
                     <li id="drop">
                         <a href="">商业合作</a>
                         <ul class="dropdown">
