@@ -111,6 +111,11 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
         Route::get('/topic/edit/{id?}/', array('uses' => 'UserDiscussController@showTopicEdit', 'as' => 'user.discuss.topic.edit'));
         Route::post('/topic/edit/{id?}/submit/', array('uses' => 'UserDiscussController@submitTopicEdit'));
         Route::get('/topic/ajax/delete/{id?}', array('uses' => 'UserDiscussController@ajaxTopicDelete', 'as' => 'user.discuss.topic.ajax.delete'));
+
+        Route::get('/comment/', array('uses' => 'UserDiscussController@showComment', 'as' => 'user.discuss.comment'));
+        Route::get('/comment/edit/{id?}/', array('uses' => 'UserDiscussController@showCommentEdit', 'as' => 'user.discuss.comment.edit'));
+        Route::post('/comment/edit/{id?}/submit/', array('uses' => 'UserDiscussController@submitCommentEdit'));
+        Route::get('/comment/ajax/delete/{id?}', array('uses' => 'UserDiscussController@ajaxCommentDelete', 'as' => 'user.discuss.comment.ajax.delete'));
     });
     Route::group(array('prefix' => 'setting'), function()
     {

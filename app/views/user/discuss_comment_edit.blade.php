@@ -2,17 +2,17 @@
 
 @section('breadcrumb')
 <li>我的讨论区</li>
-<li>编辑话题</li>
+<li>编辑回复</li>
 @stop
 
 @section('content')
 <div id="content">
     <div class="row">
         <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
-            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的讨论区 <span>&gt; 编辑话题 </span></h1>
+            <h1 class="page-title txt-color-blueDark"><i class="fa fa-table fa-fw "></i> 我的讨论区 <span>&gt; 编辑回复 </span></h1>
         </div>
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
-            <a data-toggle="modal" href="{{ route('user.discuss.topic') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 返回我的话题列表</a>
+            <a data-toggle="modal" href="{{ route('user.discuss.comment') }}" class="btn btn-success btn-lg pull-right header-btn hidden-mobile"><i class="fa fa-circle-arrow-up fa-lg"></i> 返回我的回复列表</a>
         </div>
     </div>
 
@@ -58,7 +58,7 @@
                 <div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>编辑话题</h2>
+                        <h2>编辑回复</h2>
                         <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span>
                     </header>
 
@@ -73,18 +73,18 @@
 
                         <!-- widget content -->
                         <div class="widget-body">
-                            {{ Form::open(array('action' => array('UserDiscussController@submitTopicEdit', $discuss->id), 'class' => 'form-horizontal')) }}
+                            {{ Form::open(array('action' => array('UserDiscussController@submitCommentEdit', $comment->id), 'class' => 'form-horizontal')) }}
                                 <fieldset>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">话题名称</label>
                                         <div class="col-md-9">
-                                            {{ Form::text('title', $discuss->title, array('class' => 'form-control')) }}
+                                            <input class="form-control" disabled="disabled" placeholder="{{ $comment->discuss->title }}" type="text">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">话题内容</label>
+                                        <label class="col-md-2 control-label">回复内容</label>
                                         <div class="col-md-9">
-                                            {{ Form::textarea('ckeditor', $discuss->content, array('class' => 'form-control')) }}
+                                            {{ Form::textarea('content', $comment->content, array('class' => 'form-control')) }}
                                         </div>
                                     </div>
                                 </fieldset>
@@ -109,11 +109,9 @@
 @stop
 
 @section('custom_js')
-<script src="{{ asset('smartadmin/js/plugin/ckeditor/ckeditor.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     pageSetUp();
-    CKEDITOR.replace( 'ckeditor', { height: '380px', startupFocus : true} );
 });
 </script>
 @stop

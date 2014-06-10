@@ -103,8 +103,8 @@
                             <li <?php if($action_name[0]==='UserDiscussController'&&($action_name[1]==='showTopic'||$action_name[1]==='showTopicEdit')) echo 'class="active"'; ?>>
                                 <a href="{{ route('user.discuss.topic') }}">我的话题</a>
                             </li>
-                            <li>
-                                <a href="">我的回复</a>
+                            <li <?php if($action_name[0]==='UserDiscussController'&&($action_name[1]==='showComment'||$action_name[1]==='showCommentEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('user.discuss.comment') }}">我的回复</a>
                             </li>
                         </ul>
                     </li>
