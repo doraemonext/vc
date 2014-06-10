@@ -1,7 +1,9 @@
 @extends('front.templates.base')
 
 @section('custom_css')
-<link rel="stylesheet" type="text/css" href="{{ asset('front/css/index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.css') }}">
+    <script type="text/javascript" src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/css/index.css') }}">
 @stop
 
 @section('slider')
@@ -10,22 +12,26 @@
         <div id="carousel-generic" class="carousel slide" data-ride="carousel">
             <!-- Indicators -->
             <ol class="carousel-indicators">
-                <li data-target="#carousel-generic" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-generic" data-slide-to="1"></li>
-                <li data-target="#carousel-generic" data-slide-to="2"></li>
+                @foreach ($ad_top as $index => $ad)
+                @if ($index == 0)
+                <li data-target="#carousel-generic" data-slide-to="{{ $index }}" class="active"></li>
+                @else
+                <li data-target="#carousel-generic" data-slide-to="{{ $index }}"></li>
+                @endif
+                @endforeach
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" id="ad_slider_imgs">
+                @foreach ($ad_top as $index => $ad)
+                @if ($index == 0)
                 <div class="item active">
-                    <a href="" style="background-image:url({{ asset('front/images/ad_slider1.png') }})"></a>
-                </div>
+                @else
                 <div class="item">
-                    <a href="" style="background-image:url({{ asset('front/images/ad_slider2.png') }})"></a>
+                @endif
+                    <a href="" style="background-image:url({{ Croppa::url($config_upload['ad.picture'].$ad->picture, 1366, 260) }})"></a>
                 </div>
-                <div class="item">
-                    <a href="" style="background-image:url({{ asset('front/images/ad_slider3.png') }})"></a>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

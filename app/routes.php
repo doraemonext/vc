@@ -226,4 +226,24 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
             Route::get('/delete/{id?}', array('uses' => 'AdminUserController@ajaxDeleteUser', 'as' => 'admin.user.ajax.delete'));
         });
     });
+
+    // 广告管理
+    Route::group(array('prefix' => 'ad'), function()
+    {
+        Route::get('/', array('uses' => 'AdminAdController@showAd', 'as' => 'admin.ad'));
+        Route::group(array('prefix' => 'new'), function()
+        {
+            Route::get('/', array('uses' => 'AdminAdController@showNew', 'as' => 'admin.ad.new'));
+            Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AdminAdController@submitNew'));
+        });
+        Route::group(array('prefix' => 'edit'), function()
+        {
+            Route::get('/{id?}/', array('uses' => 'AdminAdController@showEdit', 'as' => 'admin.ad.edit'));
+            Route::post('/{id?}/submit/', array('uses' => 'AdminAdController@submitEdit'));
+        });
+        Route::group(array('prefix' => 'ajax'), function()
+        {
+            Route::get('/delete/{id?}', array('uses' => 'AdminAdController@ajaxAdDelete', 'as' => 'admin.ad.ajax.delete'));
+        });
+    });
 });

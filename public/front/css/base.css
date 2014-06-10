@@ -1,8 +1,13 @@
+body, html {
+  width: 100%;
+  height: 100%;
+}
+
 * {
   padding: 0;
   margin: 0;
   font-size: 14px;
-  font-family: "微软雅黑", "microsoft yahei", "WenQuanYi Micro Hei", "黑体", "arial";
+  font-family: "微软雅黑", "microsoft yahei", "黑体", "arial";
 }
 
 #nav > li > a {

@@ -32,6 +32,7 @@ class HomeController extends BaseController {
             'showcase_recommend' => Showcase::getRecommend(),
             'news_hot' => News::orderBy('comment_count', 'DESC')->take(6)->get(),
             'news_latest' => News::orderBy('datetime', 'DESC')->take(8)->get(),
+            'ad_top' => Ad::where('position_id', '=', 1)->get(),
         );
 
 		return View::make('front.home', $data);

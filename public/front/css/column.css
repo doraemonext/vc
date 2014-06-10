@@ -261,13 +261,13 @@
   width: 526px;
 }
 
-.project_title a, .project_title, .topicitem_title, .newsitem_title, .vcitem_title {
+.project_title a, .project_title, .topicitem_title, .newsitem_title, .vcitem_title, .search_title {
   font-size: 24px;
   color: #333;
   text-decoration: none;
 }
 
-.project_title a:hover {
+.project_title a:hover, .search_title:hover {
   color: #0070cc;
 }
 
@@ -303,6 +303,16 @@
   border-left: 4px solid #51aded;
 }
 
+#post {
+  margin-top: 50px;
+}
+
+.post_head {
+  font-size: 16px;
+  font-weight: 900;
+  color: #999;
+}
+
 .comment_box {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
@@ -331,18 +341,28 @@
   color: #e2003e;
 }
 
-#comment textarea {
+#comment textarea, #post textarea, .post_title_text {
   padding: 8px;
   width: 532px;
   height: 140px;
-  background-color: #eee;
+  background-color: #f3f3f3;
   color: #666;
   border-radius: 2px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 3px #ccc inset;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 3px #ddd inset;
 }
 
-.comment_undertext {
+#comment textarea:focus, #post textarea:focus, .post_title_text:focus {
+  border-color: #5FA4DD;
+}
+
+.post_title_text {
+  margin: 20px 0;
+  height: 24px;
+  outline: none;
+}
+
+.comment_undertext, .post_undertext {
   overflow: hidden;
   margin: 30px 0;
 }
@@ -351,7 +371,7 @@
   margin-top: 4px;
 }
 
-.comment_submit, .grade_submit {
+.comment_submit, .grade_submit, .post_submit {
   display: block;
 
   width: 100px;
@@ -392,7 +412,7 @@
   color: #0070cc;
 }
 
-.comment_box .login {
+.comment_box .login, #post .login {
   margin: 0;
   margin-left: 10px;
 }

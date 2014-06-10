@@ -12,11 +12,9 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('front/css/column.css') }}">
         <script type="text/javascript" src="{{ asset('front/js/jquery-1.11.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('front/js/master.js') }}"></script>
-        <!-- 以上是通用的，下面是index才有的 -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.css') }}">
-        <script type="text/javascript" src="{{ asset('front/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('front/js/noty/packaged/jquery.noty.packaged.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('front/js/noty/tools.js') }}"></script>
+        <!-- 以上是通用的，下面是index才有的 -->
         @section('custom_css')
         @show
     </head>

@@ -7,4 +7,5 @@ return array(
     'showcase.logo.default' => 'default.jpg',
     'news.picture' => 'upload/news/picture/',
     'news.picture.default' => 'default.jpg',
+    'ad.picture' => 'upload/ad/picture/',
 );
