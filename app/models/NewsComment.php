@@ -9,4 +9,9 @@ class NewsComment extends Eloquent {
         return $this->belongsTo('News');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
 }

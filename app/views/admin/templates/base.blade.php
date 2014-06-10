@@ -93,11 +93,11 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">其他管理</span></a>
                         <ul>
-                            <li <?php if($action_name[0]==='AdminNewsController') echo 'class="active"'; ?>>
+                            <li <?php if($action_name[0]==='AdminNewsController'&&($action_name[1]==='showNews'||$action_name[1]==='showNew'||$action_name[1]==='showEdit')) echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.news') }}">新闻列表</a>
                             </li>
-                            <li>
-                                <a href="">新闻评论管理</a>
+                            <li <?php if($action_name[0]==='AdminNewsController'&&($action_name[1]==='showComment'||$action_name[1]==='showCommentEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.news.comment') }}">新闻评论管理</a>
                             </li>
                             <li <?php if($action_name[0]==='AdminUserController') echo 'class="active"'; ?>>
                                 <a href="{{ route('admin.user') }}">会员管理</a>

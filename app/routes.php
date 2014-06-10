@@ -197,6 +197,14 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         {
             Route::get('/delete/{id?}', array('uses' => 'AdminNewsController@ajaxDeleteNews', 'as' => 'admin.news.ajax.delete'));
         });
+
+        Route::group(array('prefix' => 'comment'), function()
+        {
+            Route::get('/', array('uses' => 'AdminNewsController@showComment', 'as' => 'admin.news.comment'));
+            Route::get('/edit/{id?}/', array('uses' => 'AdminNewsController@showCommentEdit', 'as' => 'admin.news.comment.edit'));
+            Route::post('/edit/{id?}/submit/', array('before' => 'csrf', 'uses' => 'AdminNewsController@submitCommentEdit'));
+            Route::get('/ajax/delete/{id?}', array('uses' => 'AdminNewsController@ajaxCommentDelete', 'as' => 'admin.news.comment.ajax.delete'));
+        });
     });
 
     // 会员管理

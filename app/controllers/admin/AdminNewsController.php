@@ -9,6 +9,8 @@ class AdminNewsController extends BaseController {
         View::composer(array(
             'admin.news',
             'admin.news_edit',
+            'admin.comment',
+            'admin.comment_edit',
         ), function($view)
         {
             $view->with('user', Sentry::getUser());
@@ -69,6 +71,40 @@ class AdminNewsController extends BaseController {
         }
 
         return View::make('admin.news_edit')->with('news', $news)->with('category_select', $category_select);
+    }
+
+    public function showComment()
+    {
+        $paginateNumber = 10;
+
+        $comments = NewsComment::orderBy('datetime', 'DESC')->paginate($paginateNumber);
+
+        $data = array(
+            'type' => 'news',
+            'comments' => $comments,
+        );
+
+        return View::make('admin.comment', $data);
+    }
+
+    public function showCommentEdit($id)
+    {
+        $id = intval($id);
+
+        try {
+            $comment = NewsComment::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '找不到您要编辑的评论信息');
+            return Redirect::route('admin.news.comment');
+        }
+
+        $data = array(
+            'type' => 'news',
+            'comment' => $comment,
+        );
+
+        return View::make('admin.comment_edit', $data);
     }
 
     public function submitNew()
@@ -236,6 +272,38 @@ class AdminNewsController extends BaseController {
         return Redirect::route('admin.news');
     }
 
+    public function submitCommentEdit($id)
+    {
+        $id = intval($id);
+
+        try {
+            $comment = NewsComment::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Session::flash('status', 'danger');
+            Session::flash('message', '找不到您要编辑的评论信息');
+            return Redirect::route('admin.news.comment');
+        }
+
+        $input = Input::only('content');
+        $input['content'] = addslashes(strip_tags($input['content']));
+
+        // 对提交信息进行验证
+        $rules = array(
+            'content' => 'required|max:2000',
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('admin.news.comment.edit', $comment->id)->withErrors($validator)->withInput($input);
+        }
+
+        $comment->content = $input['content'];
+        $comment->save();
+
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功编辑该条评论');
+        return Redirect::route('admin.news.comment');
+    }
+
     public function ajaxDeleteNews($id = null)
     {
         $id = intval($id);
@@ -252,6 +320,28 @@ class AdminNewsController extends BaseController {
         $news->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条新闻记录');
+
+        return Response::json(array(
+            'code' => 0,
+        ));
+    }
+
+    public function ajaxCommentDelete($id = null)
+    {
+        $id = intval($id);
+
+        try {
+            $comment = NewsComment::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1000,
+                'message' => '您提供的ID无效',
+            ));
+        }
+
+        $comment->delete();
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功删除该条评论');
 
         return Response::json(array(
             'code' => 0,
