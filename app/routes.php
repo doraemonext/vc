@@ -105,6 +105,13 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
             Route::get('/news/ajax/delete/{id?}', array('uses' => 'UserEvaluateController@ajaxCommentNewsDelete', 'as' => 'user.evaluate.comment.news.ajax.delete'));
         });
     });
+    Route::group(array('prefix' => 'discuss'), function()
+    {
+        Route::get('/topic/', array('uses' => 'UserDiscussController@showTopic', 'as' => 'user.discuss.topic'));
+        Route::get('/topic/edit/{id?}/', array('uses' => 'UserDiscussController@showTopicEdit', 'as' => 'user.discuss.topic.edit'));
+        Route::post('/topic/edit/{id?}/submit/', array('uses' => 'UserDiscussController@submitTopicEdit'));
+        Route::get('/topic/ajax/delete/{id?}', array('uses' => 'UserDiscussController@ajaxTopicDelete', 'as' => 'user.discuss.topic.ajax.delete'));
+    });
     Route::group(array('prefix' => 'setting'), function()
     {
         Route::get('/', array('uses' => 'UserSettingController@showSetting', 'as' => 'user.setting'));
