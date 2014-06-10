@@ -54,16 +54,28 @@ class AdminAdController extends BaseController {
     {
         $config = Config::get('upload');
 
+        $input = Input::only('url');
+        $input['url'] = addslashes(strip_tags($input['url']));
+
+        // 对提交信息进行验证
+        $rules = array(
+            'url' => 'required|url',
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('admin.ad.new')->withErrors($validator)->withInput($input);
+        }
+
         // 对图片进行处理
         $input['picture'] = Input::file('picture');
         $filename = '';
         if (is_null($input['picture'])) {
             Session::flash('error', '您必须要上传一张图片');
-            return Redirect::route('admin.ad.new');
+            return Redirect::route('admin.ad.new')->withInput(Input::except('picture'));
         } else {
             if ($input['picture']->getError()) {
                 Session::flash('error', $input['picture']->getErrorMessage());
-                return Redirect::route('admin.ad.new');
+                return Redirect::route('admin.ad.new')->withInput(Input::except('picture'));
             }
 
             $destination = $config['ad.picture'];
@@ -80,19 +92,20 @@ class AdminAdController extends BaseController {
                 $filename .= '.png';
             } else {
                 Session::flash('error', '您上传的不是图片文件');
-                return Redirect::route('admin.ad.new');
+                return Redirect::route('admin.ad.new')->withInput(Input::except('picture'));
             }
 
             try {
                 $input['picture']->move($destination, $filename);
             } catch (Exception $e) {
                 Session::flash('error', $e->getMessage());
-                return Redirect::route('admin.ad.new');
+                return Redirect::route('admin.ad.new')->withInput(Input::except('picture'));
             }
         }
 
         $ad = new Ad;
         $ad->picture = $filename;
+        $ad->url = $input['url'];
         $ad->position_id = 1;
         $ad->save();
 
@@ -114,16 +127,25 @@ class AdminAdController extends BaseController {
             return Redirect::route('admin.ad');
         }
 
+        $input = Input::only('url');
+        $input['url'] = addslashes(strip_tags($input['url']));
+
+        // 对提交信息进行验证
+        $rules = array(
+            'url' => 'required|url',
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Redirect::route('admin.ad.edit', $ad->id)->withErrors($validator)->withInput($input);
+        }
+
         // 对图片进行处理
         $input['picture'] = Input::file('picture');
         $filename = '';
-        if (is_null($input['picture'])) {
-            Session::flash('error', '您必须要上传一张图片');
-            return Redirect::route('admin.ad.edit', $ad->id);
-        } else {
+        if (!is_null($input['picture'])) {
             if ($input['picture']->getError()) {
                 Session::flash('error', $input['picture']->getErrorMessage());
-                return Redirect::route('admin.ad.edit', $ad->id);
+                return Redirect::route('admin.ad.edit', $ad->id)->withInput(Input::except('picture'));
             }
 
             $destination = $config['ad.picture'];
@@ -140,18 +162,21 @@ class AdminAdController extends BaseController {
                 $filename .= '.png';
             } else {
                 Session::flash('error', '您上传的不是图片文件');
-                return Redirect::route('admin.ad.edit', $ad->id);
+                return Redirect::route('admin.ad.edit', $ad->id)->withInput(Input::except('picture'));
             }
 
             try {
                 $input['picture']->move($destination, $filename);
             } catch (Exception $e) {
                 Session::flash('error', $e->getMessage());
-                return Redirect::route('admin.ad.edit', $ad->id);
+                return Redirect::route('admin.ad.edit', $ad->id)->withInput(Input::except('picture'));
             }
         }
 
-        $ad->picture = $filename;
+        if (!is_null($input['picture'])) {
+            $ad->picture = $filename;
+        }
+        $ad->url = $input['url'];
         $ad->save();
 
         Session::flash('status', 'success');

@@ -46,4 +46,7 @@ return array(
     'new_password.max' => '您的新密码输入过长',
 
     'summary.max' => '您输入的简介过长',
+
+    'url.required' => '您必须输入一个网址',
+    'url.url' => '您必须输入一个合法的网址',
 );

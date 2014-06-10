@@ -92,11 +92,21 @@
                             @endif
                                 <fieldset>
                                     <div class="form-group">
+                                        <label class="col-md-2 control-label">广告链接</label>
+                                        <div class="col-md-9">
+                                            @if (isset($ad))
+                                            {{ Form::text('url', $ad->url, array('class' => 'form-control')) }}
+                                            @else
+                                            {{ Form::text('url', isset($url) ? $url : '', array('class' => 'form-control')) }}
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="col-md-2 control-label">广告图片</label>
                                         <div class="col-md-9">
                                             {{ Form::file('picture', array('class' => 'btn btn-default')) }}
                                             @if (isset($ad))
-                                            <p class="help-block">如果您需要更新图片，请直接上传即可覆盖。</p>
+                                            <p class="help-block">如果您需要更新图片，请直接上传即可覆盖。如果不需要更新图片，请保持为空</p>
                                             @endif
                                             <p class="help-block">支持格式：jpg, gif, png，大小 2MB 以内</p>
                                         </div>

@@ -29,7 +29,7 @@
                 @else
                 <div class="item">
                 @endif
-                    <a href="" style="background-image:url({{ Croppa::url($config_upload['ad.picture'].$ad->picture, 1366, 260) }})"></a>
+                    <a href="{{ $ad->url }}" style="background-image:url({{ Croppa::url($config_upload['ad.picture'].$ad->picture, 1366, 260) }})"></a>
                 </div>
                 @endforeach
             </div>
