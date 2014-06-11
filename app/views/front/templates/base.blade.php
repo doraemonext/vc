@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>
-            {{ $setting['title'] }}@section('page_title')
-            @show
-        </title>
+        <title>{{ $setting['title'] }}@section('page_title')
+        @show</title>
         <meta name="description" content="{{ $setting['description'] }}">
         <link rel="shortcut icon" href="images/favicon.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
