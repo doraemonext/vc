@@ -38,10 +38,14 @@ class NewsController extends BaseController {
         $comment_count = $comment->count();
         $comment_paginate = $comment->paginate($paginateNumber);
 
+        // 获取最新项目
+        $showcase_latest = Showcase::orderBy('datetime', 'DESC')->take(8)->get();
+
         $data = array(
             'news' => $news,
             'comment_count' => $comment_count,
             'comment_paginate' => $comment_paginate,
+            'showcase_latest' => $showcase_latest,
             'news_hot' => News::orderBy('comment_count', 'DESC')->take(7)->get(),
         );
 
