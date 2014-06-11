@@ -246,6 +246,7 @@ class AdminNewsController extends BaseController {
         $news->title = $input['title'];
         $news->category_id = $input['category_id'];
         if (!is_null($input['picture'])) {
+            Croppa::delete($destination.$news->picture);
             $news->picture = $filename;
         }
         $news->summary = $input['summary'];
@@ -302,6 +303,8 @@ class AdminNewsController extends BaseController {
             ));
         }
 
+        NewsComment::where('news_id', '=', $news->id)->delete();
+        Croppa::delete(Config::get('upload')['news.picture'].$news->picture);
         $news->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条新闻记录');
@@ -323,6 +326,9 @@ class AdminNewsController extends BaseController {
                 'message' => '您提供的ID无效',
             ));
         }
+
+        $comment->news->comment_count = $comment->news->comment_count - 1;
+        $comment->news->save();
 
         $comment->delete();
         Session::flash('status', 'success');
