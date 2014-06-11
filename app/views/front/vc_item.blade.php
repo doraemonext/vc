@@ -164,26 +164,12 @@
             <div class="column_side_title">投资案例</div>
         </div>
         <div class="column_content investment">
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
+            @foreach ($vc->showcases as $s)
+            <a class="topic_item" href="{{ $s->url }}">
+                <div class="topic_title">{{ $s->title }}</div>
+                <div class="topic_content">{{ $s->content }}</div>
             </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-            </a>
+            @endforeach
         </div>
     </div>
 </div>

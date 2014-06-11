@@ -176,6 +176,75 @@
                                         </div>
                                     </div>
                                 </fieldset>
+                                <fieldset>
+                                    @if (isset($vc))
+                                    @foreach ($vc->showcases as $index => $s)
+                                    <legend>投资案例 {{ $index + 1 }}</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">案例名称</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('showcase_'.strval($index+1).'_title', $s->title, array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">案例内容</label>
+                                        <div class="col-md-9">
+                                            {{ Form::textarea('showcase_'.strval($index+1).'_content', $s->content, array('class' => 'form-control', 'rows' => '6')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">跳转链接</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('showcase_'.strval($index+1).'_url', $s->url, array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                    @for ($i = $vc->showcases->count() + 1; $i <= 5; $i++)
+                                    <legend>投资案例 {{ $i }}</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">案例名称</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('showcase_'.strval($i).'_title', '', array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">案例内容</label>
+                                        <div class="col-md-9">
+                                            {{ Form::textarea('showcase_'.strval($i).'_content', '', array('class' => 'form-control', 'rows' => '6')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">跳转链接</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('showcase_'.strval($i).'_url', '', array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    @endfor
+                                    @else
+                                    @for ($i = 1; $i <= 5; $i++)
+                                    <legend>投资案例 {{ $i }}</legend>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">案例名称</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('showcase_'.strval($i).'_title', '', array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">案例内容</label>
+                                        <div class="col-md-9">
+                                            {{ Form::textarea('showcase_'.strval($i).'_content', '', array('class' => 'form-control', 'rows' => '6')) }}
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">跳转链接</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('showcase_'.strval($i).'_url', '', array('class' => 'form-control')) }}
+                                        </div>
+                                    </div>
+                                    @endfor
+                                    @endif
+                                </fieldset>
+
                                 <div class="form-actions">
                                     <div class="row">
                                         <div class="col-md-12">

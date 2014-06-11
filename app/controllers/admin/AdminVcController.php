@@ -121,13 +121,42 @@ class AdminVcController extends BaseController {
 
     public function submitNew()
     {
-        $input = Input::only('name', 'recommended', 'invest_field', 'invest_scale', 'website', 'summary', 'ckeditor');
+        $input = Input::only(
+            'name',
+            'recommended',
+            'invest_field',
+            'invest_scale',
+            'website',
+            'summary',
+            'ckeditor',
+            'showcase_1_title', 'showcase_1_content', 'showcase_1_url',
+            'showcase_2_title', 'showcase_2_content', 'showcase_2_url',
+            'showcase_3_title', 'showcase_3_content', 'showcase_3_url',
+            'showcase_4_title', 'showcase_4_content', 'showcase_4_url',
+            'showcase_5_title', 'showcase_5_content', 'showcase_5_url'
+        );
         $input['name'] = addslashes(strip_tags($input['name']));
         $input['recommended'] = addslashes(strip_tags($input['recommended']));
         $input['invest_field'] = addslashes(strip_tags($input['invest_field']));
         $input['invest_scale'] = addslashes(strip_tags($input['invest_scale']));
         $input['website'] = addslashes(strip_tags($input['website']));
         $input['summary'] = strip_tags($input['summary'], '<br>');
+
+        $input['showcase_1_title'] = addslashes(strip_tags($input['showcase_1_title']));
+        $input['showcase_1_content'] = addslashes(strip_tags($input['showcase_1_content']));
+        $input['showcase_1_url'] = addslashes(strip_tags($input['showcase_1_url']));
+        $input['showcase_2_title'] = addslashes(strip_tags($input['showcase_2_title']));
+        $input['showcase_2_content'] = addslashes(strip_tags($input['showcase_2_content']));
+        $input['showcase_2_url'] = addslashes(strip_tags($input['showcase_2_url']));
+        $input['showcase_3_title'] = addslashes(strip_tags($input['showcase_3_title']));
+        $input['showcase_3_content'] = addslashes(strip_tags($input['showcase_3_content']));
+        $input['showcase_3_url'] = addslashes(strip_tags($input['showcase_3_url']));
+        $input['showcase_4_title'] = addslashes(strip_tags($input['showcase_4_title']));
+        $input['showcase_4_content'] = addslashes(strip_tags($input['showcase_4_content']));
+        $input['showcase_4_url'] = addslashes(strip_tags($input['showcase_4_url']));
+        $input['showcase_5_title'] = addslashes(strip_tags($input['showcase_5_title']));
+        $input['showcase_5_content'] = addslashes(strip_tags($input['showcase_5_content']));
+        $input['showcase_5_url'] = addslashes(strip_tags($input['showcase_5_url']));
 
         // 对提交信息进行验证
         $rules = array(
@@ -136,6 +165,22 @@ class AdminVcController extends BaseController {
             'invest_field' => 'max:255',
             'invest_scale' => 'max:255',
             'website' => 'url|max:255',
+
+            'showcase_1_title' => 'max:255',
+            'showcase_1_content' => 'max:2000',
+            'showcase_1_url' => 'url|max:255',
+            'showcase_2_title' => 'max:255',
+            'showcase_2_content' => 'max:2000',
+            'showcase_2_url' => 'url|max:255',
+            'showcase_3_title' => 'max:255',
+            'showcase_3_content' => 'max:2000',
+            'showcase_3_url' => 'url|max:255',
+            'showcase_4_title' => 'max:255',
+            'showcase_4_content' => 'max:2000',
+            'showcase_4_url' => 'url|max:255',
+            'showcase_5_title' => 'max:255',
+            'showcase_5_content' => 'max:2000',
+            'showcase_5_url' => 'url|max:255',
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
         if ($validator->fails()) {
@@ -175,10 +220,6 @@ class AdminVcController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
-
-//            $img = Image::make($destination.$filename);
-//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-//            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $vc = new Vc;
@@ -198,6 +239,15 @@ class AdminVcController extends BaseController {
         $vc->rating = 0.0;
         $vc->save();
 
+        for ($i = 1; $i <= 5; $i++) {
+            $vc_showcase = new VcShowcase;
+            $vc_showcase->vc_id = $vc->id;
+            $vc_showcase->title = $input['showcase_'.strval($i).'_title'];
+            $vc_showcase->content = $input['showcase_'.strval($i).'_content'];
+            $vc_showcase->url = $input['showcase_'.strval($i).'_url'];
+            $vc_showcase->save();
+        }
+
         Session::flash('status', 'success');
         Session::flash('message', '您已成功添加 '.$input['name']);
         return Redirect::route('admin.vc');
@@ -214,13 +264,43 @@ class AdminVcController extends BaseController {
             return Redirect::route('admin.vc');
         }
 
-        $input = Input::only('name', 'recommended', 'invest_field', 'invest_scale', 'website', 'summary', 'ckeditor');
+        $input = Input::only(
+            'name',
+            'recommended',
+            'invest_field',
+            'invest_scale',
+            'website',
+            'summary',
+            'ckeditor',
+
+            'showcase_1_title', 'showcase_1_content', 'showcase_1_url',
+            'showcase_2_title', 'showcase_2_content', 'showcase_2_url',
+            'showcase_3_title', 'showcase_3_content', 'showcase_3_url',
+            'showcase_4_title', 'showcase_4_content', 'showcase_4_url',
+            'showcase_5_title', 'showcase_5_content', 'showcase_5_url'
+        );
         $input['name'] = addslashes(strip_tags($input['name']));
         $input['recommended'] = addslashes(strip_tags($input['recommended']));
         $input['invest_field'] = addslashes(strip_tags($input['invest_field']));
         $input['invest_scale'] = addslashes(strip_tags($input['invest_scale']));
         $input['website'] = addslashes(strip_tags($input['website']));
         $input['summary'] = strip_tags($input['summary'], '<br>');
+
+        $input['showcase_1_title'] = addslashes(strip_tags($input['showcase_1_title']));
+        $input['showcase_1_content'] = addslashes(strip_tags($input['showcase_1_content']));
+        $input['showcase_1_url'] = addslashes(strip_tags($input['showcase_1_url']));
+        $input['showcase_2_title'] = addslashes(strip_tags($input['showcase_2_title']));
+        $input['showcase_2_content'] = addslashes(strip_tags($input['showcase_2_content']));
+        $input['showcase_2_url'] = addslashes(strip_tags($input['showcase_2_url']));
+        $input['showcase_3_title'] = addslashes(strip_tags($input['showcase_3_title']));
+        $input['showcase_3_content'] = addslashes(strip_tags($input['showcase_3_content']));
+        $input['showcase_3_url'] = addslashes(strip_tags($input['showcase_3_url']));
+        $input['showcase_4_title'] = addslashes(strip_tags($input['showcase_4_title']));
+        $input['showcase_4_content'] = addslashes(strip_tags($input['showcase_4_content']));
+        $input['showcase_4_url'] = addslashes(strip_tags($input['showcase_4_url']));
+        $input['showcase_5_title'] = addslashes(strip_tags($input['showcase_5_title']));
+        $input['showcase_5_content'] = addslashes(strip_tags($input['showcase_5_content']));
+        $input['showcase_5_url'] = addslashes(strip_tags($input['showcase_5_url']));
 
         // 对提交信息进行验证
         $rules = array(
@@ -229,6 +309,22 @@ class AdminVcController extends BaseController {
             'invest_field' => 'max:255',
             'invest_scale' => 'max:255',
             'website' => 'url|max:255',
+
+            'showcase_1_title' => 'max:255',
+            'showcase_1_content' => 'max:2000',
+            'showcase_1_url' => 'url|max:255',
+            'showcase_2_title' => 'max:255',
+            'showcase_2_content' => 'max:2000',
+            'showcase_2_url' => 'url|max:255',
+            'showcase_3_title' => 'max:255',
+            'showcase_3_content' => 'max:2000',
+            'showcase_3_url' => 'url|max:255',
+            'showcase_4_title' => 'max:255',
+            'showcase_4_content' => 'max:2000',
+            'showcase_4_url' => 'url|max:255',
+            'showcase_5_title' => 'max:255',
+            'showcase_5_content' => 'max:2000',
+            'showcase_5_url' => 'url|max:255',
         );
         $validator = Validator::make($input, $rules, Config::get('validation'));
         if ($validator->fails()) {
@@ -268,10 +364,6 @@ class AdminVcController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
-
-//            $img = Image::make($destination.$filename);
-//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-//            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $vc->name = $input['name'];
@@ -285,6 +377,20 @@ class AdminVcController extends BaseController {
         $vc->summary = $input['summary'];
         $vc->content = $input['ckeditor'];
         $vc->save();
+
+        $vc_showcase = VcShowcase::where('vc_id', '=', $vc->id)->get();
+        foreach ($vc_showcase as $v) {
+            $v->delete();
+        }
+
+        for ($i = 1; $i <= 5; $i++) {
+            $vc_showcase = new VcShowcase;
+            $vc_showcase->vc_id = $vc->id;
+            $vc_showcase->title = $input['showcase_'.strval($i).'_title'];
+            $vc_showcase->content = $input['showcase_'.strval($i).'_content'];
+            $vc_showcase->url = $input['showcase_'.strval($i).'_url'];
+            $vc_showcase->save();
+        }
 
         Session::flash('status', 'success');
         Session::flash('message', '您已成功编辑 '.$input['name']);
