@@ -1,132 +1,74 @@
 @extends('front.templates.base')
 
 @section('leftbar')
-    <div id="leftbar">
-        <div class="column_side">
-            <div class="column_side_head">
-                <div class="column_side_title">推荐投资方</div>
-            </div>
-            <div class="column_content">
-                <div class="investor_item">
-                    <a class="item_investor" href="">
-                        <div class="investor_head">
-                            <span class="investor_name">红杉资本</span>
-                            <span class="investor_update">6/1 更新</span>
-                        </div>
-                        <div class="investor_content">
-                            <div class="investor_mscore">
-                                <div class="investor_tscore">4.5</div>
-                                <div class="investor_np">249人打分</div>
-                            </div>
-                            <ul class="investor_detail">
-                                <li>沟通顺畅 4.2</li>
-                                <li>权益合理 4.1</li>
-                                <li>投资效率 4.0</li>
-                                <li>资源协助 4.9</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-                <div class="investor_item">
-                    <a class="item_investor" href="">
-                        <div class="investor_head">
-                            <span class="investor_name">红杉资本</span>
-                            <span class="investor_update">6/1 更新</span>
-                        </div>
-                        <div class="investor_content">
-                            <div class="investor_mscore">
-                                <div class="investor_tscore">4.5</div>
-                                <div class="investor_np">249人打分</div>
-                            </div>
-                            <ul class="investor_detail">
-                                <li>沟通顺畅 4.2</li>
-                                <li>权益合理 4.1</li>
-                                <li>投资效率 4.0</li>
-                                <li>资源协助 4.9</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-                <div class="investor_item">
-                    <a class="item_investor" href="">
-                        <div class="investor_head">
-                            <span class="investor_name">红杉资本</span>
-                            <span class="investor_update">6/1 更新</span>
-                        </div>
-                        <div class="investor_content">
-                            <div class="investor_mscore">
-                                <div class="investor_tscore">4.5</div>
-                                <div class="investor_np">249人打分</div>
-                            </div>
-                            <ul class="investor_detail">
-                                <li>沟通顺畅 4.2</li>
-                                <li>权益合理 4.1</li>
-                                <li>投资效率 4.0</li>
-                                <li>资源协助 4.9</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-            </div>
+<div id="leftbar">
+    <div class="column_side">
+        <div class="column_side_head">
+            <div class="column_side_title">推荐投资方</div>
         </div>
-        <div class="column_side">
-            <div class="column_side_head">
-                <div class="column_side_title">投资方排名</div>
+        <div class="column_content">
+            @foreach ($vc_recommend as $vc)
+            <div class="investor_item">
+                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
+                    <div class="investor_head">
+                        <span class="investor_name">{{ $vc->name }}</span>
+                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+                    </div>
+                    <div class="investor_content">
+                        <div class="investor_mscore">
+                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                            <div class="investor_np">{{ $vc->ratings()->count() }}人打分</div>
+                        </div>
+                        <ul class="investor_detail">
+                            @foreach ($rating_category as $category)
+                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </a>
             </div>
-            <div class="column_content">
-                <div class="investor_item">
-                    <a class="item_investor" href="">
-                        <div class="investor_head">
-                            <span class="investor_name">红杉资本</span>
-                            <span class="investor_update">6/1 更新</span>
-                        </div>
-                        <div class="investor_content">
-                            <div class="investor_mscore">
-                                <div class="investor_tscore">4.5</div>
-                                <div class="investor_np">249人打分</div>
-                            </div>
-                            <ul class="investor_detail">
-                                <li>沟通顺畅 4.2</li>
-                                <li>权益合理 4.1</li>
-                                <li>投资效率 4.0</li>
-                                <li>资源协助 4.9</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-                <div class="investor_item">
-                    <a class="item_investor" href="">
-                        <div class="investor_head">
-                            <span class="investor_name">红杉资本</span>
-                            <span class="investor_update">6/1 更新</span>
-                        </div>
-                        <div class="investor_content">
-                            <div class="investor_mscore">
-                                <div class="investor_tscore">4.5</div>
-                                <div class="investor_np">249人打分</div>
-                            </div>
-                            <ul class="investor_detail">
-                                <li>沟通顺畅 4.2</li>
-                                <li>权益合理 4.1</li>
-                                <li>投资效率 4.0</li>
-                                <li>资源协助 4.9</li>
-                            </ul>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="page sidepage">
-                <ul>
-                    <li class="prevpage disabled"><a href="#">上一页</a></li>
-                    <li class="nextpage"><a href="">下一页</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="clear"></div>
-        <div class="code_2d">
-            <img src="{{ asset('front/images/code_2d.png') }}">
+            @endforeach
         </div>
     </div>
+    <div class="column_side">
+        <div class="column_side_head">
+            <div class="column_side_title">投资方排名</div>
+        </div>
+        <div class="column_content" id="vc" data-paginate="1">
+            @foreach ($vc_list as $vc)
+            <div class="investor_item">
+                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
+                    <div class="investor_head">
+                        <span class="investor_name">{{ $vc->name }}</span>
+                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+                    </div>
+                    <div class="investor_content">
+                        <div class="investor_mscore">
+                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
+                        </div>
+                        <ul class="investor_detail">
+                            @foreach ($rating_category as $category)
+                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </a>
+            </div>
+            @endforeach
+        </div>
+        <div class="page sidepage" id="paginator_vc">
+            <ul>
+                <li class="prevpage disabled"><a href="##">上一页</a></li>
+                <li class="nextpage <?php if($count['vc']<=count($vc_list)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="code_2d">
+        <img src="{{ asset('front/images/code_2d.png') }}">
+    </div>
+</div>
 @stop
 
 @section('mainbar')
@@ -227,6 +169,75 @@ $(document).ready(function() {
     @if (Session::has('status'))
     msg_top("{{ Session::get('message') }}", "{{ Session::get('status') }}");
     @endif
+
+    $("#paginator_vc .nextpage").click(function() {
+        if ($(this).hasClass('disabled')) return;
+        var id = $("#vc").data('paginate') + 1;
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('vc.ajax.list') }}/" + id,
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    msg(data['message'], 'error');
+                } else {
+                    $("html,body").animate({scrollTop: $("#vc").offset().top - 153}, 500);
+
+                    $("#vc").data('paginate', id);
+                    $("#vc").html(data['vc_list']);
+
+                    if (data['has_next']) {
+                        $("#paginator_vc .nextpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .nextpage").addClass('disabled');
+                    }
+                    if (data['has_prev']) {
+                        $("#paginator_vc .prevpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .prevpage").addClass('disabled');
+                    }
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
+
+    $("#paginator_vc .prevpage").click(function() {
+        if ($(this).hasClass('disabled')) return;
+        var id = $("#vc").data('paginate') - 1;
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('vc.ajax.list') }}/" + id,
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    msg(data['message'], 'error');
+                } else {
+                    $("html,body").animate({scrollTop: $("#vc").offset().top - 153}, 500);
+
+                    $("#vc").data('paginate', id);
+                    $("#vc").html(data['vc_list']);
+
+                    if (data['has_next']) {
+                        $("#paginator_vc .nextpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .nextpage").addClass('disabled');
+                    }
+                    if (data['has_prev']) {
+                        $("#paginator_vc .prevpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .prevpage").addClass('disabled');
+                    }
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
+
 });
 </script>
 @stop

@@ -29,10 +29,20 @@ class ShowcaseController extends BaseController {
         // 获取热门新闻
         $news_hot = News::orderBy('comment_count', 'DESC')->take(6)->get();
 
+        $count = array(
+            'vc' => Vc::count(),
+            'vc_comment' => VcComment::count(),
+            'user' => User::count(),
+        );
+
         $data = array(
             'showcase_list' => $showcase_list,
             'news_hot' => $news_hot,
             'discuss_latest' => Discuss::orderBy('datetime', 'DESC')->take(3)->get(),
+            'count' => $count,
+            'vc_recommend' => Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value)),
+            'vc_list' => Vc::getListOrderByRatingWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_list')->first()->value)),
+            'rating_category' => VcRatingCategory::all(),
         );
 
         return View::make('front.showcase_list', $data);
