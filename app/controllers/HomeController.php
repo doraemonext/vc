@@ -26,8 +26,8 @@ class HomeController extends BaseController {
 
         $data = array(
             'count' => $count,
-            'vc_recommend' => Vc::getRecommendWithRating(),
-            'vc_list' => Vc::getListOrderByRatingWithRating(),
+            'vc_recommend' => Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value)),
+            'vc_list' => Vc::getListOrderByRatingWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_list')->first()->value)),
             'rating_category' => VcRatingCategory::all(),
             'showcase_recommend' => Showcase::getRecommend(),
             'news_hot' => News::orderBy('comment_count', 'DESC')->take(6)->get(),

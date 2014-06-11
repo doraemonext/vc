@@ -223,4 +223,28 @@ class VcController extends BaseController {
         ));
     }
 
+    public function ajaxVcList($page)
+    {
+        $paginateNumber = intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_list')->first()->value);
+
+        $vc_list = Vc::getListOrderByRatingWithRating($paginateNumber, ($page - 1) * $paginateNumber);
+        $vc_list_view = View::make('front.ajax.sidebar_vc_list', array(
+            'vc_list' => $vc_list,
+            'rating_category' => VcRatingCategory::all(),
+        ))->render();
+
+        if ($page * $paginateNumber < Vc::count()) {
+            $has_next = true;
+        } else {
+            $has_next = false;
+        }
+
+        return Response::json(array(
+            'code' => 0,
+            'vc_list' => $vc_list_view,
+            'has_prev' => $page == 1 ? false : true,
+            'has_next' => $has_next,
+        ));
+    }
+
 }

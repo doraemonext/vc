@@ -77,7 +77,7 @@
         <div class="column_side_head">
             <div class="column_side_title">投资方排名</div>
         </div>
-        <div class="column_content">
+        <div class="column_content" id="vc" data-paginate="1">
             @foreach ($vc_list as $vc)
             <div class="investor_item">
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
@@ -100,10 +100,10 @@
             </div>
             @endforeach
         </div>
-        <div class="page sidepage">
+        <div class="page sidepage" id="paginator_vc">
             <ul>
-                <li class="prevpage disabled"><a href="#">上一页</a></li>
-                <li class="nextpage"><a href="">下一页</a></li>
+                <li class="prevpage disabled"><a href="##">上一页</a></li>
+                <li class="nextpage <?php if($count['vc']<=count($vc_list)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
             </ul>
         </div>
     </div>
@@ -192,7 +192,13 @@
                 </div>
                 <div class="news_right">
                     <div class="news_title"><a href="{{ route('news.item', $latest->id) }}">{{ $latest->title }}</a></div>
-                    <div class="news_subtitle">{{ mb_substr($latest->summary, 0, 50, 'utf-8') }}...</div>
+                    <div class="news_subtitle">
+                        @if (mb_substr($latest->summary, 0, 50, 'utf-8') != $latest->summary)
+                        {{ mb_substr($latest->summary, 0, 50, 'utf-8') }}...
+                        @else
+                        {{ mb_substr($latest->summary, 0, 50, 'utf-8') }}
+                        @endif
+                    </div>
                     <div class="news_info">{{ $latest->datetime }}</div>
                 </div>
             </div>
@@ -202,11 +208,6 @@
     <div class="page">
         <ul>
             <li class="prevpage disabled"><a href="#">上一页</a></li>
-            <li class="disabled"><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
             <li class="nextpage"><a href="">下一页</a></li>
         </ul>
     </div>
@@ -255,6 +256,74 @@ $(document).ready(function() {
     @if (Session::has('status'))
     msg_top("{{ Session::get('message') }}", "{{ Session::get('status') }}");
     @endif
+
+    $("#paginator_vc .nextpage").click(function() {
+        if ($(this).hasClass('disabled')) return;
+        var id = $("#vc").data('paginate') + 1;
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('vc.ajax.list') }}/" + id,
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    msg(data['message'], 'error');
+                } else {
+                    $("html,body").animate({scrollTop: $("#vc").offset().top - 153}, 500);
+
+                    $("#vc").data('paginate', id);
+                    $("#vc").html(data['vc_list']);
+
+                    if (data['has_next']) {
+                        $("#paginator_vc .nextpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .nextpage").addClass('disabled');
+                    }
+                    if (data['has_prev']) {
+                        $("#paginator_vc .prevpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .prevpage").addClass('disabled');
+                    }
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
+
+    $("#paginator_vc .prevpage").click(function() {
+        if ($(this).hasClass('disabled')) return;
+        var id = $("#vc").data('paginate') - 1;
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('vc.ajax.list') }}/" + id,
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    msg(data['message'], 'error');
+                } else {
+                    $("html,body").animate({scrollTop: $("#vc").offset().top - 153}, 500);
+
+                    $("#vc").data('paginate', id);
+                    $("#vc").html(data['vc_list']);
+
+                    if (data['has_next']) {
+                        $("#paginator_vc .nextpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .nextpage").addClass('disabled');
+                    }
+                    if (data['has_prev']) {
+                        $("#paginator_vc .prevpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_vc .prevpage").addClass('disabled');
+                    }
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
 });
 </script>
 @stop

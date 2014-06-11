@@ -17,6 +17,7 @@ Route::get('/vc/item/{id?}/', array('uses' => 'VcController@showItem', 'as' => '
 Route::post('/vc/item/ajax/comment_submit/{id?}/', array('uses' => 'VcController@ajaxCommentSubmit', 'as' => 'vc.item.ajax.comment.submit'));
 Route::post('/vc/item/ajax/rating/{id?}/', array('uses' => 'VcController@ajaxRating', 'as' => 'vc.item.ajax.rating'));
 Route::post('/vc/item/ajax/vote/{id?}/', array('uses' => 'VcController@ajaxVote', 'as' => 'vc.item.ajax.vote'));
+Route::get('/vc/ajax/{id?}/', array('uses' => 'VcController@ajaxVcList', 'as' => 'vc.ajax.list'));
 
 Route::group(array('prefix' => 'news'), function()
 {

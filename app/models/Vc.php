@@ -9,28 +9,28 @@ class Vc extends Eloquent {
         return $this->hasMany('VcRating', 'vc_id');
     }
 
-    public static function getRecommend()
+    public static function getRecommend($limit = 2)
     {
-        return self::where('recommended', '=', 1)->get();
+        return self::where('recommended', '=', 1)->take($limit)->get();
     }
 
-    public static function getRecommendWithRating()
+    public static function getRecommendWithRating($limit = 2)
     {
-        $vcs = self::where('recommended', '=', 1)->get();
+        $vcs = self::where('recommended', '=', 1)->take($limit)->get();
         foreach ($vcs as $vc) {
             $vc->score = self::getRatingByVC($vc->id);
         }
         return $vcs;
     }
 
-    public static function getListOrderByRating($paginateNumber = 0)
+    public static function getListOrderByRating($limit = 5, $offset = 0)
     {
-        return self::orderBy('rating', 'DESC')->get();
+        return self::orderBy('rating', 'DESC')->take($limit)->offset($offset)->get();
     }
 
-    public static function getListOrderByRatingWithRating($paginateNumber = 0)
+    public static function getListOrderByRatingWithRating($limit = 5, $offset = 0)
     {
-        $vcs = self::orderBy('rating', 'DESC')->get();
+        $vcs = self::orderBy('rating', 'DESC')->take($limit)->offset($offset)->get();
         foreach ($vcs as $vc) {
             $vc->score = self::getRatingByVC($vc->id);
         }
