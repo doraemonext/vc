@@ -43,6 +43,7 @@ Route::group(array('prefix' => 'discuss'), function()
 });
 
 Route::get('/search/', array('uses' => 'SearchController@showSearch', 'as' => 'search'));
+Route::get('/business/', array('uses' => 'HomeController@showBusiness', 'as' => 'business'));
 
 Route::group(array('prefix' => 'account'), function()
 {

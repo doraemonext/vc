@@ -28,7 +28,7 @@
                     <li><a href="{{ route('showcase.list') }}">项目展示</a></li>
                     <li><a href="{{ route('vc.list') }}">VC展示</a></li>
                     <li><a href="{{ route('discuss.list') }}">讨论区</a></li>
-                    <li><a href="">商业合作</a></li>
+                    <li><a href="{{ route('business') }}">商业合作</a></li>
                 </ul>
                 <div class="search">
                     <form action="{{ route('search') }}" method="get">

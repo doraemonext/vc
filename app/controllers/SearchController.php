@@ -21,6 +21,11 @@ class SearchController extends BaseController {
         $input = Input::only('q', 'type', 'page');
         $data = array();
 
+        if ($input['q'] != addslashes(strip_tags($input['q'])) || $input['type'] != addslashes(strip_tags($input['type']))) {
+            Session::flash('status', 'error');
+            Session::flash('message', '您的搜索指令中含有非法字符');
+            return Redirect::route('home');
+        }
         $input['q'] = addslashes(strip_tags($input['q']));
         $input['type'] = addslashes(strip_tags($input['type']));
         $input['page'] = intval($input['page']);
