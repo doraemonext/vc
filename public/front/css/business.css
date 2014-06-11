@@ -27,6 +27,14 @@ body {
   margin-right: 100px;
 }
 
+.tabs .active {
+  color: #cceeff;
+}
+
+.tabs .active:hover {
+  color: #cceeff;
+}
+
 .tabs li {
   margin: 35px 0;
   color: #fff;

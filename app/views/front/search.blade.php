@@ -9,10 +9,10 @@
         <div class="classify">
             <div class="classify_title">结果分类</div>
             <ul class="classify_list">
-                <li><a href="{{ route('search') }}?q={{ $q }}&type=">全部</a></li>
-                <li><a href="{{ route('search') }}?q={{ $q }}&type=news">新闻</a></li>
-                <li><a href="{{ route('search') }}?q={{ $q }}&type=showcase">项目</a></li>
-                <li><a href="{{ route('search') }}?q={{ $q }}&type=vc">机构</a></li>
+                <li <?php if($type==='') echo 'class="active"' ?>><a href="{{ route('search') }}?q={{ $q }}&type=">全部</a></li>
+                <li <?php if($type==='news') echo 'class="active"' ?>><a href="{{ route('search') }}?q={{ $q }}&type=news">新闻</a></li>
+                <li <?php if($type==='showcase') echo 'class="active"' ?>><a href="{{ route('search') }}?q={{ $q }}&type=showcase">项目</a></li>
+                <li <?php if($type==='vc') echo 'class="active"' ?>><a href="{{ route('search') }}?q={{ $q }}&type=vc">机构</a></li>
             </ul>
         </div>
     </div>

@@ -43,6 +43,8 @@ $(document).ready(function(){
 
 
   $(".tabs").children().click(function() {
+    $(".tabs").children().attr("class", "");
+    $(this).attr("class", "active");
     $(".tabanchor").hide();
     $("." + this.id).show();
   })

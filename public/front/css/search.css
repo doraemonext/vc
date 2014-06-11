@@ -117,3 +117,11 @@ body {
 .classify_list a:hover {
   color: #f2f2f2;
 }
+
+.classify_list .active a {
+  color: #cceeff;
+}
+
+.classify_list .active:hover a {
+  color: #cceeff;
+}
