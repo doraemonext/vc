@@ -14,6 +14,11 @@ class Showcase extends Eloquent {
         return $this->belongsTo('User');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('ShowcaseComment', 'showcase_id');
+    }
+
     public static function getRecommend()
     {
         return self::where('recommended', '=', 1)->get();

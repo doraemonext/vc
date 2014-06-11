@@ -158,15 +158,12 @@ class AdminShowcaseController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
-
-//            $img = Image::make($destination.$filename);
-//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-//            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $showcase->name = $input['name'];
         $showcase->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
+            Croppa::delete($destination.$showcase->logo);
             $showcase->logo = $filename;
         }
         $showcase->company = $input['company'];
@@ -229,6 +226,8 @@ class AdminShowcaseController extends BaseController {
             ));
         }
 
+        ShowcaseComment::where('showcase_id', '=', $showcase->id)->delete();
+        Croppa::delete(Config::get('upload')['showcase.logo'].$showcase->logo);
         $showcase->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条项目记录');
@@ -250,6 +249,9 @@ class AdminShowcaseController extends BaseController {
                 'message' => '您提供的ID无效',
             ));
         }
+
+        $comment->showcase->comment_count = $comment->showcase->comment_count - 1;
+        $comment->showcase->save();
 
         $comment->delete();
         Session::flash('status', 'success');
