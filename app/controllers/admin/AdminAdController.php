@@ -175,6 +175,9 @@ class AdminAdController extends BaseController {
         }
 
         if (!is_null($input['picture'])) {
+            // 需要先删除原先的图片
+            Croppa::delete($destination.$ad->picture);
+
             $ad->picture = $filename;
         }
         $ad->url = $input['url'];
@@ -198,6 +201,7 @@ class AdminAdController extends BaseController {
             ));
         }
 
+        Croppa::delete(Config::get('upload')['ad.picture'].$ad->picture);
         $ad->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条广告');
