@@ -28,7 +28,7 @@
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group">
-                <span id="logo"> <img src="{{ asset('smartadmin/img/logo.png') }}" alt="SmartAdmin"> </span>
+                <span id="logo"> <a href="{{ route('home') }}"><img src="{{ asset('smartadmin/img/logo.png') }}" alt="SmartAdmin"></a> </span>
             </div>
 
             <!-- pulled right: nav area -->
@@ -38,12 +38,6 @@
                     <span> <a href="javascript:void(0);" title="显示/隐藏菜单"><i class="fa fa-reorder"></i></a> </span>
                 </div>
                 <!-- end collapse menu -->
-
-                <!-- logout button -->
-                <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a href="{{ route('logout') }}" title="登出"><i class="fa fa-sign-out"></i></a> </span>
-                </div>
-                <!-- end logout button -->
             </div>
             <!-- end pulled right: nav area -->
         </header>
