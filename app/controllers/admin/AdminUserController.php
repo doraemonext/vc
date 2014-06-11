@@ -13,6 +13,7 @@ class AdminUserController extends BaseController {
         {
             $view->with('user', Sentry::getUser());
             $view->with('action_name', explode('@', Route::getCurrentRoute()->getActionName()));
+            $view->with('setting', Setting::getSetting());
         });
     }
 

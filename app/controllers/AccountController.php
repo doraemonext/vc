@@ -2,6 +2,20 @@
 
 class AccountController extends BaseController {
 
+    public function __construct()
+    {
+        View::composer(array(
+            'account.login',
+            'account.register',
+            'account.forgotten',
+            'account.active',
+            'account.forgotten_reset',
+        ), function($view)
+        {
+            $view->with('setting', Setting::getSetting());
+        });
+    }
+
     public function showLogin()
     {
         if (Sentry::check()) {

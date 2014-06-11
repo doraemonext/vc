@@ -10,6 +10,7 @@ class UserShowcaseController extends BaseController {
             $view->with('user', Sentry::getUser());
             $view->with('config_upload', Config::get('upload'));
             $view->with('action_name', explode('@', Route::getCurrentRoute()->getActionName()));
+            $view->with('setting', Setting::getSetting());
         });
     }
 
