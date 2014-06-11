@@ -6,6 +6,7 @@ class HomeController extends BaseController {
     {
         View::composer(array(
             'front.home',
+            'front.business',
         ), function($view)
         {
             if (Sentry::check()) {

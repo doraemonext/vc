@@ -1,5 +1,9 @@
 @extends('front.templates.base_page')
 
+@section('page_title')
+-商业合作
+@stop
+
 @section('custom_css')
 <link rel="stylesheet" type="text/css" href="{{ asset('front/css/business.css') }}">
 @stop
