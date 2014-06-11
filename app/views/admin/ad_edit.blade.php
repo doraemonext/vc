@@ -1,5 +1,9 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+-其他管理-<?php if(isset($ad)) echo '编辑广告'; else echo '添加广告'; ?>
+@stop
+
 @section('breadcrumb')
 <li>其他管理</li>
 @if (isset($ad))

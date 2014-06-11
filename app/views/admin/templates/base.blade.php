@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
-        <meta name="description" content="">
+        <title>{{ $setting['title'] }}@section('page_title')
+        @show</title>
+        <meta name="description" content="{{ $setting['description'] }}">
         <meta name="HandheldFriendly" content="True">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -27,7 +28,7 @@
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group">
-                <span id="logo"> <img src="{{ asset('smartadmin/img/logo.png') }}" alt="SmartAdmin"> </span>
+                <span id="logo"> <a href="{{ route('home') }}"><img src="{{ asset('smartadmin/img/logo.png') }}" alt="{{ $setting['title'] }}"></a> </span>
             </div>
 
             <!-- pulled right: nav area -->
@@ -37,12 +38,6 @@
                     <span> <a href="javascript:void(0);" title="显示/隐藏菜单"><i class="fa fa-reorder"></i></a> </span>
                 </div>
                 <!-- end collapse menu -->
-
-                <!-- logout button -->
-                <div id="logout" class="btn-header transparent pull-right">
-                    <span> <a href="{{ route('logout') }}" title="登出"><i class="fa fa-sign-out"></i></a> </span>
-                </div>
-                <!-- end logout button -->
             </div>
             <!-- end pulled right: nav area -->
         </header>
@@ -114,6 +109,9 @@
                                 <a href="">系统设置</a>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <a href="{{ route('logout') }}" title="安全退出"><i class="fa fa-lg fa-fw fa-sign-out"></i> <span class="menu-item-parent">安全退出</span></a>
                     </li>
                 </ul>
             </nav>

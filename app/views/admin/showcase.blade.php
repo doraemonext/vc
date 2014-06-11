@@ -1,5 +1,9 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+-项目管理-项目列表
+@stop
+
 @section('breadcrumb')
 <li>项目管理</li>
 <li>项目列表</li>

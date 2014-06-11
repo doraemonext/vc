@@ -1,5 +1,14 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+@if (isset($vc))
+-投资方管理-编辑投资方
+@else
+-投资方管理-添加投资方
+@endif
+
+@stop
+
 @section('breadcrumb')
 <li>投资方管理</li>
 @if (isset($vc))

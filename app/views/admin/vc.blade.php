@@ -1,5 +1,9 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+-投资方管理-投资方列表
+@stop
+
 @section('breadcrumb')
 <li>投资方管理</li>
 <li>投资方列表</li>

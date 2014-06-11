@@ -1,5 +1,15 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+@if ($type == 'vc')
+-投资方管理-编辑回复
+@elseif ($type == 'showcase')
+-项目管理-编辑回复
+@elseif ($type == 'news')
+-其他管理-编辑回复
+@endif
+@stop
+
 @section('breadcrumb')
 @if ($type == 'vc')
 <li>投资方管理</li>
