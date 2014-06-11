@@ -1,33 +1,21 @@
 $(document).ready(function(){
   $(".search_input").focus(function() {
-    if(this.value == "搜索") {
-      this.value = "";
-    }
+
   });
   $(".search_input").focusout(function() {
-    if(this.value == "") {
-      this.value = "搜索";
-    }
+
   });
   $(".comment_text").focus(function() {
-    if(this.value == "你怎么看？") {
-      this.value = "";
-    }
+
   });
   $(".comment_text").focusout(function() {
-    if(this.value == "") {
-      this.value = "你怎么看？";
-    }
+
   });
   $(".post_title_text").focus(function() {
-    if(this.value == "请填写标题") {
-      this.value = "";
-    }
+
   });
   $(".post_title_text").focusout(function() {
-    if(this.value == "") {
-      this.value = "请填写标题";
-    }
+
   });
 
 

@@ -40,6 +40,8 @@ Route::group(array('prefix' => 'discuss'), function()
     Route::post('/item/ajax/vote/{id?}/', array('uses' => 'DiscussController@ajaxVote', 'as' => 'discuss.item.ajax.vote'));
 });
 
+Route::get('/search/', array('uses' => 'SearchController@showSearch', 'as' => 'search'));
+
 Route::group(array('prefix' => 'account'), function()
 {
     Route::group(array('prefix' => 'login'), function()

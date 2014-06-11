@@ -32,7 +32,7 @@
                 </ul>
                 <div class="search">
                     <form action="{{ route('search') }}" method="get">
-                        <input class="search_input" name="q" type="text">
+                        <input class="search_input" name="q" type="text" value="{{ $q }}">
                         <span class="icon icon_search"></span>
                     </form>
                 </div>
@@ -50,16 +50,9 @@
         @section('slider')
         @show
         <div id="main">
-            <div class="wrapper">
-                <div id="content">
-                    @section('leftbar')
-                    @show
-                    @section('mainbar')
-                    @show
-                </div>
-                @section('rightbar')
-                @show
-            </div>
+            @section('leftbar')
+            @show
+            @section('rightbar')
             @show
             <div class="clear"></div>
         </div>
