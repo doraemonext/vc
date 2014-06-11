@@ -238,7 +238,7 @@
         </div>
         <div class="column_content">
             @foreach ($discuss_latest as $latest)
-            <a class="topic_item" href="">
+            <a class="topic_item" href="{{ route('discuss.item', $latest->id) }}">
                 <div class="topic_title">{{ $latest->title }}</div>
                 <div class="topic_content">{{ $latest->content }}</div>
                 <div class="topic_info">赞({{ $latest->vote }}) 回复({{ $latest->comment_count }}) {{ $latest->datetime }}</div>

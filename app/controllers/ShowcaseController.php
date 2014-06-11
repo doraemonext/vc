@@ -32,6 +32,7 @@ class ShowcaseController extends BaseController {
         $data = array(
             'showcase_list' => $showcase_list,
             'news_hot' => $news_hot,
+            'discuss_latest' => Discuss::orderBy('datetime', 'DESC')->take(3)->get(),
         );
 
         return View::make('front.showcase_list', $data);
@@ -68,6 +69,7 @@ class ShowcaseController extends BaseController {
             'comment_paginate' => $comment_paginate,
             'news_hot' => $news_hot,
             'showcase_latest' => $showcase_latest,
+            'discuss_latest' => Discuss::orderBy('datetime', 'DESC')->take(3)->get(),
         );
 
         return View::make('front.showcase_item', $data);
