@@ -102,10 +102,16 @@ Route::filter('hasAccess', function($route, $request, $value)
         $user = Sentry::getUser();
 
         if( ! $user->hasAccess($value)) {
-            return View::make('noaccess')->with('error', '您没有访问该页面的权限');
+            return View::make('noaccess', array(
+                'error' => '您没有访问该页面的权限',
+                'setting' => Setting::getSetting(),
+            ));
         }
     } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-        return View::make('noaccess')->with('error', '没有找到该用户');
+        return View::make('noaccess', array(
+            'error' => '没有找到该用户',
+            'setting' => Setting::getSetting(),
+        ));
     }
 });
 
@@ -121,11 +127,20 @@ Route::filter('inGroup', function($route, $request, $value)
         $group = Sentry::findGroupByName($value);
 
         if(!$user->inGroup($group)) {
-            return View::make('noaccess')->with('error', '您没有访问该页面的权限');
+            return View::make('noaccess', array(
+                'error' => '您没有访问该页面的权限',
+                'setting' => Setting::getSetting(),
+            ));
         }
     } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
-        return View::make('noaccess')->with('error', '没有找到该用户');
+        return View::make('noaccess', array(
+            'error' => '没有找到该用户',
+            'setting' => Setting::getSetting(),
+        ));
     } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
-        return View::make('noaccess')->with('error', '没有找到该用户组');
+        return View::make('noaccess', array(
+            'error' => '没有找到该用户组',
+            'setting' => Setting::getSetting(),
+        ));
     }
 });

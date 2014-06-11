@@ -4,8 +4,8 @@
     <head>
 	<meta charset="utf-8">
 	<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
-	<title> SmartAdmin </title>
-	<meta name="description" content="">
+	<title> {{ $setting['title'] }} - 禁止访问 </title>
+	<meta name="description" content="{{ $setting['description'] }}">
 
 	<meta name="HandheldFriendly" content="True">
 	<meta name="MobileOptimized" content="320">

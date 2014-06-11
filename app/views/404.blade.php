@@ -4,8 +4,8 @@
     <head>
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
-        <title> SmartAdmin </title>
-        <meta name="description" content="">
+        <title> {{ Setting::where('title', '=', 'title')->get()->first()->value }} - 找不到该页面</title>
+        <meta name="description" content="{{ Setting::where('title', '=', 'description')->get()->first()->value }}">
 
         <meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
