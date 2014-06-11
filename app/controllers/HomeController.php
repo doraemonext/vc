@@ -31,7 +31,7 @@ class HomeController extends BaseController {
             'rating_category' => VcRatingCategory::all(),
             'showcase_recommend' => Showcase::getRecommend(),
             'news_hot' => News::orderBy('comment_count', 'DESC')->take(6)->get(),
-            'news_latest' => News::orderBy('datetime', 'DESC')->take(8)->get(),
+            'news_latest' => News::orderBy('datetime', 'DESC')->take(intval(Setting::where('title', '=', 'paginate_home_news_list')->first()->value))->get(),
             'discuss_latest' => Discuss::orderBy('datetime', 'DESC')->take(3)->get(),
             'ad_top' => Ad::where('position_id', '=', 1)->get(),
         );

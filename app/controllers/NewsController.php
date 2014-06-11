@@ -103,4 +103,36 @@ class NewsController extends BaseController {
         ));
     }
 
+    public function ajaxNewsList($page)
+    {
+        $news_count = News::count();
+        $paginateNumber = intval(Setting::where('title', '=', 'paginate_home_news_list')->first()->value);
+        $page = intval($page);
+        if ($page < 1 || $page > $news_count / $paginateNumber + 1) {
+            return Response::json(array(
+                'code' => 1006,
+                'message' => '您提供的页数范围错误',
+            ));
+        }
+
+        $news_list = News::orderBy('datetime', 'DESC')->take($paginateNumber)->offset(($page - 1) * $paginateNumber)->get();
+        $news_list_view = View::make('front.ajax.news_list', array(
+            'news_latest' => $news_list,
+            'config_upload' => Config::get('upload'),
+        ))->render();
+
+        if ($page * $paginateNumber < $news_count) {
+            $has_next = true;
+        } else {
+            $has_next = false;
+        }
+
+        return Response::json(array(
+            'code' => 0,
+            'news_list' => $news_list_view,
+            'has_prev' => $page == 1 ? false : true,
+            'has_next' => $has_next,
+        ));
+    }
+
 }

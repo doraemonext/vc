@@ -225,7 +225,15 @@ class VcController extends BaseController {
 
     public function ajaxVcList($page)
     {
+        $vc_count = Vc::count();
         $paginateNumber = intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_list')->first()->value);
+        $page = intval($page);
+        if ($page < 1 || $page > $vc_count / $paginateNumber + 1) {
+            return Response::json(array(
+                'code' => 1006,
+                'message' => '您提供的页数范围错误',
+            ));
+        }
 
         $vc_list = Vc::getListOrderByRatingWithRating($paginateNumber, ($page - 1) * $paginateNumber);
         $vc_list_view = View::make('front.ajax.sidebar_vc_list', array(
@@ -233,7 +241,7 @@ class VcController extends BaseController {
             'rating_category' => VcRatingCategory::all(),
         ))->render();
 
-        if ($page * $paginateNumber < Vc::count()) {
+        if ($page * $paginateNumber < $vc_count) {
             $has_next = true;
         } else {
             $has_next = false;

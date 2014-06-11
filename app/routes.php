@@ -23,6 +23,7 @@ Route::group(array('prefix' => 'news'), function()
 {
     Route::get('/item/{id?}/', array('uses' => 'NewsController@showItem', 'as' => 'news.item'));
     Route::post('/item/ajax/comment_submit/{id?}/', array('uses' => 'NewsController@ajaxCommentSubmit', 'as' => 'news.item.ajax.comment.submit'));
+    Route::get('/ajax/{id?}/', array('uses' => 'NewsController@ajaxNewsList', 'as' => 'news.ajax.list'));
 });
 
 Route::group(array('prefix' => 'showcase'), function()

@@ -180,7 +180,7 @@
         <div class="column_main_head">
             <div class="column_main_title">新闻 News</div>
         </div>
-        <div class="column_content">
+        <div class="column_content" id="news" data-paginate="1">
             @foreach ($news_latest as $latest)
             <div class="news_item">
                 <div class="news_left">
@@ -205,10 +205,10 @@
             @endforeach
         </div>
     </div>
-    <div class="page">
+    <div class="page" id="paginator_news">
         <ul>
-            <li class="prevpage disabled"><a href="#">上一页</a></li>
-            <li class="nextpage"><a href="">下一页</a></li>
+            <li class="prevpage disabled"><a href="##">上一页</a></li>
+            <li class="nextpage"><a href="##">下一页</a></li>
         </ul>
     </div>
 </div>
@@ -317,6 +317,74 @@ $(document).ready(function() {
                         $("#paginator_vc .prevpage").removeClass('disabled');
                     } else {
                         $("#paginator_vc .prevpage").addClass('disabled');
+                    }
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
+
+    $("#paginator_news .nextpage").click(function() {
+        if ($(this).hasClass('disabled')) return;
+        var id = $("#news").data('paginate') + 1;
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('news.ajax.list') }}/" + id,
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    msg(data['message'], 'error');
+                } else {
+                    $("html,body").animate({scrollTop: $("#news").offset().top - 153}, 500);
+
+                    $("#news").data('paginate', id);
+                    $("#news").html(data['news_list']);
+
+                    if (data['has_next']) {
+                        $("#paginator_news .nextpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_news .nextpage").addClass('disabled');
+                    }
+                    if (data['has_prev']) {
+                        $("#paginator_news .prevpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_news .prevpage").addClass('disabled');
+                    }
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
+
+    $("#paginator_news .prevpage").click(function() {
+        if ($(this).hasClass('disabled')) return;
+        var id = $("#news").data('paginate') - 1;
+
+        $.ajax({
+            type: "GET",
+            url: "{{ route('news.ajax.list') }}/" + id,
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    msg(data['message'], 'error');
+                } else {
+                    $("html,body").animate({scrollTop: $("#news").offset().top - 153}, 500);
+
+                    $("#news").data('paginate', id);
+                    $("#news").html(data['news_list']);
+
+                    if (data['has_next']) {
+                        $("#paginator_news .nextpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_news .nextpage").addClass('disabled');
+                    }
+                    if (data['has_prev']) {
+                        $("#paginator_news .prevpage").removeClass('disabled');
+                    } else {
+                        $("#paginator_news .prevpage").addClass('disabled');
                     }
                 }
             }, error: function(data) {
