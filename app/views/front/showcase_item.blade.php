@@ -1,5 +1,9 @@
 @extends('front.templates.base')
 
+@section('page_title')
+-项目-{{ $showcase->name }}
+@stop
+
 @section('leftbar')
     <div id="leftbar">
         <div class="column_side">

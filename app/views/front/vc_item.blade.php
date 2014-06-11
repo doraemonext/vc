@@ -1,5 +1,9 @@
 @extends('front.templates.base')
 
+@section('page_title')
+-VC-{{ $vc->name }}
+@stop
+
 @section('custom_css')
 
 @stop

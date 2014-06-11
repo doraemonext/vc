@@ -1,5 +1,9 @@
 @extends('user.templates.base')
 
+@section('page_title')
+-我的项目
+@stop
+
 @section('breadcrumb')
 <li>我的项目</li>
 <li>已发布的项目</li>

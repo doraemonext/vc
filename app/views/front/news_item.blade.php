@@ -1,5 +1,9 @@
 @extends('front/templates/base')
 
+@section('page_title')
+-新闻-{{ $news->title }}
+@stop
+
 @section('leftbar')
 <div id="leftbar">
     <div class="column_side">

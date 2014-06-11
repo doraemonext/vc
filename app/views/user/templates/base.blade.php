@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-        <title> SmartAdmin </title>
+        <title>{{ $setting['title'] }}-个人中心@section('page_title')
+        @show</title>
         <meta name="description" content="">
         <meta name="HandheldFriendly" content="True">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -28,7 +29,7 @@
         <!-- HEADER -->
         <header id="header">
             <div id="logo-group">
-                <span id="logo"> <a href="{{ route('home') }}"><img src="{{ asset('smartadmin/img/logo.png') }}" alt="SmartAdmin"></a> </span>
+                <span id="logo"> <a href="{{ route('home') }}"><img src="{{ asset('smartadmin/img/logo.png') }}" alt="{{ $setting['title'] }}"></a> </span>
             </div>
 
             <!-- pulled right: nav area -->

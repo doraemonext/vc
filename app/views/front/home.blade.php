@@ -1,5 +1,9 @@
 @extends('front.templates.base')
 
+@section('page_title')
+-{{ $setting['description'] }}
+@stop
+
 @section('custom_css')
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.css') }}">
     <script type="text/javascript" src="{{ asset('front/js/bootstrap.min.js') }}"></script>

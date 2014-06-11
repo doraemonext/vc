@@ -1,5 +1,9 @@
 @extends('front.templates.base')
 
+@section('page_title')
+-VC
+@stop
+
 @section('custom_css')
 <link rel="stylesheet" type="text/css" href="{{ asset('front/css/vc.css') }}">
 @stop

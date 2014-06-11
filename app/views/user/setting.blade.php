@@ -1,5 +1,9 @@
 @extends('user.templates.base')
 
+@section('page_title')
+-个人设置
+@stop
+
 @section('breadcrumb')
 <li>个人设置</li>
 @stop

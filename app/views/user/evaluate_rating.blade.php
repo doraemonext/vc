@@ -1,5 +1,9 @@
 @extends('user.templates.base')
 
+@section('page_title')
+-我的评价
+@stop
+
 @section('breadcrumb')
     <li>我的评价</li>
     <li>我的评分列表</li>
@@ -22,7 +26,7 @@
                     <a class="close" data-dismiss="alert" href="#">×</a>
                     <h4 class="alert-heading"><i class="fa-fw fa fa-info"></i>您尚未对任何投资方作出评分！</h4>
                 </div>
-                @else                
+                @else
                 <div class="well well-sm">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-12">
@@ -32,8 +36,8 @@
                                 <ul>
                                     <li class="message">
                                         <img src="{{ Croppa::url($config_upload['vc.logo'].$r['vc']['logo'], 54, 50) }}">
-                                        <span class="message-text"> 
-                                            <a href="{{ route('vc.item', $r['vc']['id']) }}" class="username">投资方：{{ $r['vc']['name'] }}</a> 
+                                        <span class="message-text">
+                                            <a href="{{ route('vc.item', $r['vc']['id']) }}" class="username">投资方：{{ $r['vc']['name'] }}</a>
                                             <p>{{ $r['vc']['summary'] }}</p>
                                         </span>
 
@@ -56,7 +60,7 @@
                                         </ul>
                                     </li>
                                     <li class="message message-reply">
-                                        <span class="message-text"> 
+                                        <span class="message-text">
                                             <blockquote>
                                                 <p class="text-primary">我对它的评分</p>
                                                 <table>

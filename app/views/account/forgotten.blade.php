@@ -1,5 +1,9 @@
 @extends('account.templates.base_clean')
 
+@section('page_title')
+-忘记密码
+@stop
+
 @section('header')
     @parent
     <span id="login-header-space"> <span class="hidden-mobile">需要一个账户？</span> <a href="{{ route('register') }}" class="btn btn-danger">注册一个新账户</a> </span>

@@ -1,5 +1,9 @@
 @extends('account.templates.base_clean')
 
+@section('page_title')
+-注册
+@stop
+
 @section('header')
     @parent
     <span id="login-header-space"> <span class="hidden-mobile">已经注册过了？</span> <a href="{{ route('login') }}" class="btn btn-danger">登陆</a> </span>

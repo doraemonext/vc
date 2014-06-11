@@ -1,5 +1,13 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+@if (isset($news))
+-其他管理-编辑新闻
+@else
+-其他管理-添加新闻
+@endif
+@stop
+
 @section('breadcrumb')
 <li>其他管理</li>
 @if (isset($news))

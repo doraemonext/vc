@@ -1,5 +1,9 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+-其他管理-会员管理
+@stop
+
 @section('breadcrumb')
 <li>其他管理</li>
 <li>会员管理</li>

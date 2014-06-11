@@ -1,5 +1,13 @@
 @extends('admin.templates.base')
 
+@section('page_title')
+@if (isset($edit_user))
+-其他管理-编辑会员
+@else
+-其他管理-添加会员
+@endif
+@stop
+
 @section('breadcrumb')
 <li>其他管理</li>
 @if (isset($edit_user))
