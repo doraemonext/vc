@@ -1,5 +1,9 @@
 @extends('user.templates.base')
 
+@section('page_title')
+-我的项目
+@stop
+
 @section('breadcrumb')
 <li>我的项目</li>
 @if (isset($showcase))
@@ -66,7 +70,7 @@
                 <div class="jarviswidget jarviswidget-color-darken jarviswidget-sortable" id="wid-id-1" data-widget-editbutton="false" role="widget" style="">
                     <header role="heading">
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        @if (isset($showcase))                        
+                        @if (isset($showcase))
                         <h2>编辑项目</h2>
                         @else
                         <h2>新建项目</h2>
@@ -118,39 +122,39 @@
                                             @if (isset($showcase))
                                             {{ Form::text('company', $showcase->company, array('class' => 'form-control')) }}
                                             @else
-                                            {{ Form::text('company', isset($company) ? $company : '', array('class' => 'form-control')) }}                                            
+                                            {{ Form::text('company', isset($company) ? $company : '', array('class' => 'form-control')) }}
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">联系人</label>
                                         <div class="col-md-9">
-                                            @if (isset($showcase))                                            
+                                            @if (isset($showcase))
                                             {{ Form::text('contact_person', $showcase->contact_person, array('class' => 'form-control')) }}
                                             @else
                                             {{ Form::text('contact_person', isset($contact_person) ? $contact_person : '', array('class' => 'form-control')) }}
-                                            @endif                                            
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">联系方式(邮箱)</label>
                                         <div class="col-md-9">
-                                            @if (isset($showcase))                                            
+                                            @if (isset($showcase))
                                             {{ Form::text('contact_email', $showcase->contact_email, array('class' => 'form-control')) }}
                                             @else
                                             {{ Form::text('contact_email', isset($contact_email) ? $contact_email : '', array('class' => 'form-control')) }}
-                                            @endif                                            
-                                        </div>                                        
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">联系方式(电话)</label>
                                         <div class="col-md-9">
-                                            @if (isset($showcase))                                            
+                                            @if (isset($showcase))
                                             {{ Form::text('contact_phone', $showcase->contact_phone, array('class' => 'form-control')) }}
                                             @else
                                             {{ Form::text('contact_phone', isset($contact_phone) ? $contact_phone : '', array('class' => 'form-control')) }}
-                                            @endif                                            
-                                        </div>    
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">项目领域</label>
@@ -165,12 +169,12 @@
                                     <div class="form-group">
                                         <label class="col-md-2 control-label">项目运营时间</label>
                                         <div class="col-md-9">
-                                            @if (isset($showcase))                                            
+                                            @if (isset($showcase))
                                             {{ Form::text('operation_time', $showcase->operation_time, array('class' => 'form-control')) }}
                                             @else
                                             {{ Form::text('operation_time', isset($operation_time) ? $operation_time : '', array('class' => 'form-control')) }}
-                                            @endif                                            
-                                        </div>                                            
+                                            @endif
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <fieldset>

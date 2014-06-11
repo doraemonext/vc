@@ -1,5 +1,9 @@
 @extends('user.templates.base')
 
+@section('page_title')
+-我的评价
+@stop
+
 @section('breadcrumb')
 <li>我的评价</li>
 @if ($type == 'vc')

@@ -1,5 +1,9 @@
 @extends('user.templates.base')
 
+@section('page_title')
+-我的讨论区
+@stop
+
 @section('breadcrumb')
 <li>我的讨论区</li>
 <li>我的话题</li>
