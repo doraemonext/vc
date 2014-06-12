@@ -58,6 +58,7 @@ Route::group(array('prefix' => 'account'), function()
     {
         Route::get('/', array('uses' => 'AccountController@showRegister', 'as' => 'register'));
         Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitRegister'));
+        Route::post('/ajax/', array('uses' => 'AccountController@ajaxRegister', 'as' => 'register.ajax'));
     });
     Route::get('/logout', array('uses' => 'AccountController@showLogout', 'as' => 'logout'));
     // Route::get('/active', array('uses' => 'AccountController@showActive', 'as' => 'active'));

@@ -369,4 +369,72 @@ class AccountController extends BaseController {
         }
     }
 
+    public function ajaxRegister()
+    {
+        $input = Input::only('username', 'email', 'password', 'confirm_password', 'agree', 'job', 'name', 'contact', 'company', 'website');
+
+        // 对提交信息进行验证
+        $rules = array(
+            'username' => 'required|alpha_dash|max:64',
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6|max:64',
+            'confirm_password' => 'required|min:6|max:64|same:password',
+            'job' => 'max:255',
+            'name' => 'max:255',
+            'contact' => 'max:255',
+            'company' => 'max:255',
+            'website' => 'url|max:255',
+            'agree' => 'accepted'
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Response::json(array(
+                'code' => 1020,
+                'message' => $validator->messages()->all('<li>:message</li>'),
+            ));
+        }
+
+        try {
+            $user = Sentry::createUser(array(
+                'username' => $input['username'],
+                'email' => $input['email'],
+                'password' => $input['password'],
+                'activated' => true,
+                'job' => $input['job'],
+                'name' => $input['name'],
+                'contact' => $input['contact'],
+                'company' => $input['company'],
+                'website' => $input['website']
+            ));
+            $group = Sentry::findGroupByName('normal');
+
+            $user->addGroup($group);
+            Sentry::login($user, false);
+
+            return Response::json(array(
+                'code' => 0,
+            ));
+        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
+            return Response::json(array(
+                'code' => 1021,
+                'message' => '用户名不能为空',
+            ));
+        } catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
+            return Response::json(array(
+                'code' => 1022,
+                'message' => '密码不能为空',
+            ));
+        } catch (Cartalyst\Sentry\Users\UserExistsException $e) {
+            return Response::json(array(
+                'code' => 1023,
+                'message' => '该用户名已存在',
+            ));
+        } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1024,
+                'message' => '发生系统错误，请重试',
+            ));
+        }
+    }
+
 }

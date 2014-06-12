@@ -182,6 +182,36 @@
                 });
                 return false;
             });
+
+            $("#reg_submit").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('register.ajax') }}",
+                    data: {
+                        username: $("#reg_username").val(),
+                        email: $("#reg_email").val(),
+                        password: $("#reg_password").val(),
+                        confirm_password: $("#reg_confirm_password").val(),
+                        agree: 'on',
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function(data, textStatus) {
+                        if (data['code'] != 0) {
+                            content = '';
+                            for (index = 0; index < data['message'].length; ++index) {
+                                content += data['message'][index];
+                            }
+                            msg(content, 'error');
+                        } else {
+                            location.reload();
+                        }
+                    }, error: function(data) {
+                        msg('网络错误，请刷新页面后重试', 'error');
+                    }
+                });
+                return false;
+            });
         });
         </script>
     </body>
