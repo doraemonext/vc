@@ -182,6 +182,7 @@ $(document).ready(function() {
             type: "GET",
             url: "{{ route('vc.ajax.list') }}/" + id,
             dataType: "json",
+            cache: false,
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
                     msg(data['message'], 'error');
@@ -216,6 +217,7 @@ $(document).ready(function() {
             type: "GET",
             url: "{{ route('vc.ajax.list') }}/" + id,
             dataType: "json",
+            cache: false,
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
                     msg(data['message'], 'error');

@@ -212,7 +212,7 @@
     <div class="page" id="paginator_news">
         <ul>
             <li class="prevpage disabled"><a href="##">上一页</a></li>
-            <li class="nextpage"><a href="##">下一页</a></li>
+            <li class="nextpage <?php if(News::count()<=count($news_latest)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
         </ul>
     </div>
 </div>
@@ -269,6 +269,7 @@ $(document).ready(function() {
             type: "GET",
             url: "{{ route('vc.ajax.list') }}/" + id,
             dataType: "json",
+            cache: false,
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
                     msg(data['message'], 'error');
@@ -303,6 +304,7 @@ $(document).ready(function() {
             type: "GET",
             url: "{{ route('vc.ajax.list') }}/" + id,
             dataType: "json",
+            cache: false,
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
                     msg(data['message'], 'error');
@@ -337,6 +339,7 @@ $(document).ready(function() {
             type: "GET",
             url: "{{ route('news.ajax.list') }}/" + id,
             dataType: "json",
+            cache: false,
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
                     msg(data['message'], 'error');
@@ -371,6 +374,7 @@ $(document).ready(function() {
             type: "GET",
             url: "{{ route('news.ajax.list') }}/" + id,
             dataType: "json",
+            cache: false,
             success: function(data, textStatus) {
                 if (data['code'] != 0) {
                     msg(data['message'], 'error');
