@@ -186,6 +186,8 @@ class UserDiscussController extends BaseController {
             ));
         }
 
+        DiscussComment::where('discuss_id', '=', $topic->id)->delete();
+
         $topic->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该话题');
@@ -214,6 +216,9 @@ class UserDiscussController extends BaseController {
                 'message' => '您没有删除该回复的权限',
             ));
         }
+
+        $comment->discuss->comment_count = $comment->discuss->comment_count - 1;
+        $comment->discuss->save();
 
         $comment->delete();
         Session::flash('status', 'success');
