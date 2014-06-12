@@ -8,6 +8,7 @@ class UserShowcaseController extends BaseController {
         View::composer(array('user.showcase', 'user.showcase_edit'), function($view)
         {
             $view->with('user', Sentry::getUser());
+            $view->with('notification', Notification::getNotifications(Sentry::getUser()->getId()));
             $view->with('config_upload', Config::get('upload'));
             $view->with('action_name', explode('@', Route::getCurrentRoute()->getActionName()));
             $view->with('setting', Setting::getSetting());

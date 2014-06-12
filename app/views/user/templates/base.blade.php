@@ -34,6 +34,7 @@
 
                 <div class="ajax-dropdown">
                     <div class="ajax-notifications custom-scroll">
+                        @if ($notification->count() != 0)
                         <ul class="notification-body">
                             @foreach ($notification as $n)
                             <li>
@@ -47,6 +48,13 @@
                             </li>
                             @endforeach
                         </ul>
+                        @else
+                        <div class="alert alert-transparent">
+                            <h4>尚无任何最新消息</h4>
+                            如果您在讨论区的话题被回复，发布的项目收到赞，评价过的投资方有新评价时，此处将会显示这些通知。
+                        </div>
+                        <i class="fa fa-lock fa-4x fa-border"></i>
+                        @endif
                     </div>
                     <!-- end notification content -->
                 </div>
