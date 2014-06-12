@@ -367,8 +367,8 @@
   margin: 30px 0;
 }
 
-#comment .user {
-  margin-top: 4px;
+#comment .user, #post .user {
+  margin-top: 0px;
 }
 
 .comment_submit, .grade_submit, .post_submit {

@@ -13,7 +13,17 @@ class UserHomeController extends BaseController {
 
     public function showHome()
     {
-        return View::make('user.home');
+        $user_id = Sentry::getUser()->getId();
+        $data = array(
+            'showcases' => Showcase::where('user_id', '=', $user_id)->orderBy('datetime', 'DESC')->take(5)->get(),
+            'comments_vc' => VcComment::where('user_id', '=', $user_id)->orderBy('datetime', 'DESC')->take(5)->get(),
+            'comments_showcase' => ShowcaseComment::where('user_id', '=', $user_id)->orderBy('datetime', 'DESC')->take(5)->get(),
+            'comments_news' => NewsComment::where('user_id', '=', $user_id)->orderBy('datetime', 'DESC')->take(5)->get(),
+            'discusses' => Discuss::where('user_id', '=', $user_id)->orderBy('datetime', 'DESC')->take(5)->get(),
+            'discuss_comments' => DiscussComment::where('user_id', '=', $user_id)->orderBy('datetime', 'DESC')->take(5)->get(),
+        );
+
+        return View::make('user.home', $data);
     }
 
 }
