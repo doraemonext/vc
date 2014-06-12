@@ -103,8 +103,6 @@
                                         <td>{{ nl2br($comment->content) }}</td>
                                         <td>{{ $comment->datetime }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-info btn-xs">查看</button>
-
                                             @if ($type == 'vc')
                                             <a href="{{ route('user.evaluate.comment.vc.edit', $comment->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             @elseif ($type == 'showcase')
