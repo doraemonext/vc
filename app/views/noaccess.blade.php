@@ -38,7 +38,7 @@
 
 	    <div class="lockscreen animated flipInY">
 		<div class="logo">
-		    <h1 class="semi-bold"><img src="{{ asset('smartadmin/img/logo-o.png') }}" alt="" /> SmartAdmin</h1>
+		    <h1 class="semi-bold"><img src="{{ asset('smartadmin/img/logo-o.png') }}" alt="" /> {{ $setting['title'] }}</h1>
 		</div>
 		<div>
 		    <div>
