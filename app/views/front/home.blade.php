@@ -42,7 +42,7 @@
     <div class="wrapper">
         <span class="ad_data">已入驻VC {{ $count['vc'] }}</span>
         <span class="ad_data">已入驻联合创始人 {{ $count['user'] }}</span>
-        <span class="ad_data">已有评论 {{ $count['vc_comment'] }}</span>
+        <span class="ad_data">已有评论 {{ $count['comment'] }}</span>
     </div>
 </div>
 @stop

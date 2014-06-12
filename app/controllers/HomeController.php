@@ -22,7 +22,7 @@ class HomeController extends BaseController {
 	{
         $count = array(
             'vc' => Vc::count(),
-            'vc_comment' => VcComment::count(),
+            'comment' => VcComment::count() + ShowcaseComment::count() + NewsComment::count() + Discuss::count(),
             'user' => User::count(),
         );
 

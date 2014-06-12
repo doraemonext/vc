@@ -72,15 +72,15 @@
         </div>
         <div id="post">
             <div class="post_head">发表新的讨论</div>
-            <input class="post_title_text" type="text" placeholder="请输入标题">
-            <textarea class="post_text" placeholder="请输入内容"></textarea>
+            <input class="post_title_text" id="discuss_title" type="text" placeholder="请输入标题">
+            <textarea class="post_text" id="discuss_content" placeholder="请输入内容"></textarea>
             <div class="post_undertext">
                 @if (isset($user))
                 <a class="user left" href="">
                     <span class="user_name">{{ $user->username }}</span>
                     <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
                 </a>
-                <a class="post_submit right" href="">提交评论</a>
+                <button class="post_submit right" id="discuss_submit">发表讨论</button>
                 @else
                 <span>没有账号？</span>
                 <a class="register" href="{{ route('register') }}">注册&gt;&gt;</a>
@@ -117,6 +117,31 @@ $(document).ready(function() {
     @if (Session::has('status'))
     msg_top("{{ Session::get('message') }}", "{{ Session::get('status') }}");
     @endif
+
+    $("#discuss_submit").click(function() {
+        $.ajax({
+            type: "POST",
+            url: "{{ route('discuss.ajax.topic.submit') }}",
+            data: {
+                title: $("#discuss_title").val(),
+                content: $("#discuss_content").val(),
+            },
+            dataType: "json",
+            success: function(data, textStatus) {
+                if (data['code'] != 0) {
+                    content = '';
+                    for (index = 0; index < data['message'].length; ++index) {
+                        content += data['message'][index];
+                    }
+                    msg(content, 'error');
+                } else {
+                    window.location.href = data['url'];
+                }
+            }, error: function(data) {
+                msg('网络错误，请刷新页面后重试', 'error');
+            }
+        });
+    });
 });
 </script>
 @stop

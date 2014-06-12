@@ -163,4 +163,49 @@ class DiscussController extends BaseController {
         ));
     }
 
+    public function ajaxTopicSubmit()
+    {
+        if (!Sentry::check()) {
+            return Response::json(array(
+                'code' => 1002,
+                'message' => '您尚未登陆，请登陆后重试',
+            ));
+        }
+
+        $input = Input::only('title', 'content');
+        $input['title'] = strip_tags(addslashes($input['title']));
+        $input['content'] = strip_tags($input['content'], '<br>');
+
+        // 对提交信息进行验证
+        $rules = array(
+            'title' => 'required|max:255',
+            'content' => 'required|max:10240',
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Response::json(array(
+                'code' => 1001,
+                'message' => $validator->messages()->all('<li>:message</li>'),
+            ));
+        }
+
+        // 在数据库中插入新话题
+        $discuss = new Discuss;
+        $discuss->user_id = Sentry::getUser()->id;
+        $discuss->title = $input['title'];
+        $discuss->content = $input['content'];
+        $discuss->vote = 0;
+        $discuss->recommended = 0;
+        $discuss->comment_count = 0;
+        $discuss->datetime = date("Y-m-d H:i:s");
+        $discuss->save();
+
+        Session::flash('status', 'success');
+        Session::flash('message', '您已成功发表话题');
+        return Response::json(array(
+            'code' => 0,
+            'url' => route('discuss.item', $discuss->id),
+        ));
+    }
+
 }
