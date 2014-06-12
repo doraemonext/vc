@@ -14,7 +14,14 @@ class AdminHomeController extends BaseController {
 
     public function showHome()
     {
-        return View::make('admin.home');
+        $data = array(
+            'vcs' => Vc::orderBy('datetime', 'DESC')->take(5)->get(),
+            'showcases' => Showcase::orderBy('datetime', 'DESC')->take(5)->get(),
+            'news' => News::orderBy('datetime', 'DESC')->take(5)->get(),
+            'discusses' => Discuss::orderBy('datetime', 'DESC')->take(5)->get(),
+        );
+
+        return View::make('admin.home', $data);
     }
 
 }

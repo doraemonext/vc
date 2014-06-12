@@ -187,6 +187,7 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         });
     });
 
+    // 讨论区管理
     Route::group(array('prefix' => 'discuss'), function()
     {
         Route::get('/topic/', array('uses' => 'AdminDiscussController@showTopic', 'as' => 'admin.discuss.topic'));
