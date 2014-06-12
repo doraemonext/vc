@@ -22,53 +22,57 @@
     <body>
         <div id="popbox" style="display:none">
             <div class="popbox_box login_box" style="display:none">
-                <div class="box_head">
-                    <span class="login_title">登陆</span>
-                    <a class="regist_link right" href="">注册账号 >></a>
-                </div>
-                <div class="login_username">
-                    <div class="login_head">用户名:</div>
-                    <input type="text" name="username">
-                </div>
-                <div class="login_password">
-                    <div class="login_head">密码：</div>
-                    <input type="password" name="password">
-                    <a class="login_forgotpassword right" href="">忘记密码？</a>
-                </div>
-                <div class="popbox_bottom">
-                    <a class="login_blank" href="">登录</a>
-                    <div class="login_remember">
-                        <label>
-                            <input type="checkbox" name="remember">
-                            下次自动登录
-                        </label>
+                <form action="" method="">
+                    <div class="box_head">
+                        <span class="login_title">登陆</span>
+                        <a class="regist_link right" href="">注册账号 >></a>
                     </div>
-                </div>
+                    <div class="login_username">
+                        <div class="login_head">用户名:</div>
+                        <input type="text" id="login_username">
+                    </div>
+                    <div class="login_password">
+                        <div class="login_head">密码：</div>
+                        <input type="password" id="login_password">
+                        <a class="login_forgotpassword right" href="{{ route('forgotten') }}">忘记密码？</a>
+                    </div>
+                    <div class="popbox_bottom">
+                        <button class="login_blank" id="login_submit">登录</button>
+                        <div class="login_remember">
+                            <label>
+                                <input type="checkbox" id="login_remember">
+                                下次自动登录
+                            </label>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="popbox_box regist_box" style="display:none">
-                <div class="box_head">
-                    <span class="regist_title">注册</span>
-                    <a class="login_link right" href="">登录 >></a>
-                </div>
-                <div class="regist_username">
-                    <div class="regist_head">用户名:</div>
-                    <input type="text" name="username">
-                </div>
-                <div class="regist_username">
-                    <div class="regist_head">邮箱:</div>
-                    <input type="text" name="email">
-                </div>
-                <div class="regist_password">
-                    <div class="login_head">密码：</div>
-                    <input type="password" name="password">
-                </div>
-                <div class="regist_password">
-                    <div class="regist_head">确认密码：</div>
-                    <input type="password" name="rpassword">
-                </div>
-                <div class="popbox_bottom">
-                    <a class="regist_blank" href="">注册</a>
-                </div>
+                <form action="" method="">
+                    <div class="box_head">
+                        <span class="regist_title">注册</span>
+                        <a class="login_link right" href="">登录 >></a>
+                    </div>
+                    <div class="regist_username">
+                        <div class="regist_head">用户名:</div>
+                        <input type="text" id="reg_username">
+                    </div>
+                    <div class="regist_username">
+                        <div class="regist_head">邮箱:</div>
+                        <input type="text" id="reg_email">
+                    </div>
+                    <div class="regist_password">
+                        <div class="login_head">密码：</div>
+                        <input type="password" id="reg_password">
+                    </div>
+                    <div class="regist_password">
+                        <div class="regist_head">确认密码：</div>
+                        <input type="password" id="reg_confirm_password">
+                    </div>
+                    <div class="popbox_bottom">
+                        <button class="regist_blank" id="reg_submit">注册</button>
+                    </div>
+                </form>
             </div>
             <div class="popbox_bg"></div>
         </div>
@@ -142,5 +146,67 @@
 
         @section('custom_js')
         @show
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $("#login_submit").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('login.ajax') }}",
+                    data: {
+                        username: $("#login_username").val(),
+                        password: $("#login_password").val(),
+                        remember: ($("#login_remember").prop('checked')==true)?'on':'',
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function(data, textStatus) {
+                        if (data['code'] != 0) {
+                            content = '';
+                            for (index = 0; index < data['message'].length; ++index) {
+                                content += data['message'][index];
+                            }
+                            msg(content, 'error');
+                        } else {
+                            location.reload();
+                        }
+                    }, error: function(data) {
+                        msg('网络错误，请刷新页面后重试', 'error');
+                    }
+                });
+                return false;
+            });
+
+            $("#reg_submit").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('register.ajax') }}",
+                    data: {
+                        username: $("#reg_username").val(),
+                        email: $("#reg_email").val(),
+                        password: $("#reg_password").val(),
+                        confirm_password: $("#reg_confirm_password").val(),
+                        agree: 'on',
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function(data, textStatus) {
+                        if (data['code'] != 0) {
+                            content = '';
+                            for (index = 0; index < data['message'].length; ++index) {
+                                content += data['message'][index];
+                            }
+                            msg(content, 'error');
+                        } else {
+                            location.reload();
+                        }
+                    }, error: function(data) {
+                        msg('网络错误，请刷新页面后重试', 'error');
+                    }
+                });
+                return false;
+            });
+        });
+        </script>
     </body>
 </html>

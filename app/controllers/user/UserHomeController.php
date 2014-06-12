@@ -6,6 +6,7 @@ class UserHomeController extends BaseController {
         View::composer(array('user.home'), function($view)
         {
             $view->with('user', Sentry::getUser());
+            $view->with('notification', Notification::getNotifications(Sentry::getUser()->getId()));
             $view->with('action_name', explode('@', Route::getCurrentRoute()->getActionName()));
             $view->with('setting', Setting::getSetting());
         });

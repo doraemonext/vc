@@ -130,6 +130,10 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
         Route::get('/', array('uses' => 'UserSettingController@showSetting', 'as' => 'user.setting'));
         Route::post('/submit/', array('before' => 'csrf', 'uses' => 'UserSettingController@submitSetting'));
     });
+    Route::group(array('prefix' => 'notification'), function()
+    {
+        Route::post('/clear/', array('uses' => 'UserNotificationController@ajaxClear', 'as' => 'user.notification.clear'));
+    });
 });
 
 Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()
@@ -276,3 +280,4 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AdminSettingController@submitSetting'));
     });
 });
+

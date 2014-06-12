@@ -30,6 +30,27 @@
         <header id="header">
             <div id="logo-group">
                 <span id="logo"> <a href="{{ route('home') }}"><img src="{{ asset('smartadmin/img/logo.png') }}" alt="{{ $setting['title'] }}"></a> </span>
+                <span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> {{ $notification->count() }} </b> </span>
+
+                <div class="ajax-dropdown">
+                    <div class="ajax-notifications custom-scroll">
+                        <ul class="notification-body">
+                            @foreach ($notification as $n)
+                            <li>
+                                <span class="padding-10 unread">
+                                    <span>
+                                        {{ $n->content }}
+                                        <br>
+                                        <span class="pull-right font-xs text-muted"><i>{{ $n->datetime }}</i></span>
+                                    </span>
+                                </span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <!-- end notification content -->
+                </div>
+                <!-- END AJAX-DROPDOWN -->
             </div>
 
             <!-- pulled right: nav area -->
@@ -193,14 +214,46 @@
 
     @section('custom_js')
 	<script type="text/javascript">
-
-	// DO NOT REMOVE : GLOBAL FUNCTIONS!
-
 	$(document).ready(function() {
 	    pageSetUp();
 	})
-
 	</script>
     @show
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".activity-dropdown").click(function(){
+            $.ajax({
+                type: "POST",
+                url: "{{ route('user.notification.clear') }}",
+                dataType: "json",
+                data: {
+                    id: {{ $user->id }}
+                },
+                success: function(data, textStatus){
+                    if (data['code'] == 0) {
+
+                    } else {
+                        $.smallBox({
+                            title : "发生错误",
+                            content : data['message'],
+                            color : "#C46A69",
+                            iconSmall : "fa fa-lock fa-2x fadeInRight animated",
+                            timeout : 4000
+                        });
+                    }
+                }, error: function(data){
+                    $.smallBox({
+                        title : "发生错误",
+                        content : "在发送请求时出现错误，请刷新页面后重试",
+                        color : "#C46A69",
+                        iconSmall : "fa fa-lock fa-2x fadeInRight animated",
+                        timeout : 4000
+                    });
+                }
+            });
+        });
+    })
+    </script>
     </body>
 </html>
