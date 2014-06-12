@@ -216,6 +216,62 @@ class AdminUserController extends BaseController {
             ));
         }
 
+        // 删除VC评论
+        $vc_comment = VcComment::where('user_id', '=', $user->id)->get();
+        foreach ($vc_comment as $v) {
+            $v->vc->comment_count = $v->vc->comment_count - 1;
+            $v->vc->save();
+            $v->delete();
+        }
+        // 删除项目评论
+        $showcase_comment = ShowcaseComment::where('user_id', '=', $user->id)->get();
+        foreach ($showcase_comment as $s) {
+            $s->showcase->comment_count = $s->showcase->comment_count - 1;
+            $s->showcase->save();
+            $s->delete();
+        }
+        // 删除新闻评论
+        $news_comment = NewsComment::where('user_id', '=', $user->id)->get();
+        foreach ($news_comment as $n) {
+            $n->news->comment_count = $n->news->comment_count - 1;
+            $n->news->save();
+            $n->delete();
+        }
+        // 删除讨论区评论
+        $discuss_comment = DiscussComment::where('user_id', '=', $user->id)->get();
+        foreach ($discuss_comment as $d) {
+            $d->discuss->comment_count = $d->discuss->comment_count - 1;
+            $d->discuss->save();
+            $d->delete();
+        }
+        // 删除讨论区话题
+        $discuss = Discuss::where('user_id', '=', $user->id)->get();
+        foreach ($discuss as $d) {
+            DiscussComment::where('discuss_id', '=', $d->id)->delete();
+            $d->delete();
+        }
+        // 删除发布的项目
+        $showcase = Showcase::where('user_id', '=', $user->id)->get();
+        foreach ($showcase as $s) {
+            // 删除该项目下的所有评论
+            ShowcaseComment::where('showcase_id', '=', $s->id)->delete();
+            $s->delete();
+        }
+        // 删除通知中心中的内容
+        // 删除VC评分
+        $vc_rating = VcRating::where('user_id', '=', $user->id)->get();
+        $vc = array();
+        foreach ($vc_rating as $v) {
+            array_push($vc, $v->vc_id);
+            $v->delete();
+        }
+        $vc = array_unique($vc);
+        foreach ($vc as $v) {
+            $now = Vc::find($v);
+            $now->rating = Vc::getRatingByVC($v)[0];
+            $now->save();
+        }
+
         $user->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该用户');

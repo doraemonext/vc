@@ -42,7 +42,7 @@ class Vc extends Eloquent {
         return $vcs;
     }
 
-    protected static function getRatingByVC($id)
+    public static function getRatingByVC($id)
     {
         $id = intval($id);
         $vc = self::findOrFail($id);
