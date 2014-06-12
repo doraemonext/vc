@@ -307,6 +307,9 @@ class UserEvaluateController extends BaseController {
             ));
         }
 
+        $comment->vc->comment_count = $comment->vc->comment_count - 1;
+        $comment->vc->save();
+
         $comment->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条评论');
@@ -336,6 +339,9 @@ class UserEvaluateController extends BaseController {
             ));
         }
 
+        $comment->showcase->comment_count = $comment->showcase->comment_count - 1;
+        $comment->showcase->save();
+
         $comment->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条评论');
@@ -364,6 +370,9 @@ class UserEvaluateController extends BaseController {
                 'message' => '您没有删除该条评论的权限',
             ));
         }
+
+        $comment->news->comment_count = $comment->news->comment_count - 1;
+        $comment->news->save();
 
         $comment->delete();
         Session::flash('status', 'success');
