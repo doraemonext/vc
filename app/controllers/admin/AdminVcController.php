@@ -370,6 +370,7 @@ class AdminVcController extends BaseController {
         $vc->name = $input['name'];
         $vc->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
+            Croppa::delete($destination.$vc->logo);
             $vc->logo = $filename;
         }
         $vc->invest_field = $input['invest_field'];
@@ -443,6 +444,10 @@ class AdminVcController extends BaseController {
             ));
         }
 
+        VcComment::where('vc_id', '=', $vc->id)->delete();
+        VcRating::where('vc_id', '=', $vc->id)->delete();
+        VcShowcase::where('vc_id', '=', $vc->id)->delete();
+
         $vc->delete();
         Session::flash('status', 'success');
         Session::flash('message', '您已成功删除该条VC记录');
@@ -464,6 +469,9 @@ class AdminVcController extends BaseController {
                 'message' => '您提供的ID无效',
             ));
         }
+
+        $comment->vc->comment_count = $comment->vc->comment_count - 1;
+        $comment->vc->save();
 
         $comment->delete();
         Session::flash('status', 'success');

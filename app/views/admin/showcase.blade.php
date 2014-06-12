@@ -82,7 +82,7 @@
                                 <tbody>
                                     @foreach ($showcases as $showcase)
                                     <tr>
-                                        <td>{{ $showcase->name }}</td>
+                                        <td><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a></td>
                                         <td>{{ $showcase->company }}</td>
                                         <td>{{ $showcase->contact_person }}</td>
                                         <td>{{ $showcase->contact_phone }}</td>

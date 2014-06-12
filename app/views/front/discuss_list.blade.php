@@ -70,6 +70,25 @@
                 @endif
             </ul>
         </div>
+        <div id="post">
+            <div class="post_head">发表新的讨论</div>
+            <input class="post_title_text" type="text" placeholder="请输入标题">
+            <textarea class="post_text" placeholder="请输入内容"></textarea>
+            <div class="post_undertext">
+                @if (isset($user))
+                <a class="user left" href="">
+                    <span class="user_name">{{ $user->username }}</span>
+                    <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
+                </a>
+                <a class="post_submit right" href="">提交评论</a>
+                @else
+                <span>没有账号？</span>
+                <a class="register" href="{{ route('register') }}">注册&gt;&gt;</a>
+                <a class="login" href="{{ route('login') }}">登录</a>
+                <span class="right">登录后可以评论</span>
+                @endif
+            </div>
+        </div>
     </div>
 @stop
 
