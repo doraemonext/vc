@@ -265,4 +265,11 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
             Route::get('/delete/{id?}', array('uses' => 'AdminAdController@ajaxAdDelete', 'as' => 'admin.ad.ajax.delete'));
         });
     });
+
+    // 系统设置
+    Route::group(array('prefix' => 'setting'), function()
+    {
+        Route::get('/', array('uses' => 'AdminSettingController@showSetting', 'as' => 'admin.setting'));
+        Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AdminSettingController@submitSetting'));
+    });
 });

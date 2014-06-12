@@ -116,8 +116,8 @@
                     <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-cog"></i> <span class="menu-item-parent">系统设置</span></a>
                         <ul>
-                            <li>
-                                <a href="">系统设置</a>
+                            <li <?php if($action_name[0]==='AdminSettingController') echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.setting') }}">系统设置</a>
                             </li>
                         </ul>
                     </li>
