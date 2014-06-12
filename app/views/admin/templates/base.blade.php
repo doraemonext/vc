@@ -86,6 +86,17 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="#"><i class="fa fa-lg fa-fw fa-anchor"></i> <span class="menu-item-parent">讨论区管理</span></a>
+                        <ul>
+                            <li <?php if($action_name[0]==='AdminDiscussController'&&($action_name[1]==='showTopic'||$action_name[1]==='showTopicEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.discuss.topic') }}">话题管理</a>
+                            </li>
+                            <li <?php if($action_name[0]==='AdminDiscussController'&&($action_name[1]==='showComment'||$action_name[1]==='showCommentEdit')) echo 'class="active"'; ?>>
+                                <a href="{{ route('admin.discuss.comment') }}">回复管理</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
                         <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">其他管理</span></a>
                         <ul>
                             <li <?php if($action_name[0]==='AdminNewsController'&&($action_name[1]==='showNews'||$action_name[1]==='showNew'||$action_name[1]==='showEdit')) echo 'class="active"'; ?>>

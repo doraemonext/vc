@@ -49,4 +49,7 @@ return array(
 
     'url.required' => '您必须输入一个网址',
     'url.url' => '您必须输入一个合法的网址',
+
+    'title.required' => '您必须输入标题',
+    'title.max' => '您的标题输入过长',
 );

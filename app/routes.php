@@ -185,6 +185,19 @@ Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), fun
         });
     });
 
+    Route::group(array('prefix' => 'discuss'), function()
+    {
+        Route::get('/topic/', array('uses' => 'AdminDiscussController@showTopic', 'as' => 'admin.discuss.topic'));
+        Route::get('/topic/edit/{id?}/', array('uses' => 'AdminDiscussController@showTopicEdit', 'as' => 'admin.discuss.topic.edit'));
+        Route::post('/topic/edit/{id?}/submit/', array('uses' => 'AdminDiscussController@submitTopicEdit'));
+        Route::get('/topic/ajax/delete/{id?}', array('uses' => 'AdminDiscussController@ajaxTopicDelete', 'as' => 'admin.discuss.topic.ajax.delete'));
+
+        Route::get('/comment/', array('uses' => 'AdminDiscussController@showComment', 'as' => 'admin.discuss.comment'));
+        Route::get('/comment/edit/{id?}/', array('uses' => 'AdminDiscussController@showCommentEdit', 'as' => 'admin.discuss.comment.edit'));
+        Route::post('/comment/edit/{id?}/submit/', array('uses' => 'AdminDiscussController@submitCommentEdit'));
+        Route::get('/comment/ajax/delete/{id?}', array('uses' => 'AdminDiscussController@ajaxCommentDelete', 'as' => 'admin.discuss.comment.ajax.delete'));
+    });
+
     // 新闻管理
     Route::group(array('prefix' => 'news'), function()
     {

@@ -9,4 +9,8 @@ class DiscussComment extends Eloquent {
         return $this->belongsTo('Discuss');
     }
 
+    public function user() {
+        return $this->belongsTo('User');
+    }
+
 }
