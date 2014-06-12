@@ -128,10 +128,6 @@ class UserShowcaseController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('user.showcase.new')->withInput(Input::except('logo'));
             }
-
-//            $img = Image::make($destination.$filename);
-//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-//            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $showcase = new Showcase;
@@ -229,14 +225,11 @@ class UserShowcaseController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('user.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
-
-//            $img = Image::make($destination.$filename);
-//            $img->resize(526, 320)->save($destination.$filename.'-526x320');
-//            $img->resize(140, 140)->save($destination.$filename.'-140x140');
         }
 
         $showcase->name = $input['name'];
         if (!is_null($input['logo'])) {
+            Croppa::delete($destination.$showcase->logo);
             $showcase->logo = $filename;
         }
         $showcase->company = $input['company'];
