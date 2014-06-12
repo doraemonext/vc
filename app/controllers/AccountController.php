@@ -309,4 +309,64 @@ class AccountController extends BaseController {
         }
     }
 
+    public function ajaxLogin()
+    {
+        $input = Input::only('username', 'password', 'remember');
+
+        // 对提交信息进行验证
+        $rules = array(
+            'username' => 'required|alpha_dash|max:64',
+            'password' => 'required|max:64'
+        );
+        $validator = Validator::make($input, $rules, Config::get('validation'));
+        if ($validator->fails()) {
+            return Response::json(array(
+                'code' => 1010,
+                'message' => $validator->messages()->all('<li>:message</li>'),
+            ));
+        }
+
+        try {
+            $credentials = array(
+                'username' => $input['username'],
+                'password' => $input['password'],
+            );
+
+            if (empty($input['remember'])) {
+                $user = Sentry::authenticate($credentials, false);
+            } elseif ($input['remember'] === 'on') {
+                $user = Sentry::authenticate($credentials, true);
+            }
+
+            return Response::json(array(
+                'code' => 0,
+            ));
+        } catch (Cartalyst\Sentry\Users\LoginRequiredException $e) {
+            return Response::json(array(
+                'code' => 1011,
+                'message' => '用户名不能为空',
+            ));
+        } catch (Cartalyst\Sentry\Users\PasswordRequiredException $e) {
+            return Response::json(array(
+                'code' => 1012,
+                'message' => '密码不能为空',
+            ));
+        } catch (Cartalyst\Sentry\Users\WrongPasswordException $e) {
+            return Response::json(array(
+                'code' => 1013,
+                'message' => '密码错误，请重试',
+            ));
+        } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+            return Response::json(array(
+                'code' => 1014,
+                'message' => '用户名不存在',
+            ));
+        } catch (Cartalyst\Sentry\Users\UserNotActivatedException $e) {
+            return Response::json(array(
+                'code' => 1015,
+                'message' => '您尚未激活您的账户，请检查您的邮箱中的激活链接',
+            ));
+        }
+    }
+
 }

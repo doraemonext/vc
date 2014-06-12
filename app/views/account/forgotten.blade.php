@@ -12,13 +12,15 @@
 @section('content')
     @parent
     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-        <h1 class="txt-color-red login-header-big">SmartAdmin</h1>
+        <h1 class="txt-color-red login-header-big">{{ $setting['title'] }}</h1>
         <div class="hero">
             <div class="pull-left login-desc-box-l">
-                <h4 class="paragraph-header">It's Okay to be Smart. Experience the simplicity of SmartAdmin, everywhere you go!</h4>
+                <h4 class="paragraph-header">{{ $setting['description'] }}</h4>
                 <div class="login-app-icons">
-                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>
-                    <a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>
+                    <a href="{{ route('vc.list') }}" class="btn btn-danger btn-sm">VC展示</a>
+                    <a href="{{ route('showcase.list') }}" class="btn btn-danger btn-sm">项目展示</a>
+                    <a href="{{ route('discuss.list') }}" class="btn btn-danger btn-sm">讨论区</a>
+                    <a href="{{ route('business') }}" class="btn btn-danger btn-sm">商业合作</a>
                 </div>
             </div>
             <img src="{{ asset('smartadmin/img/demo/iphoneview.png') }}" class="pull-right display-image" alt="" style="width:210px">

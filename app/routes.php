@@ -52,6 +52,7 @@ Route::group(array('prefix' => 'account'), function()
     {
         Route::get('/', array('uses' => 'AccountController@showLogin', 'as' => 'login'));
         Route::post('/submit/', array('before' => 'csrf', 'uses' => 'AccountController@submitLogin'));
+        Route::post('/ajax/', array('uses' => 'AccountController@ajaxLogin', 'as' => 'login.ajax'));
     });
     Route::group(array('prefix' => 'register'), function()
     {
