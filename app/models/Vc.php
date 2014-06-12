@@ -14,6 +14,11 @@ class Vc extends Eloquent {
         return $this->hasMany('VcShowcase', 'vc_id');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('VcComment', 'vc_id');
+    }
+
     public static function getRecommend($limit = 2)
     {
         return self::where('recommended', '=', 1)->take($limit)->get();
