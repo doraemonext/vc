@@ -127,6 +127,10 @@ class DiscussController extends BaseController {
         $discuss->comment_count = $discuss->comment_count + 1;
         $discuss->save();
 
+        if ($discuss->user_id != Sentry::getUser()->getId()) {
+            Notification::insertNotification($discuss->user_id, 'discuss', '您在讨论区发布的 <a href="'.route('discuss.item', $discuss->id).'">'.$discuss->title.'</a> 话题有了 '.$comment->user->username.' 的新回复');
+        }
+
         Session::flash('status', 'success');
         Session::flash('message', '您已成功添加评论');
         return Response::json(array(

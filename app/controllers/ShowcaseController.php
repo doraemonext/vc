@@ -165,6 +165,10 @@ class ShowcaseController extends BaseController {
         $showcase->vote = $showcase->vote + 1;
         $showcase->save();
 
+        if ($showcase->user_id != Sentry::getUser()->getId()) {
+            Notification::insertNotification($showcase->user_id, 'showcase', '您发布的项目 <a href="'.route('showcase.item', $showcase->id).'">'.$showcase->name.'</a> 收到了来自 '.Sentry::getUser()->username.' 的一个赞');
+        }
+
         return Response::json(array(
             'code' => 0,
             'vote_count' => $showcase->vote,

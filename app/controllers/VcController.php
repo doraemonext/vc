@@ -118,6 +118,17 @@ class VcController extends BaseController {
             ));
         }
 
+        $user_array = array();
+        foreach ($vc->comments as $c) {
+            array_push($user_array, $c->user_id);
+        }
+        $user_array = array_unique($user_array);
+        foreach ($user_array as $u) {
+            if ($u != Sentry::getUser()->getId()) {
+                Notification::insertNotification($u, 'vc', '您评论过的VC <a href="'.route('vc.item', $vc->id).'">'.$vc->name.'</a> 有了 '.Sentry::getUser()->username.' 的新评论');
+            }
+        }
+
         // 在数据库中插入新评论
         $comment = new VcComment;
         $comment->vc_id = $id;
