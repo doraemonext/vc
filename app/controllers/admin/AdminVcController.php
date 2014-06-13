@@ -241,6 +241,10 @@ class AdminVcController extends BaseController {
         $vc->save();
 
         for ($i = 1; $i <= 5; $i++) {
+            if (empty($input['showcase_'.strval($i).'_title']) && empty($input['showcase_'.strval($i).'_content']) && empty($input['showcase_'.strval($i).'_url'])) {
+                continue;
+            }
+
             $vc_showcase = new VcShowcase;
             $vc_showcase->vc_id = $vc->id;
             $vc_showcase->title = $input['showcase_'.strval($i).'_title'];
@@ -388,6 +392,10 @@ class AdminVcController extends BaseController {
         }
 
         for ($i = 1; $i <= 5; $i++) {
+            if (empty($input['showcase_'.strval($i).'_title']) && empty($input['showcase_'.strval($i).'_content']) && empty($input['showcase_'.strval($i).'_url'])) {
+                continue;
+            }
+
             $vc_showcase = new VcShowcase;
             $vc_showcase->vc_id = $vc->id;
             $vc_showcase->title = $input['showcase_'.strval($i).'_title'];
