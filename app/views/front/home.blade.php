@@ -148,7 +148,7 @@
                         @endif
                             <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}">
                             <div class="carousel-caption">
-                                <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a><span class="project_like right">赞(8)</span></div>
+                                <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a><span class="project_like right">赞({{ $showcase->vote }})</span></div>
                                 <div class="project_subtitle">
                                     <ul class="project_info">
                                         <li><span class="project_name">领域：</span><span class="project_v">{{ $showcase->category->title }}</span></li>
