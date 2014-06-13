@@ -246,7 +246,9 @@ class AdminNewsController extends BaseController {
         $news->title = $input['title'];
         $news->category_id = $input['category_id'];
         if (!is_null($input['picture'])) {
-            Croppa::delete($destination.$news->picture);
+            if ($news->picture != 'default.jpg') {
+                Croppa::delete($destination.$news->picture);
+            }
             $news->picture = $filename;
         }
         $news->summary = $input['summary'];

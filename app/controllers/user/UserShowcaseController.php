@@ -242,7 +242,9 @@ class UserShowcaseController extends BaseController {
 
         $showcase->name = $input['name'];
         if (!is_null($input['logo'])) {
-            Croppa::delete($destination.$showcase->logo);
+            if ($showcase->logo != 'default.jpg') {
+                Croppa::delete($destination.$showcase->logo);
+            }
             $showcase->logo = $filename;
         }
         $showcase->company = $input['company'];

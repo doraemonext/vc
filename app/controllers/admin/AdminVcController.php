@@ -370,7 +370,9 @@ class AdminVcController extends BaseController {
         $vc->name = $input['name'];
         $vc->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
-            Croppa::delete($destination.$vc->logo);
+            if ($vc->logo != 'default.jpg') {
+                Croppa::delete($destination.$vc->logo);
+            }
             $vc->logo = $filename;
         }
         $vc->invest_field = $input['invest_field'];
