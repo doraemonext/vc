@@ -34,7 +34,7 @@
             <div class="column_content">
                 <div class="topicitem_article">
                     <div class="topicitem_title">{{ $discuss->title }}</div>
-                    <div class="topicitem_content">{{ $discuss->content }}</div>
+                    <div class="topicitem_content">{{ nl2br($discuss->content) }}</div>
                     <div class="topicitem_info">
                         {{ $discuss->user->username }} {{ $discuss->datetime }}
                     </div>
