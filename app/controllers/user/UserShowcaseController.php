@@ -118,7 +118,13 @@ class UserShowcaseController extends BaseController {
             } while (file_exists($destination.$filename));
 
             $mime = $input['logo']->getMimeType();
-            if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
+            if ($mime === 'image/gif') {
+                $filename .= '.gif';
+            } elseif ($mime === 'image/jpeg') {
+                $filename .= '.jpg';
+            } elseif ($mime === 'image/png') {
+                $filename .= '.png';
+            } else {
                 Session::flash('error', '您上传的不是图片文件');
                 return Redirect::route('user.showcase.new')->withInput(Input::except('logo'));
             }
@@ -215,7 +221,13 @@ class UserShowcaseController extends BaseController {
             } while (file_exists($destination.$filename));
 
             $mime = $input['logo']->getMimeType();
-            if ($mime !== 'image/gif' && $mime !== 'image/jpeg' && $mime !== 'image/png') {
+            if ($mime === 'image/gif') {
+                $filename .= '.gif';
+            } elseif ($mime === 'image/jpeg') {
+                $filename .= '.jpg';
+            } elseif ($mime === 'image/png') {
+                $filename .= '.png';
+            } else {
                 Session::flash('error', '您上传的不是图片文件');
                 return Redirect::route('user.showcase.edit', $showcase->id)->withInput(Input::except('logo'));
             }
