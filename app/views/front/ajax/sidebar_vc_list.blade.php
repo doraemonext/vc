@@ -3,7 +3,7 @@
     <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
         <div class="investor_head">
             <span class="investor_name">{{ $vc->name }}</span>
-            <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+            <span class="investor_update">第 {{ $vc->rank }} 名</span>
         </div>
         <div class="investor_content">
             <div class="investor_mscore">

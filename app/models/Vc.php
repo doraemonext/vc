@@ -41,8 +41,9 @@ class Vc extends Eloquent {
     public static function getListOrderByRatingWithRating($limit = 5, $offset = 0)
     {
         $vcs = self::orderBy('rating', 'DESC')->take($limit)->offset($offset)->get();
-        foreach ($vcs as $vc) {
+        foreach ($vcs as $index => $vc) {
             $vc->score = self::getRatingByVC($vc->id);
+            $vc->rank = $index + $offset + 1;
         }
         return $vcs;
     }

@@ -49,12 +49,12 @@
                     </div>
                     <div class="project_title">{{ $showcase->name }}</div>
                     <ul class="project_info">
-                        <li><span class="project_name">领域：</span><span class="project_v">移动互联网</span></li>
-                        <li><span class="project_name">联系人：</span><span class="project_v">李湘</span></li>
-                        <li><span class="project_name">运营时间：</span><span class="project_v">3年</span></li>
-                        <li><span class="project_name">公司名：</span><span class="project_v">****</span></li>
-                        <li><span class="project_name">电话：</span><span class="project_v">********</span></li>
-                        <li><span class="project_name">email：</span><span class="project_v">**@**.**</span></li>
+                        <li><span class="project_name">领域：</span><span class="project_v">{{ $showcase->category->title }}</span></li>
+                        <li><span class="project_name">联系人：</span><span class="project_v">{{ $showcase->contact_person }}</span></li>
+                        <li><span class="project_name">运营时间：</span><span class="project_v">{{ $showcase->operation_time }}</span></li>
+                        <li><span class="project_name">公司名：</span><span class="project_v">{{ $showcase->company }}</span></li>
+                        <li><span class="project_name">电话：</span><span class="project_v">{{ $showcase->contact_phone }}</span></li>
+                        <li><span class="project_name">email：</span><span class="project_v">{{ $showcase->contact_email }}</span></li>
                     </ul>
                     <div class="project_content">
                         {{ $showcase->content }}

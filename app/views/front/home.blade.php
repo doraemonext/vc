@@ -87,7 +87,7 @@
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
                         <span class="investor_name">{{ $vc->name }}</span>
-                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+                        <span class="investor_update">第 {{ $vc->rank }} 名</span>
                     </div>
                     <div class="investor_content">
                         <div class="investor_mscore">
@@ -151,9 +151,9 @@
                                 <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a><span class="project_like right">赞(8)</span></div>
                                 <div class="project_subtitle">
                                     <ul class="project_info">
-                                        <li><span class="project_name">领域：</span><span class="project_v">移动互联网</span></li>
-                                        <li><span class="project_name">联系人：</span><span class="project_v">李湘</span></li>
-                                        <li><span class="project_name">运营时间：</span><span class="project_v">3年</span></li>
+                                        <li><span class="project_name">领域：</span><span class="project_v">{{ $showcase->category->title }}</span></li>
+                                        <li><span class="project_name">联系人：</span><span class="project_v">{{ $showcase->contact_person }}</span></li>
+                                        <li><span class="project_name">运营时间：</span><span class="project_v">{{ $showcase->operation_time }}</span></li>
                                     </ul>
                                     <div class="project_intro">
                                         @if (mb_substr($showcase->summary, 0, 50, 'utf-8') != $showcase->summary)
