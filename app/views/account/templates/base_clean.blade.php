@@ -41,7 +41,7 @@
         <script src="{{ asset('smartadmin/js/plugin/pace/pace.min.js') }}"></script>
         <script src="{{ asset('smartadmin/js/libs/jquery-2.0.2.min.js') }}"></script>
         <script src="{{ asset('smartadmin/js/libs/jquery-ui-1.10.3.min.js') }}"></script>
-        <script src="{{ asset('smartadmin/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js') }}"></script> -->
+        <script src="{{ asset('smartadmin/js/plugin/jquery-touch/jquery.ui.touch-punch.min.js') }}"></script>
         <script src="{{ asset('smartadmin/js/bootstrap/bootstrap.min.js') }}"></script>
         <script src="{{ asset('smartadmin/js/notification/SmartNotification.min.js') }}"></script>
         <script src="{{ asset('smartadmin/js/smartwidgets/jarvis.widget.min.js') }}"></script>

@@ -113,7 +113,7 @@ class NewsController extends BaseController {
         $news_count = News::count();
         $paginateNumber = intval(Setting::where('title', '=', 'paginate_home_news_list')->first()->value);
         $page = intval($page);
-        if ($page < 1 || $page > $news_count / $paginateNumber + 1) {
+        if ($page < 1 || $page > ceil($news_count / $paginateNumber)) {
             return Response::json(array(
                 'code' => 1006,
                 'message' => '您提供的页数范围错误',
@@ -135,6 +135,8 @@ class NewsController extends BaseController {
         return Response::json(array(
             'code' => 0,
             'news_list' => $news_list_view,
+            'total_page' => ceil(News::count() / $paginateNumber),
+            'now_page' => $page,
             'has_prev' => $page == 1 ? false : true,
             'has_next' => $has_next,
         ));

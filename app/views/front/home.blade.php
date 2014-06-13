@@ -77,7 +77,7 @@
             @endforeach
         </div>
     </div>
-    <div class="column_side">
+    <div class="column_side" id="news">
         <div class="column_side_head">
             <div class="column_side_title">投资方排名</div>
         </div>
@@ -146,7 +146,7 @@
                         @else
                         <div class="item">
                         @endif
-                            <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 526, 320) }}">
+                            <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 550, 135) }}">
                             <div class="carousel-caption">
                                 <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a></div>
                                 <div class="project_subtitle">
@@ -209,10 +209,29 @@
             @endforeach
         </div>
     </div>
-    <div class="page" id="paginator_news">
+    <div class="page">
         <ul>
+            @if ($news_latest->getCurrentPage() - 1 > 0)
+            <li class="prevpage"><a href="{{ $news_latest->getUrl($news_latest->getCurrentPage() - 1) }}#news">上一页</a></li>
+            @else
             <li class="prevpage disabled"><a href="##">上一页</a></li>
-            <li class="nextpage <?php if(News::count()<=count($news_latest)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
+            @endif
+
+            @for ($i = $news_latest->getCurrentPage() - 2; $i <= $news_latest->getCurrentPage() + 2; $i++)
+            @if ($i > 0 && $i <= $news_latest->getLastPage())
+                @if ($i == $news_latest->getCurrentPage())
+                    <li class="disabled"><a href="##">{{ $i }}</a></li>
+                @else
+                    <li><a href="{{ $news_latest->getUrl($i) }}#news">{{ $i }}</a></li>
+                @endif
+            @endif
+            @endfor
+
+            @if ($news_latest->getCurrentPage() < $news_latest->getLastPage())
+            <li class="nextpage"><a href="{{ $news_latest->getUrl($news_latest->getCurrentPage() + 1) }}#news">下一页</a></li>
+            @else
+            <li class="nextpage disabled"><a href="##">下一页</a></li>
+            @endif
         </ul>
     </div>
 </div>
@@ -323,76 +342,6 @@ $(document).ready(function() {
                         $("#paginator_vc .prevpage").removeClass('disabled');
                     } else {
                         $("#paginator_vc .prevpage").addClass('disabled');
-                    }
-                }
-            }, error: function(data) {
-                msg('网络错误，请刷新页面后重试', 'error');
-            }
-        });
-    });
-
-    $("#paginator_news .nextpage").click(function() {
-        if ($(this).hasClass('disabled')) return;
-        var id = $("#news").data('paginate') + 1;
-
-        $.ajax({
-            type: "GET",
-            url: "{{ route('news.ajax.list') }}/" + id,
-            dataType: "json",
-            cache: false,
-            success: function(data, textStatus) {
-                if (data['code'] != 0) {
-                    msg(data['message'], 'error');
-                } else {
-                    $("html,body").animate({scrollTop: $("#news").offset().top - 153}, 500);
-
-                    $("#news").data('paginate', id);
-                    $("#news").html(data['news_list']);
-
-                    if (data['has_next']) {
-                        $("#paginator_news .nextpage").removeClass('disabled');
-                    } else {
-                        $("#paginator_news .nextpage").addClass('disabled');
-                    }
-                    if (data['has_prev']) {
-                        $("#paginator_news .prevpage").removeClass('disabled');
-                    } else {
-                        $("#paginator_news .prevpage").addClass('disabled');
-                    }
-                }
-            }, error: function(data) {
-                msg('网络错误，请刷新页面后重试', 'error');
-            }
-        });
-    });
-
-    $("#paginator_news .prevpage").click(function() {
-        if ($(this).hasClass('disabled')) return;
-        var id = $("#news").data('paginate') - 1;
-
-        $.ajax({
-            type: "GET",
-            url: "{{ route('news.ajax.list') }}/" + id,
-            dataType: "json",
-            cache: false,
-            success: function(data, textStatus) {
-                if (data['code'] != 0) {
-                    msg(data['message'], 'error');
-                } else {
-                    $("html,body").animate({scrollTop: $("#news").offset().top - 153}, 500);
-
-                    $("#news").data('paginate', id);
-                    $("#news").html(data['news_list']);
-
-                    if (data['has_next']) {
-                        $("#paginator_news .nextpage").removeClass('disabled');
-                    } else {
-                        $("#paginator_news .nextpage").addClass('disabled');
-                    }
-                    if (data['has_prev']) {
-                        $("#paginator_news .prevpage").removeClass('disabled');
-                    } else {
-                        $("#paginator_news .prevpage").addClass('disabled');
                     }
                 }
             }, error: function(data) {

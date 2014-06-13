@@ -33,7 +33,7 @@
             </div>
             <div class="column_content project">
                 <div class="project_img">
-                    <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 526, 320) }}">
+                    <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}">
                 </div>
                 <div class="project_article">
                     <div class="project_title">{{ $showcase->name }}</div>

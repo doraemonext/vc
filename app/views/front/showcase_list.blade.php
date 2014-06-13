@@ -85,7 +85,7 @@
                 @foreach ($showcase_list as $showcase)
                 <div class="project_item">
                     <div class="project_img">
-                        <a href="{{ route('showcase.item', $showcase->id) }}"><img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 526, 320) }}"></a>
+                        <a href="{{ route('showcase.item', $showcase->id) }}"><img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}"></a>
                     </div>
                     <div class="project_description">
                         <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a></div>
@@ -96,7 +96,7 @@
                             {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}
                             @endif
                         </div>
-                        <div class="project_info"><a class="project_like" href="">赞({{ $showcase->vote }})</a>{{ $showcase->datetime }}</div>
+                        <div class="project_info"><span class="project_like">赞({{ $showcase->vote }})</span>{{ $showcase->datetime }}</div>
                     </div>
                 </div>
                 @endforeach

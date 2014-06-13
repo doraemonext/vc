@@ -55,7 +55,7 @@ class SearchController extends BaseController {
         $data['type'] = $input['type'];
 
         // 进行搜索结果分页
-        $perPage = 2;
+        $perPage = 10;
         $currentPage = $input['page'] - 1;
         $pagedData = array_slice($result, $currentPage * $perPage, $perPage);
         $data['paginator'] = Paginator::make($pagedData, count($result), $perPage);

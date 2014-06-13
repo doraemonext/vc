@@ -136,7 +136,7 @@ Route::group(array('prefix' => 'user', 'before' => 'Sentry'), function()
     });
 });
 
-Route::group(array('prefix' => 'admin', 'before' => 'Sentry|inGroup:admin'), function()
+Route::group(array('prefix' => 'kingcarat/admin/info', 'before' => 'Sentry|inGroup:admin'), function()
 {
     Route::get('/', array('uses' => 'AdminHomeController@showHome', 'as' => 'admin.home'));
 
