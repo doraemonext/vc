@@ -216,6 +216,13 @@ class AdminUserController extends BaseController {
             ));
         }
 
+        if ($user->isSuperUser()) {
+            return Response::json(array(
+                'code' => 1009,
+                'message' => '您不能删除超级管理员',
+            ));
+        }
+
         // 删除VC评论
         $vc_comment = VcComment::where('user_id', '=', $user->id)->get();
         foreach ($vc_comment as $v) {
@@ -258,6 +265,7 @@ class AdminUserController extends BaseController {
             $s->delete();
         }
         // 删除通知中心中的内容
+        Notification::where('user_id', '=', $user->id)->delete();
         // 删除VC评分
         $vc_rating = VcRating::where('user_id', '=', $user->id)->get();
         $vc = array();
