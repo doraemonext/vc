@@ -1,0 +1,95 @@
+body {
+  position: relative;
+  margin-top: 0px;
+  padding-top: 0px;
+  height: auto;
+  min-height: 100%;
+}
+
+#main {
+  padding-bottom: 206px;
+  width: 850px;
+  margin: 0 auto;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 126px;
+}
+
+#b_leftbar {
+  overflow: hidden;
+  float: left;
+  width: 208px;
+  height: 100%;
+}
+
+#b_rightbar {
+  float: right;
+  height: 100%;
+  width: 71%;
+  background-color: #fff;
+}
+
+.tabs {
+  width: 100px;
+  margin-top: 171px;
+  text-align: center;
+}
+
+.tabs .active {
+  color: #0070cc;
+}
+
+.tabs .active:hover {
+  color: #0070cc;
+}
+
+.tabs li {
+  margin: 35px 0;
+  color: #333;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.tabs li:hover {
+  color: #999;
+}
+
+.business_article {
+  float: left;
+  margin-top: 136px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+  width: 600px;
+  background-color: #fff;
+  border: 1px solid #E6EAED;
+}
+
+.business_title {
+  margin: 20px 0;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 900;
+}
+
+.business_content p {
+  margin: 0.5em 0;
+  font-size: 16px;
+  text-indent: 2em;
+  line-height: 1.5em;
+  color: #666;
+}
+
+@media screen and (max-width: 1190px) {
+  #b_leftbar {
+    width: 25%;
+  }
+
+  #b_rightbar {
+    width: 75%
+  }
+}

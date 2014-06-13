@@ -78,3 +78,69 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/**
+ * Sentry filter
+ *
+ * Checks if the user is logged in
+ */
+Route::filter('Sentry', function()
+{
+    if (!Sentry::check()) {
+        return Redirect::route('login');
+    }
+});
+
+/**
+ * hasAcces filter (permissions)
+ *
+ * Check if the user has permission (group/user)
+ */
+Route::filter('hasAccess', function($route, $request, $value)
+{
+    try {
+        $user = Sentry::getUser();
+
+        if( ! $user->hasAccess($value)) {
+            return View::make('noaccess', array(
+                'error' => '您没有访问该页面的权限',
+                'setting' => Setting::getSetting(),
+            ));
+        }
+    } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+        return View::make('noaccess', array(
+            'error' => '没有找到该用户',
+            'setting' => Setting::getSetting(),
+        ));
+    }
+});
+
+/**
+ * InGroup filter
+ *
+ * Check if the user belongs to a group
+ */
+Route::filter('inGroup', function($route, $request, $value)
+{
+    try {
+        $user = Sentry::getUser();
+        $group = Sentry::findGroupByName($value);
+
+        if(!$user->inGroup($group)) {
+            return View::make('noaccess', array(
+                'error' => '您没有访问该页面的权限',
+                'setting' => Setting::getSetting(),
+            ));
+        }
+    } catch (Cartalyst\Sentry\Users\UserNotFoundException $e) {
+        return View::make('noaccess', array(
+            'error' => '没有找到该用户',
+            'setting' => Setting::getSetting(),
+        ));
+    } catch (Cartalyst\Sentry\Groups\GroupNotFoundException $e) {
+        return View::make('noaccess', array(
+            'error' => '没有找到该用户组',
+            'setting' => Setting::getSetting(),
+        ));
+    }
+});
