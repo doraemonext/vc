@@ -158,13 +158,20 @@ class DiscussController extends BaseController {
             ));
         }
 
-        $discuss->vote = $discuss->vote + 1;
-        $discuss->save();
+        if (Vote::insertVote('discuss', $discuss->id)) {
+            $discuss->vote = $discuss->vote + 1;
+            $discuss->save();
 
-        return Response::json(array(
-            'code' => 0,
-            'vote_count' => $discuss->vote,
-        ));
+            return Response::json(array(
+                'code' => 0,
+                'vote_count' => $discuss->vote,
+            ));
+        } else {
+            return Response::json(array(
+                'code' => 1008,
+                'message' => '您已经赞过，不能重复点赞',
+            ));
+        }
     }
 
     public function ajaxTopicSubmit()

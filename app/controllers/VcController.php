@@ -226,13 +226,19 @@ class VcController extends BaseController {
             ));
         }
 
-        $vc->vote = $vc->vote + 1;
-        $vc->save();
-
-        return Response::json(array(
-            'code' => 0,
-            'vote_count' => $vc->vote,
-        ));
+        if (Vote::insertVote('vc', $vc->id)) {
+            $vc->vote = $vc->vote + 1;
+            $vc->save();
+            return Response::json(array(
+                'code' => 0,
+                'vote_count' => $vc->vote,
+            ));
+        } else {
+            return Response::json(array(
+                'code' => 1008,
+                'message' => '您已经赞过，不能重复点赞',
+            ));
+        }
     }
 
     public function ajaxVcList($page)
