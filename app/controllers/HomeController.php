@@ -21,11 +21,12 @@ class HomeController extends BaseController {
 	public function showHome()
 	{
         $paginateNewsNumber = intval(Setting::where('title', '=', 'paginate_home_news_list')->first()->value);
+        $setting = Setting::getSetting();
 
         $count = array(
-            'vc' => Vc::count(),
-            'comment' => VcComment::count() + ShowcaseComment::count() + NewsComment::count() + Discuss::count(),
-            'user' => User::count(),
+            'vc' => (empty($setting['count_vc'])) ? Vc::count() : $setting['count_vc'],
+            'comment' => (empty($setting['count_comment'])) ? VcComment::count() + ShowcaseComment::count() + NewsComment::count() + Discuss::count() : $setting['count_comment'],
+            'user' => (empty($setting['count_user'])) ? User::count() : $setting['count_user']
         );
 
         $data = array(

@@ -88,6 +88,33 @@
                                             {{ Form::text('description', $setting['description'], array('class' => 'form-control')) }}
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">VC数目</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('count_vc', $setting['count_vc'], array('class' => 'form-control')) }}
+                                            <div class="help-block">
+                                                保持此数目为0即可显示真实数据
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">创业者数目</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('count_user', $setting['count_user'], array('class' => 'form-control')) }}
+                                            <div class="help-block">
+                                                保持此数目为0即可显示真实数据
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">评论总数</label>
+                                        <div class="col-md-9">
+                                            {{ Form::text('count_comment', $setting['count_comment'], array('class' => 'form-control')) }}
+                                            <div class="help-block">
+                                                保持此数目为0即可显示真实数据
+                                            </div>
+                                        </div>
+                                    </div>
                                 </fieldset>
                                 <div class="form-actions">
                                     <div class="row">
