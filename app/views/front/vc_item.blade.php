@@ -36,27 +36,27 @@
             <div class="column_main_title">VC信息 Information of VC</div>
         </div>
         <div class="column_content vcitem">
-            <div class="vcitem_title">{{ $vc->name }}</div>
-            <div class="vcitem_condition">
-                <div class="vc_img">
-                    <a href="{{ $vc->website }}"><img src="{{ Croppa::url($config_upload['vc.logo'].$vc->logo, 140, 140) }}"></a>
-                </div>
-                <ul class="vc_score">
-                    <li class="vctotal">
-                        <span class="vcbar_head">总分</span>
-                        <span class="vcscore">{{ round($rating[0], 1) }}</span>
-                        <span class="vc_bar" style="width:{{ $rating[0] * 18 }}px"></span>
-                    </li>
-                    @foreach ($rating_category as $category)
-                    <li>
-                        <span class="vcbar_head">{{ $category->title }}</span>
-                        <span class="vcscore">{{ round($rating[$category->id], 1) }}</span>
-                        <span class="vc_bar" style="width:{{ $rating[$category->id] * 18 }}px"></span>
-                    </li>
-                    @endforeach
-                </ul>
-            </div>
             <div class="vcitem_article">
+                <div class="vcitem_title">{{ $vc->name }}</div>
+                <div class="vcitem_condition">
+                    <div class="vc_img">
+                        <a href="{{ $vc->website }}"><img src="{{ Croppa::url($config_upload['vc.logo'].$vc->logo, 140, 140) }}"></a>
+                    </div>
+                    <ul class="vc_score">
+                        <li class="vctotal">
+                            <span class="vcbar_head">总分</span>
+                            <span class="vcscore">{{ round($rating[0], 1) }}</span>
+                            <span class="vc_bar" style="width:{{ $rating[0] * 18 }}px"></span>
+                        </li>
+                        @foreach ($rating_category as $category)
+                        <li>
+                            <span class="vcbar_head">{{ $category->title }}</span>
+                            <span class="vcscore">{{ round($rating[$category->id], 1) }}</span>
+                            <span class="vc_bar" style="width:{{ $rating[$category->id] * 18 }}px"></span>
+                        </li>
+                        @endforeach
+                    </ul>
+                </div>
                 <div class="vcitem_content">
                     {{ $vc->content }}
                 </div>

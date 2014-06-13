@@ -121,7 +121,7 @@
     <div id="rightbar">
         <div class="column_side">
             <div class="column_side_head">
-                <div class="column_side_title">最热话题</div>
+                <div class="column_side_title red_title">最热话题</div>
             </div>
             <div class="column_content hottopic">
                 @foreach ($discuss_hot as $hot)

@@ -61,12 +61,12 @@
             </div>
             @endforeach
         </div>
-        <div class="page sidepage" id="paginator_vc">
-            <ul>
-                <li class="prevpage disabled"><a href="##">上一页</a></li>
-                <li class="nextpage <?php if($count['vc']<=count($vc_list)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
-            </ul>
-        </div>
+    </div>
+    <div class="page sidepage" id="paginator_vc">
+        <ul>
+            <li class="prevpage disabled"><a href="##">上一页</a></li>
+            <li class="nextpage <?php if($count['vc']<=count($vc_list)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
+        </ul>
     </div>
     <div class="clear"></div>
     <div class="code_2d">
@@ -88,15 +88,21 @@
                         <a href="{{ route('showcase.item', $showcase->id) }}"><img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}"></a>
                     </div>
                     <div class="project_description">
-                        <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a></div>
+                        <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a><span class="project_like right">赞(8)</span></div>
                         <div class="project_subtitle">
-                            @if (mb_substr($showcase->summary, 0, 50, 'utf-8') != $showcase->summary)
-                            {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}...
-                            @else
-                            {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}
-                            @endif
+                            <ul class="project_info">
+                                <li><span class="project_name">领域：</span><span class="project_v">移动互联网</span></li>
+                                <li><span class="project_name">联系人：</span><span class="project_v">李湘</span></li>
+                                <li><span class="project_name">运营时间：</span><span class="project_v">3年</span></li>
+                            </ul>
+                            <div class="project_intro">
+                                @if (mb_substr($showcase->summary, 0, 50, 'utf-8') != $showcase->summary)
+                                {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}...
+                                @else
+                                {{ mb_substr($showcase->summary, 0, 50, 'utf-8') }}
+                                @endif
+                            </div>
                         </div>
-                        <div class="project_info"><span class="project_like">赞({{ $showcase->vote }})</span>{{ $showcase->datetime }}</div>
                     </div>
                 </div>
                 @endforeach

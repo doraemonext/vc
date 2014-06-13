@@ -1,5 +1,16 @@
 @extends('front.templates.base')
 
+@section('custom_css')
+<style type="text/css">
+.project_info {
+    float: none;
+    margin: 0 auto;
+    width: 400px;
+    border: 0;
+}
+</style>
+@stop
+
 @section('page_title')
 -项目-{{ $showcase->name }}
 @stop
@@ -32,15 +43,23 @@
                 <div class="column_main_title">项目展示 All Project</div>
             </div>
             <div class="column_content project">
-                <div class="project_img">
-                    <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}">
-                </div>
                 <div class="project_article">
+                    <div class="project_img">
+                        <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}">
+                    </div>
                     <div class="project_title">{{ $showcase->name }}</div>
+                    <ul class="project_info">
+                        <li><span class="project_name">领域：</span><span class="project_v">移动互联网</span></li>
+                        <li><span class="project_name">联系人：</span><span class="project_v">李湘</span></li>
+                        <li><span class="project_name">运营时间：</span><span class="project_v">3年</span></li>
+                        <li><span class="project_name">公司名：</span><span class="project_v">****</span></li>
+                        <li><span class="project_name">电话：</span><span class="project_v">********</span></li>
+                        <li><span class="project_name">email：</span><span class="project_v">**@**.**</span></li>
+                    </ul>
                     <div class="project_content">
                         {{ $showcase->content }}
                     </div>
-                    <div class="project_info">
+                    <div class="article_info">
                         {{ $showcase->datetime }}
                     </div>
                 </div>

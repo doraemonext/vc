@@ -32,10 +32,10 @@
             <div class="column_main_title">新闻 News</div>
         </div>
         <div class="column_content newsitem">
-            <div class="newsitem_img">
-                <img src="{{ Croppa::url($config_upload['news.picture'].$news->picture, 508, 320) }}">
-            </div>
             <div class="newsitem_article">
+                <div class="newsitem_img">
+                    <img src="{{ Croppa::url($config_upload['news.picture'].$news->picture, 508, 320) }}">
+                </div>
                 <div class="newsitem_title">{{ $news->title }}</div>
                 <div class="newsitem_content">
                     {{ $news->content }}

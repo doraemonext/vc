@@ -1,6 +1,5 @@
-body, html {
-  width: 100%;
-  height: 100%;
+html, body {
+  height: 100%
 }
 
 * {
@@ -85,12 +84,26 @@ textarea {
   width: 280px;
 }
 
-@media screen and (max-width: 1190px) {
+@media screen and (min-width:841px) and (max-width:1190px) {
   #rightbar {
     display: none;
   }
 
   .wrapper {
     width: 850px;
+  }
+}
+
+@media screen and (max-width: 839px) {
+  #rightbar {
+    display: none;
+  }
+
+  #leftbar {
+    display: none;
+  }
+
+  .wrapper {
+    width: 550px;
   }
 }

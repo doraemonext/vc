@@ -118,7 +118,7 @@
         <div id="footer">
             <div class="wrapper">
                 <div class="column_footer">
-                    <h3>KingCarat</h3>
+                    <h3>25K</h3>
                     <ul>
                         <li><a href="">关于我们</a></li>
                         <li><a href="">联系我们</a></li>

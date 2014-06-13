@@ -23,12 +23,10 @@
 @stop
 
 @section('rightbar')
-    <div id="b_rightbar">
-        <div class="wrapper">
-            <div class="column_main">
-                <div class="column_main_head">
-                    <div class="column_main_title">搜索结果 Search Result</div>
-                </div>
+    <div class="wrapper">
+        <div class="column_main">
+            <div class="column_main_head">
+                <div class="column_main_title">搜索结果 Search Result</div>
             </div>
             <div class="column_content">
                 @foreach ($paginator as $s)
@@ -53,31 +51,31 @@
                 </div>
                 @endforeach
             </div>
-            <div class="page">
-                <ul>
-                    @if ($paginator->getCurrentPage() - 1 > 0)
-                    <li class="prevpage"><a href="{{ $paginator->getUrl($paginator->getCurrentPage() - 1) }}&q={{ $q }}&type={{ $type }}">上一页</a></li>
-                    @else
-                    <li class="prevpage disabled"><a href="##">上一页</a></li>
-                    @endif
+        </div>
+        <div class="page">
+            <ul>
+                @if ($paginator->getCurrentPage() - 1 > 0)
+                <li class="prevpage"><a href="{{ $paginator->getUrl($paginator->getCurrentPage() - 1) }}&q={{ $q }}&type={{ $type }}">上一页</a></li>
+                @else
+                <li class="prevpage disabled"><a href="##">上一页</a></li>
+                @endif
 
-                    @for ($i = $paginator->getCurrentPage() - 2; $i <= $paginator->getCurrentPage() + 2; $i++)
-                        @if ($i > 0 && $i <= $paginator->getLastPage())
-                            @if ($i == $paginator->getCurrentPage())
-                            <li class="disabled"><a href="##">{{ $i }}</a></li>
-                            @else
-                            <li><a href="{{ $paginator->getUrl($i) }}&q={{ $q }}&type={{ $type }}">{{ $i }}</a></li>
-                            @endif
+                @for ($i = $paginator->getCurrentPage() - 2; $i <= $paginator->getCurrentPage() + 2; $i++)
+                    @if ($i > 0 && $i <= $paginator->getLastPage())
+                        @if ($i == $paginator->getCurrentPage())
+                        <li class="disabled"><a href="##">{{ $i }}</a></li>
+                        @else
+                        <li><a href="{{ $paginator->getUrl($i) }}&q={{ $q }}&type={{ $type }}">{{ $i }}</a></li>
                         @endif
-                    @endfor
-
-                    @if ($paginator->getCurrentPage() < $paginator->getLastPage())
-                    <li class="nextpage"><a href="{{ $paginator->getUrl($paginator->getCurrentPage() + 1) }}&q={{ $q }}&type={{ $type }}">下一页</a></li>
-                    @else
-                    <li class="nextpage disabled"><a href="##">下一页</a></li>
                     @endif
-                </ul>
-            </div>
+                @endfor
+
+                @if ($paginator->getCurrentPage() < $paginator->getLastPage())
+                <li class="nextpage"><a href="{{ $paginator->getUrl($paginator->getCurrentPage() + 1) }}&q={{ $q }}&type={{ $type }}">下一页</a></li>
+                @else
+                <li class="nextpage disabled"><a href="##">下一页</a></li>
+                @endif
+            </ul>
         </div>
     </div>
 @stop

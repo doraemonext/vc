@@ -36,23 +36,28 @@ body {
 }
 
 .project_slider {
-  padding: 16px 12px;
-  border-bottom: 2px solid #444;
+  padding: 20px;
+  margin-bottom: 10px;
 }
 
 .project_slider_container {
   position: relative;
-  width: 526px;
+  width: 508px;
   height: 320px;
   background-color: #fff;
 }
 
 .project_description {
-  height: 160px;
+  margin-top: 0;
+  height: 150px;
 }
 
 .project_title {
-  margin-top: 16px;
+  margin: 8px 0;
+}
+
+.project_info {
+  float: left;
 }
 
 .carousel-inner {
@@ -61,13 +66,12 @@ body {
 
 .carousel-caption {
   z-index: 1;
-  bottom: -168px;
+  bottom: -150px;
   left: 0;
   right: 0;
   padding: 0;
   margin-top: 8px;
-  width: 526px;
-  height: 168px;
+  height: 150px;
   text-align: left;
   text-shadow: none;
 }
@@ -85,9 +89,9 @@ body {
 }
 
 .center_ad {
-  margin: 16px 12px;
+  margin-bottom: 30px;
   height: 135px;
-  width: 526px;
+  width: 550px;
 }
 
 
