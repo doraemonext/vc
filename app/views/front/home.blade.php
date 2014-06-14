@@ -51,10 +51,10 @@
 <div id="topbar">
     <div class="imgcolumn">
         @if (isset($ad_top_big))
-        <a class="imgcolumn_main" href="{{ $ad_top_big->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_big->picture, 605, 410) }}"></a>
+        <a class="imgcolumn_main" target="_blank" href="{{ $ad_top_big->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_big->picture, 605, 410) }}"></a>
         @endif
         @foreach ($ad_top_small as $a)
-        <a class="imgcolumn_sub" href="{{ $a->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$a->picture, 220, 130) }}"></a>
+        <a class="imgcolumn_sub" target="_blank" href="{{ $a->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$a->picture, 220, 130) }}"></a>
         @endforeach
     </div>
 </div>
