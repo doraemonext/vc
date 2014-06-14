@@ -18,14 +18,14 @@ body {
 }
 
 #header .wrapper {
-  width: 980px;
+  width: 1150px;
 }
 
 .logo {
   float: left;
 
   width: 150px;
-  height: 49px;
+  height: 54px;
 
   background-image: url(../images/logo.png);
 }
@@ -42,7 +42,7 @@ body {
 #nav > li > a {
   display: block;
 
-  margin: 0 14px;
+  margin-left: 40px;
   height: 32px;
 
   line-height: 32px;
@@ -56,7 +56,7 @@ body {
   float: left;
   position: relative;
   margin-top: 18px;
-  margin-left: 30px;
+  margin-left: 60px;
 }
 
 .search_input {
@@ -186,6 +186,21 @@ body {
 .user_name {
   float: right;
   line-height: 36px;
+}
+
+@media screen and (max-width:1160px) {
+  #header .wrapper {
+    width: 980px;
+  }
+
+  .search {
+    margin-left: 30px;
+  }
+
+  #nav > li > a {
+    margin-left: 28px;
+  }
+
 }
 
 .code_2d {
