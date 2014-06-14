@@ -1,5 +1,37 @@
 body {
-  padding-top: 86px;
+  padding-top: 82px;
+}
+
+#content {
+  float: left;
+  width: 835px;
+}
+
+#topbar {
+  float: left;
+  margin-bottom: 20px;
+  width: 835px;
+}
+
+.imgcolumn a {
+  float: left;
+  display: block;
+}
+
+.imgcolumn img {
+  display: block;
+}
+
+.imgcolumn_main {
+  margin-right: 10px;
+  width: 605px;
+  height: 410px;
+}
+
+.imgcolumn_sub {
+  width: 220px;
+  height: 130px;
+  margin-bottom: 10px;
 }
 
 #ad_slider {
@@ -93,5 +125,3 @@ body {
   height: 135px;
   width: 550px;
 }
-
-

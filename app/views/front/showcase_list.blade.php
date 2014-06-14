@@ -8,14 +8,20 @@
 <div id="leftbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">推荐投资方</div>
+            <div class="column_side_title b_title">推荐投资方</div>
         </div>
         <div class="column_content">
             @foreach ($vc_recommend as $vc)
             <div class="investor_item">
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
-                        <span class="investor_name">{{ $vc->name }}</span>
+                        <span class="investor_name red_title">
+                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
+                            @else
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
+                            @endif
+                        </span>
                         <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
                     </div>
                     <div class="investor_content">
@@ -43,8 +49,14 @@
             <div class="investor_item">
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
-                        <span class="investor_name">{{ $vc->name }}</span>
-                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+                        <span class="investor_name">
+                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
+                            @else
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
+                            @endif
+                        </span>
+                        <span class="investor_update">第 {{ $vc->rank }} 名</span>
                     </div>
                     <div class="investor_content">
                         <div class="investor_mscore">
@@ -88,7 +100,7 @@
                         <a href="{{ route('showcase.item', $showcase->id) }}"><img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase->logo, 508, 320) }}"></a>
                     </div>
                     <div class="project_description">
-                        <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a><span class="project_like right">赞(8)</span></div>
+                        <div class="project_title"><a href="{{ route('showcase.item', $showcase->id) }}">{{ $showcase->name }}</a><span class="project_like right">赞({{ $showcase->vote }})</span></div>
                         <div class="project_subtitle">
                             <ul class="project_info">
                                 <li><span class="project_name">领域：</span><span class="project_v">{{ $showcase->category->title }}</span></li>
@@ -141,7 +153,7 @@
     <div id="rightbar">
         <div class="column_side">
             <div class="column_side_head">
-                <div class="column_side_title">热门新闻</div>
+                <div class="column_side_title red_title">热门轶闻</div>
             </div>
             <div class="column_content">
                 @foreach ($news_hot as $hot)

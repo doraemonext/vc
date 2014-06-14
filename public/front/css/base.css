@@ -9,11 +9,6 @@ html, body {
   font-family: "微软雅黑", "microsoft yahei", "黑体", "arial";
 }
 
-#nav > li > a {
-  color: #000;
-  font-size: 20px;
-}
-
 ul {
   list-style: none;
 }
@@ -25,6 +20,11 @@ a {
 textarea {
   resize: none;
   outline:none;
+}
+
+button {
+  border: 0;
+  outline: none;
 }
 
 .wrapper {

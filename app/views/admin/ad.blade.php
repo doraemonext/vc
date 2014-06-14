@@ -69,8 +69,9 @@
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-8">广告图片</th>
+                                        <th class="col-md-7">广告图片</th>
                                         <th class="col-md-3">链接地址</th>
+                                        <th class="col-md-1">广告位置</th>
                                         <th class="col-md-1">操作</th>
                                     </tr>
                                 </thead>
@@ -79,6 +80,7 @@
                                     <tr>
                                         <td><img class="img-responsive" src="{{ Croppa::url($config_upload['ad.picture'].$ad->picture, 1366, 260) }}"></td>
                                         <td><a href="{{ $ad->url }}">{{ $ad->url }}</a></td>
+                                        <td>{{ $ad->position->name }}</td>
                                         <td>
                                             <a href="{{ route('admin.ad.edit', $ad->id) }}" class="btn btn-success btn-xs">编辑</a>
                                             <a class="btn btn-danger btn-xs ajax-delete" data-id="{{ $ad->id }}">删除</a>

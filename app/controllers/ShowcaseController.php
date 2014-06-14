@@ -81,6 +81,9 @@ class ShowcaseController extends BaseController {
             'news_hot' => $news_hot,
             'showcase_latest' => $showcase_latest,
             'discuss_latest' => Discuss::orderBy('datetime', 'DESC')->take(3)->get(),
+            'vc_recommend' => Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value)),
+            'vc_list' => Vc::getListOrderByRatingWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_list')->first()->value)),
+            'rating_category' => VcRatingCategory::all(),
         );
 
         return View::make('front.showcase_item', $data);

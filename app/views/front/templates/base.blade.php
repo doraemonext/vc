@@ -4,7 +4,7 @@
         <title>{{ $setting['title'] }}@section('page_title')
         @show</title>
         <meta name="description" content="{{ $setting['description'] }}">
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="favicon.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
         <link rel="stylesheet" type="text/css" href="{{ asset('front/css/base.css') }}">
@@ -81,10 +81,11 @@
             <div class="wrapper">
                 <a href="{{ route('home') }}" class="logo"></a>
                 <ul id="nav">
-                    <li><a href="{{ route('home') }}">首页</a></li>
-                    <li><a href="{{ route('showcase.list') }}">项目展示</a></li>
-                    <li><a href="{{ route('vc.list') }}">VC展示</a></li>
-                    <li><a href="{{ route('discuss.list') }}">讨论区</a></li>
+                    <li><a href="{{ route('home') }}">首 页</a></li>
+                    <li><a href="{{ route('news.list') }}">轶 闻</a></li>
+                    <li><a href="{{ route('showcase.list') }}">项 目</a></li>
+                    <li><a href="{{ route('vc.list') }}">V C</a></li>
+                    <li><a href="{{ route('discuss.list') }}">讨 论</a></li>
                     <li><a href="{{ route('business') }}">商业合作</a></li>
                 </ul>
                 <div class="search">
@@ -93,12 +94,19 @@
                         <span class="icon icon_search"></span>
                     </form>
                 </div>
-                @if (isset($user))
+                @if (isset($user) && Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')))
+                <a class="user right" href="{{ route('admin.home') }}">
+                    <span class="user_name">{{ $user->username }}</span>
+                    <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
+                </a>
+                @elseif (isset($user))
                 <a class="user right" href="{{ route('user.home') }}">
                     <span class="user_name">{{ $user->username }}</span>
                     <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
                 </a>
-                @else
+                @endif
+
+                @if (!isset($user))
                 <a class="login" href="{{ route('login') }}">登陆</a>
                 @endif
             </div>
@@ -109,6 +117,8 @@
         <div id="main">
             <div class="wrapper">
                 <div id="content">
+                    @section('topbar')
+                    @show
                     @section('leftbar')
                     @show
                     @section('mainbar')

@@ -221,6 +221,10 @@ class AdminVcController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
+
+            $img = Image::make($destination.$filename);
+            $img->resize(140, 140);
+            $img->save();
         }
 
         $vc = new Vc;
@@ -241,6 +245,10 @@ class AdminVcController extends BaseController {
         $vc->save();
 
         for ($i = 1; $i <= 5; $i++) {
+            if (empty($input['showcase_'.strval($i).'_title']) && empty($input['showcase_'.strval($i).'_content']) && empty($input['showcase_'.strval($i).'_url'])) {
+                continue;
+            }
+
             $vc_showcase = new VcShowcase;
             $vc_showcase->vc_id = $vc->id;
             $vc_showcase->title = $input['showcase_'.strval($i).'_title'];
@@ -365,12 +373,18 @@ class AdminVcController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
+
+            $img = Image::make($destination.$filename);
+            $img->resize(140, 140);
+            $img->save();
         }
 
         $vc->name = $input['name'];
         $vc->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
-            Croppa::delete($destination.$vc->logo);
+            if ($vc->logo != 'default.jpg') {
+                Croppa::delete($destination.$vc->logo);
+            }
             $vc->logo = $filename;
         }
         $vc->invest_field = $input['invest_field'];
@@ -386,6 +400,10 @@ class AdminVcController extends BaseController {
         }
 
         for ($i = 1; $i <= 5; $i++) {
+            if (empty($input['showcase_'.strval($i).'_title']) && empty($input['showcase_'.strval($i).'_content']) && empty($input['showcase_'.strval($i).'_url'])) {
+                continue;
+            }
+
             $vc_showcase = new VcShowcase;
             $vc_showcase->vc_id = $vc->id;
             $vc_showcase->title = $input['showcase_'.strval($i).'_title'];

@@ -4,7 +4,7 @@ body {
 }
 
 #header {
-  z-index: 2;
+  z-index: 16;
   position: fixed;
   top: 0;
   left: 0;
@@ -13,19 +13,19 @@ body {
   padding-top: 16px;
   padding-bottom: 12px;
 
-  background-color: #f2f2f2;
-  box-shadow: 0 1px 2px #ccc;
+  background-color: #333;
+  box-shadow: 0 0px 5px #333;
 }
 
 #header .wrapper {
-  width: 980px;
+  width: 1150px;
 }
 
 .logo {
   float: left;
 
   width: 150px;
-  height: 58px;
+  height: 54px;
 
   background-image: url(../images/logo.png);
 }
@@ -42,11 +42,13 @@ body {
 #nav > li > a {
   display: block;
 
-  width: 95px;
+  margin-left: 40px;
   height: 32px;
 
   line-height: 32px;
   text-align: center;
+  font-size: 20px;
+  color: #f2f2f2;
   font-weight: 900;
 }
 
@@ -54,7 +56,7 @@ body {
   float: left;
   position: relative;
   margin-top: 18px;
-  margin-left: 30px;
+  margin-left: 60px;
 }
 
 .search_input {
@@ -63,6 +65,7 @@ body {
   height: 19px;
 
   line-height: 19px;
+  color: #999;
 
   background-color: #fafafa;
   border-radius: 16px;
@@ -96,6 +99,15 @@ body {
 
   border-radius: 2px;
   background-color: #0070cc;
+}
+
+#header .login {
+  color: #333;
+  background-color: #fff;
+}
+
+#header .user_name {
+  color: #f2f2f2;
 }
 
 .register {
@@ -174,6 +186,21 @@ body {
 .user_name {
   float: right;
   line-height: 36px;
+}
+
+@media screen and (max-width:1160px) {
+  #header .wrapper {
+    width: 980px;
+  }
+
+  .search {
+    margin-left: 30px;
+  }
+
+  #nav > li > a {
+    margin-left: 28px;
+  }
+
 }
 
 .code_2d {
@@ -355,7 +382,7 @@ body {
 }
 
 #popbox {
-  z-index: 16;
+  z-index: 17;
   position: fixed;
   top: 0;
   left: 0;
@@ -462,4 +489,17 @@ body {
   line-height: 40px;
   background-color: #0070cc;
   border-radius: 2px;
+}
+
+.authcode {
+  float: left;
+}
+
+.authcode input {
+  padding: 6px;
+  width: 80px;
+  height: 24px;
+  color: #999;
+  font-size: 16px;
+  outline: none;
 }

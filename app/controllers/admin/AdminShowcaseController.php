@@ -163,7 +163,9 @@ class AdminShowcaseController extends BaseController {
         $showcase->name = $input['name'];
         $showcase->recommended = ($input['recommended'] == '1') ? 1 : 0;
         if (!is_null($input['logo'])) {
-            Croppa::delete($destination.$showcase->logo);
+            if ($showcase->logo != 'default.jpg') {
+                Croppa::delete($destination.$showcase->logo);
+            }
             $showcase->logo = $filename;
         }
         $showcase->company = $input['company'];

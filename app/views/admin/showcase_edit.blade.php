@@ -97,7 +97,7 @@
                                         <div class="col-md-9">
                                             {{ Form::file('logo', array('class' => 'btn btn-default')) }}
                                             <p class="help-block">如果您需要更新图片，请直接上传即可覆盖；如果不需要，请保持此处为空。</p>
-                                            <p class="help-block">支持格式：jpg, gif, png，大小 2MB 以内</p>
+                                            <p class="help-block">支持格式：jpg, gif, png，大小 2MB 以内。大小：508 * 320</p>
                                         </div>
                                     </div>
                                     <div class="form-group">
