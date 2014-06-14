@@ -62,7 +62,7 @@ class VcController extends BaseController {
             return Redirect::route('vc.list');
         }
 
-        $vc_recommend = Vc::where('recommended', '=', '1')->get();
+        $vc_recommend = Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value));
 
         // 获取VC动态
         $news_category = NewsCategory::where('title', '=', 'VC动态')->get()->first()->id;

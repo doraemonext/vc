@@ -19,12 +19,12 @@ class Vc extends Eloquent {
         return $this->hasMany('VcComment', 'vc_id');
     }
 
-    public static function getRecommend($limit = 2)
+    public static function getRecommend($limit = 10)
     {
         return self::where('recommended', '=', 1)->take($limit)->get();
     }
 
-    public static function getRecommendWithRating($limit = 2)
+    public static function getRecommendWithRating($limit = 10)
     {
         $vcs = self::where('recommended', '=', 1)->take($limit)->get();
         foreach ($vcs as $vc) {
