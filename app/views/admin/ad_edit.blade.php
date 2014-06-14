@@ -122,7 +122,7 @@
                                             @if (isset($ad))
                                             <p class="help-block">如果您需要更新图片，请直接上传即可覆盖。如果不需要更新图片，请保持为空</p>
                                             @endif
-                                            <p class="help-block">支持格式：jpg, gif, png，大小 2MB 以内。大小：1366 * 260</p>
+                                            <p class="help-block">支持格式：jpg, gif, png，大小 2MB 以内。大小：1366 * 260(首页上部）</p>
                                         </div>
                                     </div>
                                 </fieldset>
