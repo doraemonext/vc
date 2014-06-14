@@ -52,9 +52,6 @@
         </div>
     </div>
     <div class="clear"></div>
-    <div class="code_2d">
-        <img src="{{ asset('front/images/code_2d.png') }}">
-    </div>
 </div>
 @stop
 
@@ -187,6 +184,9 @@
             </a>
             @endforeach
         </div>
+    </div>
+    <div class="code_2d">
+        <img src="{{ asset('front/images/code_2d.png') }}">
     </div>
 </div>
 @stop
