@@ -5,7 +5,7 @@
         @show</title>
         <meta name="keywords" content="">
         <meta name="description" content="">
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="favicon.ico">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
         <link rel="stylesheet" type="text/css" href="{{ asset('front/css/base.css') }}">
