@@ -102,8 +102,12 @@ body {
 }
 
 #header .login {
-  color: #333333;
+  color: #333;
   background-color: #fff;
+}
+
+#header .user_name {
+  color: #f2f2f2;
 }
 
 .register {
