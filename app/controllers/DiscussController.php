@@ -51,8 +51,6 @@ class DiscussController extends BaseController {
         try {
             $discuss = Discuss::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('status', 'danger');
-            Session::flash('message', '找不到您要查看的话题信息');
             return Redirect::route('discuss.list');
         }
 

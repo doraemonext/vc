@@ -57,8 +57,6 @@ class VcController extends BaseController {
         try {
             $vc = Vc::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('status', 'danger');
-            Session::flash('message', '找不到您要查看的投资方信息');
             return Redirect::route('vc.list');
         }
 

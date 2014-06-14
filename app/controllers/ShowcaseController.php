@@ -58,8 +58,6 @@ class ShowcaseController extends BaseController {
         try {
             $showcase = Showcase::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('status', 'danger');
-            Session::flash('message', '找不到您要查看的项目信息');
             return Redirect::route('showcase.list');
         }
 

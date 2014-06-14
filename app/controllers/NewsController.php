@@ -62,8 +62,6 @@ class NewsController extends BaseController {
         try {
             $news = News::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('status', 'danger');
-            Session::flash('message', '找不到您要展示的新闻信息');
             return Redirect::route('home');
         }
 
