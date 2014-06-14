@@ -221,6 +221,10 @@ class AdminVcController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.new')->withInput(Input::except('logo'));
             }
+
+            $img = Image::make($destination.$filename);
+            $img->resize(140, 140);
+            $img->save();
         }
 
         $vc = new Vc;
@@ -369,6 +373,10 @@ class AdminVcController extends BaseController {
                 Session::flash('error', $e->getMessage());
                 return Redirect::route('admin.vc.edit', $vc->id)->withInput(Input::except('logo'));
             }
+
+            $img = Image::make($destination.$filename);
+            $img->resize(140, 140);
+            $img->save();
         }
 
         $vc->name = $input['name'];
