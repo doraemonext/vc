@@ -47,85 +47,49 @@
 </div>
 @stop
 
+@section('topbar')
+<div id="topbar">
+    <div class="imgcolumn">
+        <a class="imgcolumn_main" href="{{ $ad_top_big->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_big->picture, 605, 410) }}"></a>
+        <a class="imgcolumn_sub" href="{{ $ad_top_small[0]->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_small[0]->picture, 220, 130) }}"></a>
+        <a class="imgcolumn_sub" href="{{ $ad_top_small[1]->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_small[1]->picture, 220, 130) }}"></a>
+        <a class="imgcolumn_sub" href="{{ $ad_top_small[2]->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_small[2]->picture, 220, 130) }}"></a>
+    </div>
+</div>
+@stop
+
 @section('leftbar')
 <div id="leftbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title red_title">推荐投资方</div>
+            <div class="column_side_title">热门新闻</div>
         </div>
         <div class="column_content">
-            @foreach ($vc_recommend as $vc)
-            <div class="investor_item">
-                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
-                    <div class="investor_head">
-                        <span class="investor_name">
-                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
-                            @else
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
-                            @endif
-                        </span>
-                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
-                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            @foreach ($rating_category as $category)
-                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </a>
+            @foreach ($news_hot as $hot)
+            <div class="hotnews_item">
+                <div class="hotnews_img">
+                    <a href="{{ route('news.item', $hot->id) }}"><img src="{{ Croppa::url($config_upload['news.picture'].$hot->picture, 60, 60) }}"></a>
+                </div>
+                <div class="hotnews_title">
+                    <a href="{{ route('news.item', $hot->id) }}">{{ $hot->title }}</a>
+                </div>
             </div>
             @endforeach
         </div>
     </div>
-    <div class="column_side" id="news">
+    <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">投资方排名</div>
+            <div class="column_side_title">最新话题</div>
         </div>
-        <div class="column_content" id="vc" data-paginate="1">
-            @foreach ($vc_list as $vc)
-            <div class="investor_item">
-                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
-                    <div class="investor_head">
-                        <span class="investor_name">
-                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
-                            @else
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
-                            @endif
-                        </span>
-                        <span class="investor_update">第 {{ $vc->rank }} 名</span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
-                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            @foreach ($rating_category as $category)
-                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </a>
-            </div>
+        <div class="column_content">
+            @foreach ($discuss_latest as $latest)
+            <a class="topic_item" href="{{ route('discuss.item', $latest->id) }}">
+                <div class="topic_title">{{ $latest->title }}</div>
+                <div class="topic_content">{{ $latest->content }}</div>
+                <div class="topic_info">赞({{ $latest->vote }}) 回复({{ $latest->comment_count }}) {{ $latest->datetime }}</div>
+            </a>
             @endforeach
         </div>
-    </div>
-    <div class="page sidepage" id="paginator_vc">
-        <ul>
-            <li class="prevpage disabled"><a href="##">上一页</a></li>
-            <li class="nextpage <?php if($count['vc']<=count($vc_list)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
-        </ul>
-    </div>
-    <div class="clear"></div>
-    <div class="code_2d">
-        <img src="{{ asset('front/images/code_2d.png') }}">
     </div>
 </div>
 @stop
@@ -259,34 +223,97 @@
 <div id="rightbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">热门新闻</div>
+            <div class="column_side_title red_title">推荐投资方</div>
         </div>
         <div class="column_content">
-            @foreach ($news_hot as $hot)
-            <div class="hotnews_item">
-                <div class="hotnews_img">
-                    <a href="{{ route('news.item', $hot->id) }}"><img src="{{ Croppa::url($config_upload['news.picture'].$hot->picture, 60, 60) }}"></a>
-                </div>
-                <div class="hotnews_title">
-                    <a href="{{ route('news.item', $hot->id) }}">{{ $hot->title }}</a>
-                </div>
+            @foreach ($vc_recommend as $vc)
+            <div class="investor_item">
+                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
+                    <div class="investor_head">
+                        <span class="investor_name">
+                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
+                            @else
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
+                            @endif
+                        </span>
+                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+                    </div>
+                    <div class="investor_content">
+                        <div class="investor_mscore">
+                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
+                        </div>
+                        <ul class="investor_detail">
+                            @foreach ($rating_category as $category)
+                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </a>
             </div>
             @endforeach
         </div>
     </div>
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">最新话题</div>
+            <div class="column_side_title b_title">优秀项目</div>
         </div>
         <div class="column_content">
-            @foreach ($discuss_latest as $latest)
-            <a class="topic_item" href="{{ route('discuss.item', $latest->id) }}">
-                <div class="topic_title">{{ $latest->title }}</div>
-                <div class="topic_content">{{ $latest->content }}</div>
-                <div class="topic_info">赞({{ $latest->vote }}) 回复({{ $latest->comment_count }}) {{ $latest->datetime }}</div>
-            </a>
+            <div class="project_show">
+                <div class="project_show_img">
+                    <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase_recommend->first()->logo, 250, 158) }}">
+                </div>
+                <div class="project_show_title">
+                    <a href="">{{ $showcase_recommend->first()->name }}</a>
+                </div>
+                <div class="project_show_subtitle">{{ $showcase_recommend->first()->summary }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="column_side" id="news">
+        <div class="column_side_head">
+            <div class="column_side_title">投资方排名</div>
+        </div>
+        <div class="column_content" id="vc" data-paginate="1">
+            @foreach ($vc_list as $vc)
+            <div class="investor_item">
+                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
+                    <div class="investor_head">
+                        <span class="investor_name">
+                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
+                            @else
+                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
+                            @endif
+                        </span>
+                        <span class="investor_update">第 {{ $vc->rank }} 名</span>
+                    </div>
+                    <div class="investor_content">
+                        <div class="investor_mscore">
+                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
+                        </div>
+                        <ul class="investor_detail">
+                            @foreach ($rating_category as $category)
+                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </a>
+            </div>
             @endforeach
         </div>
+    </div>
+    <div class="page sidepage" id="paginator_vc">
+        <ul>
+            <li class="prevpage disabled"><a href="##">上一页</a></li>
+            <li class="nextpage <?php if($count['vc']<=count($vc_list)) echo 'disabled'; ?>"><a href="##">下一页</a></li>
+        </ul>
+    </div>
+    <div class="clear"></div>
+    <div class="code_2d">
+        <img src="{{ asset('front/images/code_2d.png') }}">
     </div>
 </div>
 @stop

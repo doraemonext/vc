@@ -47,6 +47,8 @@ class NewsController extends BaseController {
             'comment_paginate' => $comment_paginate,
             'showcase_latest' => $showcase_latest,
             'news_hot' => News::orderBy('comment_count', 'DESC')->take(7)->get(),
+            'vc_recommend' => Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value)),
+            'rating_category' => VcRatingCategory::all(),
         );
 
         return View::make('front.news_item', $data);

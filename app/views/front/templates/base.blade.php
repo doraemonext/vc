@@ -116,6 +116,8 @@
         <div id="main">
             <div class="wrapper">
                 <div id="content">
+                    @section('topbar')
+                    @show
                     @section('leftbar')
                     @show
                     @section('mainbar')

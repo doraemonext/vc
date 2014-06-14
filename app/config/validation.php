@@ -52,4 +52,7 @@ return array(
 
     'title.required' => '您必须输入标题',
     'title.max' => '您的标题输入过长',
+
+    'captcha.required' => '请输入验证码',
+    'captcha.captcha' => '您输入的验证码不正确',
 );

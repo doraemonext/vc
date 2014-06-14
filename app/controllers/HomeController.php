@@ -39,6 +39,8 @@ class HomeController extends BaseController {
             'news_latest' => News::orderBy('datetime', 'DESC')->paginate($paginateNewsNumber),
             'discuss_latest' => Discuss::orderBy('datetime', 'DESC')->take(3)->get(),
             'ad_top' => Ad::where('position_id', '=', 1)->get(),
+            'ad_top_big' => Ad::where('position_id', '=', 2)->get()->first(),
+            'ad_top_small' => Ad::where('position_id', '=', 3)->get(),
         );
 
 		return View::make('front.home', $data);
