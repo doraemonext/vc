@@ -26,7 +26,6 @@
                             {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
                             @endif
                         </span>
-                        <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
                     </div>
                     <div class="investor_content">
                         <div class="investor_mscore">

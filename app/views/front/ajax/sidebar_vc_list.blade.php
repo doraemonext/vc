@@ -3,10 +3,10 @@
     <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
         <div class="investor_head">
             <span class="investor_name">
-                @if (mb_substr($vc->name, 0, 7, 'utf-8') != $vc->name)
-                {{ mb_substr($vc->name, 0, 7, 'utf-8') }}...
+                @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
+                {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
                 @else
-                {{ mb_substr($vc->name, 0, 7, 'utf-8') }}
+                {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
                 @endif
             </span>
             <span class="investor_update">第 {{ $vc->rank }} 名</span>
