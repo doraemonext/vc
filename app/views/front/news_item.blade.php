@@ -180,21 +180,13 @@
             <div class="column_side_title">最新话题</div>
         </div>
         <div class="column_content">
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-                <div class="topic_info">赞(13) 回复(5) 20:21</div>
+            @foreach ($discuss_hot as $hot)
+            <a class="topic_item" href="{{ route('discuss.item', $hot->id) }}">
+                <div class="topic_title">{{ $hot->title }}</div>
+                    <div class="topic_content">{{ $hot->content }}</div>
+                <div class="topic_info">赞({{ $hot->vote }}) 回复({{ $hot->comment_count }}) {{ $hot->datetime }}</div>
             </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-                <div class="topic_info">赞(13) 回复(5) 20:21</div>
-            </a>
-            <a class="topic_item" href="">
-                <div class="topic_title">这是话题的题目这是话题的题目这是话题的题目</div>
-                <div class="topic_content">这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的内容这是话题的</div>
-                <div class="topic_info">赞(13) 回复(5) 20:21</div>
-            </a>
+            @endforeach
         </div>
     </div>
 </div>
