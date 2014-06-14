@@ -673,9 +673,9 @@ body.nooverflow {
 .jarviswidget-color-greenLight > header {
   border-color: #638167 !important;
 }
-/* 
+/*
 	 * WIDGET COLOR DROPDOWN
-	 * 
+	 *
 	 */
 .color-select {
   list-style: none;
@@ -1821,7 +1821,7 @@ body.nooverflow {
 }
 /*
 		 * date picker
-		
+
 		.ui-datepicker {
 			display: none;
 			padding: 10px 12px;
@@ -1876,19 +1876,19 @@ body.nooverflow {
 			text-align:center;
 		}
 		.ui-datepicker-unselectable.ui-state-disabled {
-			
+
 		}
 		.ui-datepicker-unselectable.ui-state-disabled > span {
 			color:#bfbfbf;
 			background-color: #FAFCFD;
 		}
-		
+
 		.ui-datepicker-calendar a:hover {
 			background: #3276B1;
 			color:#fff;
 		}
 		.ui-datepicker-calendar span {
-			
+
 		}
 		.ui-datepicker-today a {
 			font-weight: 700;
@@ -2002,7 +2002,7 @@ body.nooverflow {
   height: 11px;
   top: 17px;
 }
-/*! X-editable - v1.5.0 
+/*! X-editable - v1.5.0
 * In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
 * http://github.com/vitalets/x-editable
 * Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
@@ -7626,7 +7626,7 @@ table.fc-border-separate {
   font-size: 21px;
   color: #999;
 }
-/* 
+/*
  * RIBBON
  */
 .ribbon {
@@ -8260,7 +8260,7 @@ ul.DTTT_dropdown.dropdown-menu li:hover a {
  * Language:    Javascript
  * License:     GPL v2 / 3 point BSD
  * Project:     DataTables
- * 
+ *
  * Copyright 2009-2012 Allan Jardine, all rights reserved.
  *
  * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -8684,12 +8684,12 @@ body.fd-slider-drag-horizontal * {
 }
 /*
 	 Sample tooltip code. Only works on grade A browsers (so no IE6,7 or 8).
-	
+
 	 See: http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2/ for full info on
 	 how to style generated content & the associated pitfalls
-	
+
 	 This code to be taken as experimental & untested - use at your discretion
-	
+
 	 If showing the tooltip above the sider handle you are relegated to showing
 	 single line tooltips due to styling constraints!
 	 */
@@ -8720,7 +8720,7 @@ body.fd-slider-drag-horizontal * {
 	 The tooltip body - as we position it above the slider and position the tooltip arrow
 	 below it, we need to know the height of the body. This means that multi-line tooltips
 	 are not supported.
-	
+
 	 To support multi-line tooltips, you will need to position the tooltip below the slider
 	 and the tooltip pointer above the tooltip body. Additionally, you will have to set the
 	 tooltip bodies "height" to auto
@@ -11918,7 +11918,7 @@ textarea.clone {
 /*
 .MessageIE{
     background-image: url("@{base-url}/bg.png");
-    
+
 }*/
 .MessageBoxContainer {
   top: 35%;
@@ -12992,7 +12992,7 @@ textarea.clone {
 }
 /*
  * JS SLIDER
- * Copied from: js/plugin/noUiSlider/jquery.nouislider.css 
+ * Copied from: js/plugin/noUiSlider/jquery.nouislider.css
  */
 /*	General CSS resets;
  *		The target itself is not affected, allowing
@@ -14128,7 +14128,7 @@ td.fc-other-month,
   display: block;
   opacity: 1 !important;
 }
-/* 
+/*
 	* Drag and drop events
 	*/
 #external-events > li {
@@ -15754,7 +15754,7 @@ h6 {
   opacity: 1;
 }
 /*
- * JUST A BORDER 
+ * JUST A BORDER
  */
 .bordered {
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -15791,7 +15791,7 @@ aside {
  */
 #header {
   display: block;
-  height: 49px;
+  height: 60px;
   position: relative;
   margin: 0;
   padding: 0 13px 0 0;
@@ -16011,7 +16011,7 @@ aside {
  */
 #left-panel {
   position: absolute;
-  top: 49px;
+  top: 60px;
   left: 0px;
   z-index: 1002;
 }
@@ -17337,9 +17337,9 @@ hr.simple {
 .jarviswidget > header > .nav-tabs.pull-left > li:first-child a {
   border-left-width: 0px !important;
 }
-/* 
+/*
  * WEBKIT IOS HIGHLIGHT COLOR
- * 
+ *
  */
 a:link,
 .btn,
@@ -18152,7 +18152,7 @@ img.away {
   width: 100%;
 }
 /*
- * Flot Tool tips 
+ * Flot Tool tips
  */
 #flotTip {
   padding: 3px 5px;
@@ -18193,7 +18193,7 @@ img.away {
   -webkit-box-sizing: content-box;
 }
 /*
- * Morris Charts 
+ * Morris Charts
  */
 .morris-hover.morris-default-style {
   border-radius: 10px;
@@ -18218,7 +18218,7 @@ img.away {
   z-index: 1001;
 }
 /*
- * Flot Chart 
+ * Flot Chart
  */
 .chart {
   height: 220px;
@@ -19230,7 +19230,7 @@ img.away {
   -webkit-overflow-scrolling: touch;
 }
 /*
- * Air fields 
+ * Air fields
  * Description: absolute positioned objects
  */
 .air {
@@ -19752,7 +19752,7 @@ img.away {
     padding-left: 30px;
     padding-right: 30px;
   }
-  /* added new class per version 1.3 
+  /* added new class per version 1.3
 	html, body {
 		overflow-x: hidden !important;
 	}*/
@@ -20490,7 +20490,7 @@ img.away {
 /*
  * ANIMATED
  */
-/* Navigation icon first level 
+/* Navigation icon first level
 .desktop-detected nav > ul > li > a:hover i {
 	-webkit-animation-name: wobble;
 	-moz-animation-name: wobble;
