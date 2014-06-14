@@ -173,10 +173,10 @@
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
                         <span class="investor_name red_title">
-                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
+                            @if (mb_substr($vc->name, 0, 10, 'utf-8') != $vc->name)
+                            {{ mb_substr($vc->name, 0, 10, 'utf-8') }}...
                             @else
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
+                            {{ mb_substr($vc->name, 0, 10, 'utf-8') }}
                             @endif
                         </span>
                         <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
