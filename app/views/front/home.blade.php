@@ -202,7 +202,7 @@
                     <img src="{{ Croppa::url($config_upload['showcase.logo'].$showcase_recommend->first()->logo, 250, 158) }}">
                 </div>
                 <div class="project_show_title">
-                    <a href="">{{ $showcase_recommend->first()->name }}</a>
+                    <a href="{{ route('showcase.item', $showcase_recommend->first()->id) }}">{{ $showcase_recommend->first()->name }}</a>
                 </div>
                 <div class="project_show_subtitle">{{ $showcase_recommend->first()->summary }}</div>
             </div>
