@@ -78,7 +78,7 @@
                                 <tbody>
                                     @foreach ($ads as $ad)
                                     <tr>
-                                        <td><img class="img-responsive" src="{{ Croppa::url($config_upload['ad.picture'].$ad->picture, 1366, 260) }}"></td>
+                                        <td><img class="img-responsive" src="{{ Croppa::url($config_upload['ad.picture'].$ad->picture, 560, 260) }}"></td>
                                         <td><a href="{{ $ad->url }}">{{ $ad->url }}</a></td>
                                         <td>{{ $ad->position->name }}</td>
                                         <td>
