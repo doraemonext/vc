@@ -22,11 +22,6 @@ textarea {
   outline:none;
 }
 
-button {
-  border: 0;
-  outline: none;
-}
-
 .wrapper {
   margin: 0 auto;
   width: 1150px;
@@ -84,7 +79,7 @@ button {
   width: 280px;
 }
 
-@media screen and (min-width:841px) and (max-width:1190px) {
+@media screen and (min-width:841px) and (max-width:1160px) {
   #rightbar {
     display: none;
   }
@@ -94,7 +89,7 @@ button {
   }
 }
 
-@media screen and (max-width: 839px) {
+@media screen and (max-width: 840px) {
   #rightbar {
     display: none;
   }

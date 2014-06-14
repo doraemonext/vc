@@ -2,6 +2,12 @@ body {
   padding-top: 82px;
 }
 
+@media screen and (max-width: 840px) {
+  body {
+    padding-top: 0;
+  }
+}
+
 #content {
   float: left;
   width: 835px;
@@ -39,15 +45,15 @@ body {
 }
 
 #ad_slider_container {
+  margin: 0 auto;
   margin-bottom: 8px;
   height:260px;
-  width:100%;
+  width:1150px;
 }
 
-@media screen and (min-width: 1370px) {
+@media screen and (max-width: 1160px) {
   #ad_slider_container {
-    margin: 0 auto;
-    width: 1150px;
+    width: 100%;
   }
 }
 
