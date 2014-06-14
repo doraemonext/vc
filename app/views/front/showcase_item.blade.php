@@ -19,6 +19,40 @@
     <div id="leftbar">
         <div class="column_side">
             <div class="column_side_head">
+                <div class="column_side_title b_title" id="comment">推荐投资方</div>
+            </div>
+            <div class="column_content">
+                @foreach ($vc_recommend as $vc)
+                <div class="investor_item">
+                    <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
+                        <div class="investor_head">
+                            <span class="investor_name red_title">
+                                @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
+                                {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
+                                @else
+                                {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
+                                @endif
+                            </span>
+                            <span class="investor_update">{{ date('m/d', strtotime($vc->updated_at)) }} 更新</span>
+                        </div>
+                        <div class="investor_content">
+                            <div class="investor_mscore">
+                                <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
+                                <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
+                            </div>
+                            <ul class="investor_detail">
+                                @foreach ($rating_category as $category)
+                                <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="column_side">
+            <div class="column_side_head">
                 <div class="column_side_title">最新项目</div>
             </div>
             <div class="column_content">

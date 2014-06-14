@@ -64,7 +64,7 @@
 <div id="leftbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">热门新闻</div>
+            <div class="column_side_title">热门轶闻</div>
         </div>
         <div class="column_content">
             @foreach ($news_hot as $hot)
@@ -100,53 +100,59 @@
 <div id="mainbar">
     <div class="column_main">
         <div class="column_main_head">
-            <div class="column_main_title">新闻 News</div>
+            <div class="column_main_title">最新评论 New Opinions</div>
         </div>
-        <div class="column_content" id="news" data-paginate="1">
-            @foreach ($news_latest as $latest)
-            <div class="news_item">
-                <div class="news_left">
-                    <a href="{{ route('news.item', $latest->id) }}"><img src="{{ Croppa::url($config_upload['news.picture'].$latest->picture, 160, 110) }}"></a>
-                    <a class="news_forward" title="回应人数" href="{{ route('news.item', $latest->id) }}">
-                        <span class="icon icon_forward"></span>
-                        {{ $latest->comment_count }}
-                    </a>
+        <div class="column_content">
+            @foreach ($comment_latest as $comment)
+            <div class="opinions_item">
+                <div class="opinions_left">
+                    <img src="{{ Croppa::url($config_upload['vc.logo'].$comment->vc->logo, 140, 140) }}">
                 </div>
-                <div class="news_right">
-                    <div class="news_title"><a href="{{ route('news.item', $latest->id) }}">{{ $latest->title }}</a></div>
-                    <div class="news_subtitle">
-                        @if (mb_substr($latest->summary, 0, 50, 'utf-8') != $latest->summary)
-                        {{ mb_substr($latest->summary, 0, 50, 'utf-8') }}...
+                <div class="opinions_right">
+                    <div class="opinions_title"><a href="{{ route('vc.item', $comment->vc->id) }}">{{ $comment->vc->name }}</a></div>
+                    <div class="opinions_subtitle">
+                        @if (mb_substr($comment->vc->summary, 0, 20, 'utf-8') != $comment->vc->summary)
+                        {{ mb_substr($comment->vc->summary, 0, 20, 'utf-8') }}...
                         @else
-                        {{ mb_substr($latest->summary, 0, 50, 'utf-8') }}
+                        {{ mb_substr($comment->vc->summary, 0, 20, 'utf-8') }}
                         @endif
                     </div>
-                    <div class="news_info">{{ $latest->datetime }}</div>
+                    <div class="opinions_comments">
+                        <span class="username">{{ $comment->user->username }}：</span>
+                        <span class="comment_content">
+                            @if (mb_substr($comment->content, 0, 50, 'utf-8') != $comment->content)
+                            {{ mb_substr($comment->content, 0, 50, 'utf-8') }}...
+                            @else
+                            {{ mb_substr($comment->content, 0, 50, 'utf-8') }}
+                            @endif
+                        </span>
+                    </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
+
     <div class="page">
         <ul>
-            @if ($news_latest->getCurrentPage() - 1 > 0)
-            <li class="prevpage"><a href="{{ $news_latest->getUrl($news_latest->getCurrentPage() - 1) }}#news">上一页</a></li>
+            @if ($comment_latest->getCurrentPage() - 1 > 0)
+            <li class="prevpage"><a href="{{ $comment_latest->getUrl($comment_latest->getCurrentPage() - 1) }}#comment">上一页</a></li>
             @else
             <li class="prevpage disabled"><a href="##">上一页</a></li>
             @endif
 
-            @for ($i = $news_latest->getCurrentPage() - 2; $i <= $news_latest->getCurrentPage() + 2; $i++)
-            @if ($i > 0 && $i <= $news_latest->getLastPage())
-                @if ($i == $news_latest->getCurrentPage())
+            @for ($i = $comment_latest->getCurrentPage() - 2; $i <= $comment_latest->getCurrentPage() + 2; $i++)
+            @if ($i > 0 && $i <= $comment_latest->getLastPage())
+                @if ($i == $comment_latest->getCurrentPage())
                     <li class="disabled"><a href="##">{{ $i }}</a></li>
                 @else
-                    <li><a href="{{ $news_latest->getUrl($i) }}#news">{{ $i }}</a></li>
+                    <li><a href="{{ $comment_latest->getUrl($i) }}#comment">{{ $i }}</a></li>
                 @endif
             @endif
             @endfor
 
-            @if ($news_latest->getCurrentPage() < $news_latest->getLastPage())
-            <li class="nextpage"><a href="{{ $news_latest->getUrl($news_latest->getCurrentPage() + 1) }}#news">下一页</a></li>
+            @if ($comment_latest->getCurrentPage() < $comment_latest->getLastPage())
+            <li class="nextpage"><a href="{{ $comment_latest->getUrl($comment_latest->getCurrentPage() + 1) }}#comment">下一页</a></li>
             @else
             <li class="nextpage disabled"><a href="##">下一页</a></li>
             @endif
@@ -159,14 +165,14 @@
 <div id="rightbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title red_title">推荐投资方</div>
+            <div class="column_side_title b_title" id="comment">推荐投资方</div>
         </div>
         <div class="column_content">
             @foreach ($vc_recommend as $vc)
             <div class="investor_item">
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
-                        <span class="investor_name">
+                        <span class="investor_name red_title">
                             @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
                             {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
                             @else

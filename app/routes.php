@@ -21,6 +21,7 @@ Route::get('/vc/ajax/{id?}/', array('uses' => 'VcController@ajaxVcList', 'as' =>
 
 Route::group(array('prefix' => 'news'), function()
 {
+    Route::get('/list/', array('uses' => 'NewsController@showList', 'as' => 'news.list'));
     Route::get('/item/{id?}/', array('uses' => 'NewsController@showItem', 'as' => 'news.item'));
     Route::post('/item/ajax/comment_submit/{id?}/', array('uses' => 'NewsController@ajaxCommentSubmit', 'as' => 'news.item.ajax.comment.submit'));
     Route::get('/ajax/{id?}/', array('uses' => 'NewsController@ajaxNewsList', 'as' => 'news.ajax.list'));

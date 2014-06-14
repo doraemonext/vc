@@ -7,6 +7,7 @@ class NewsController extends BaseController {
     public function __construct()
     {
         View::composer(array(
+            'front.news_list',
             'front.news_item',
         ), function($view)
         {
@@ -17,6 +18,39 @@ class NewsController extends BaseController {
             $view->with('action_name', explode('@', Route::getCurrentRoute()->getActionName()));
             $view->with('setting', Setting::getSetting());
         });
+    }
+
+    public function showList()
+    {
+        $paginateNumber = 8;
+
+        // 获取圈内轶闻
+        $news_list = News::orderBy('datetime', 'DESC')->paginate($paginateNumber);
+
+        // 获取推荐投资方
+        $vc_recommend = Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value));
+
+        // 获取最新项目
+        $showcase_latest = Showcase::orderBy('datetime', 'DESC')->take(8)->get();
+
+        // 获取热门轶闻
+        $news_hot = News::orderBy('comment_count', 'DESC')->take(6)->get();
+
+        // 获取最新话题
+        $discuss_latest = Discuss::orderBy('datetime', 'DESC')->take(3)->get();
+
+        // 获取最新话题
+
+        $data = array(
+            'news_list' => $news_list,
+            'vc_recommend' => $vc_recommend,
+            'rating_category' => VcRatingCategory::all(),
+            'showcase_latest' => $showcase_latest,
+            'news_hot' => $news_hot,
+            'discuss_latest' => $discuss_latest,
+        );
+
+        return View::make('front.news_list', $data);
     }
 
     public function showItem($id)

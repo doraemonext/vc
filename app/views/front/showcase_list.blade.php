@@ -8,14 +8,14 @@
 <div id="leftbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title">推荐投资方</div>
+            <div class="column_side_title b_title">推荐投资方</div>
         </div>
         <div class="column_content">
             @foreach ($vc_recommend as $vc)
             <div class="investor_item">
                 <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
                     <div class="investor_head">
-                        <span class="investor_name">
+                        <span class="investor_name red_title">
                             @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
                             {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
                             @else
@@ -153,7 +153,7 @@
     <div id="rightbar">
         <div class="column_side">
             <div class="column_side_head">
-                <div class="column_side_title">热门新闻</div>
+                <div class="column_side_title red_title">热门轶闻</div>
             </div>
             <div class="column_content">
                 @foreach ($news_hot as $hot)

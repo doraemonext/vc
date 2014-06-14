@@ -63,7 +63,7 @@
 <div id="mainbar">
     <div class="column_main">
         <div class="column_main_head">
-            <div class="column_main_title">新闻 News</div>
+            <div class="column_main_title">圈内轶闻 Stories</div>
         </div>
         <div class="column_content newsitem">
             <div class="newsitem_article">

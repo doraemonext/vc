@@ -82,10 +82,11 @@
             <div class="wrapper">
                 <a href="{{ route('home') }}" class="logo"></a>
                 <ul id="nav">
-                    <li><a href="{{ route('home') }}">首页</a></li>
-                    <li><a href="{{ route('showcase.list') }}">项目展示</a></li>
-                    <li><a href="{{ route('vc.list') }}">VC展示</a></li>
-                    <li><a href="{{ route('discuss.list') }}">讨论区</a></li>
+                    <li><a href="{{ route('home') }}">首 页</a></li>
+                    <li><a href="{{ route('news.list') }}">轶 闻</a></li>
+                    <li><a href="{{ route('showcase.list') }}">项 目</a></li>
+                    <li><a href="{{ route('vc.list') }}">V C</a></li>
+                    <li><a href="{{ route('discuss.list') }}">讨 论</a></li>
                     <li><a href="{{ route('business') }}">商业合作</a></li>
                 </ul>
                 <div class="search">
