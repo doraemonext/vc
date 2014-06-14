@@ -29,7 +29,17 @@ class AdminAdController extends BaseController {
 
     public function showNew()
     {
-        return View::make('admin.ad_edit');
+        $ad_position = AdPosition::all();
+        $position_array = array();
+        foreach ($ad_position as $p) {
+            $position_array[$p->id] = $p->name;
+        }
+
+        $data = array(
+            'position_select' => $position_array,
+        );
+
+        return View::make('admin.ad_edit', $data);
     }
 
     public function showEdit($id)
@@ -44,8 +54,15 @@ class AdminAdController extends BaseController {
             return Redirect::route('admin.ad');
         }
 
+        $ad_position = AdPosition::all();
+        $position_array = array();
+        foreach ($ad_position as $p) {
+            $position_array[$p->id] = $p->name;
+        }
+
         $data = array(
             'ad' => $ad,
+            'position_select' => $position_array,
         );
 
         return View::make('admin.ad_edit', $data);
@@ -55,8 +72,9 @@ class AdminAdController extends BaseController {
     {
         $config = Config::get('upload');
 
-        $input = Input::only('url');
+        $input = Input::only('url', 'position');
         $input['url'] = addslashes(strip_tags($input['url']));
+        $input['position'] = intval($input['position']);
 
         // 对提交信息进行验证
         $rules = array(
@@ -107,7 +125,7 @@ class AdminAdController extends BaseController {
         $ad = new Ad;
         $ad->picture = $filename;
         $ad->url = $input['url'];
-        $ad->position_id = 1;
+        $ad->position_id = $input['position'];
         $ad->save();
 
         Session::flash('status', 'success');
@@ -128,8 +146,9 @@ class AdminAdController extends BaseController {
             return Redirect::route('admin.ad');
         }
 
-        $input = Input::only('url');
+        $input = Input::only('url', 'position');
         $input['url'] = addslashes(strip_tags($input['url']));
+        $input['position'] = intval($input['position']);
 
         // 对提交信息进行验证
         $rules = array(
@@ -181,6 +200,7 @@ class AdminAdController extends BaseController {
             $ad->picture = $filename;
         }
         $ad->url = $input['url'];
+        $ad->position_id = $input['position'];
         $ad->save();
 
         Session::flash('status', 'success');
