@@ -62,6 +62,8 @@ class VcController extends BaseController {
             return Redirect::route('vc.list');
         }
 
+        $vc_recommend = Vc::where('recommended', '=', '1')->get();
+
         // 获取VC动态
         $news_category = NewsCategory::where('title', '=', 'VC动态')->get()->first()->id;
         $news_list = News::where('category_id', '=', $news_category)->orderBy('datetime', 'DESC')->take(8)->get();
@@ -76,6 +78,7 @@ class VcController extends BaseController {
             'comment_count' => $comment_count,
             'comment_paginate' => $comment_paginate,
             'rating_category' => VcRatingCategory::all(),
+            'vc_recommend' => $vc_recommend,
             'rating' => $this->getRatingByVC($vc->id),
             'news_list' => $news_list,
         );
