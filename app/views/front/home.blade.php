@@ -50,10 +50,12 @@
 @section('topbar')
 <div id="topbar">
     <div class="imgcolumn">
+        @if (isset($ad_top_big))
         <a class="imgcolumn_main" href="{{ $ad_top_big->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_big->picture, 605, 410) }}"></a>
-        <a class="imgcolumn_sub" href="{{ $ad_top_small[0]->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_small[0]->picture, 220, 130) }}"></a>
-        <a class="imgcolumn_sub" href="{{ $ad_top_small[1]->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_small[1]->picture, 220, 130) }}"></a>
-        <a class="imgcolumn_sub" href="{{ $ad_top_small[2]->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$ad_top_small[2]->picture, 220, 130) }}"></a>
+        @endif
+        @foreach ($ad_top_small as $a)
+        <a class="imgcolumn_sub" href="{{ $a->url }}"><img src="{{ Croppa::url($config_upload['ad.picture'].$a->picture, 220, 130) }}"></a>
+        @endforeach
     </div>
 </div>
 @stop
@@ -255,6 +257,7 @@
             @endforeach
         </div>
     </div>
+    @if (isset($showcase_recommend))
     <div class="column_side">
         <div class="column_side_head">
             <div class="column_side_title b_title">优秀项目</div>
@@ -271,6 +274,7 @@
             </div>
         </div>
     </div>
+    @endif
     <div class="column_side" id="news">
         <div class="column_side_head">
             <div class="column_side_title">投资方排名</div>
