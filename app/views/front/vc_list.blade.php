@@ -48,7 +48,7 @@
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">
-                        <span class="vcbar_head">总分</span>
+                        <span class="vcbar_head">综合</span>
                         <span class="vcscore">{{ round($vc->score[0], 1) }}</span>
                         <span class="vc_bar" style="width:{{ $vc->score[0] * 18 }}px"></span>
                     </li>
@@ -84,7 +84,7 @@
                 </div>
                 <ul class="vc_score">
                     <li class="vctotal">
-                        <span class="vcbar_head">总分</span>
+                        <span class="vcbar_head">综合</span>
                         <span class="vcscore">{{ round($vc->score[0], 1) }}</span>
                         <span class="vc_bar" style="width:{{ $vc->score[0] * 18 }}px"></span>
                     </li>

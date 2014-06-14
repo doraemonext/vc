@@ -93,12 +93,19 @@
                         <span class="icon icon_search"></span>
                     </form>
                 </div>
-                @if (isset($user))
+                @if (isset($user) && Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')))
+                <a class="user right" href="{{ route('admin.home') }}">
+                    <span class="user_name">{{ $user->username }}</span>
+                    <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
+                </a>
+                @elseif (isset($user))
                 <a class="user right" href="{{ route('user.home') }}">
                     <span class="user_name">{{ $user->username }}</span>
                     <img class="user_photo" src="{{ Gravatar::src($user->email, 36) }}">
                 </a>
-                @else
+                @endif
+
+                @if (!isset($user))
                 <a class="login" href="{{ route('login') }}">登陆</a>
                 @endif
             </div>
