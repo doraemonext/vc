@@ -257,7 +257,7 @@
             @endforeach
         </div>
     </div>
-    @if (isset($showcase_recommend))
+    @if ($showcase_recommend->count() > 0)
     <div class="column_side">
         <div class="column_side_head">
             <div class="column_side_title b_title">优秀项目</div>
