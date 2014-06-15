@@ -45,7 +45,11 @@ Route::group(array('prefix' => 'discuss'), function()
 });
 
 Route::get('/search/', array('uses' => 'SearchController@showSearch', 'as' => 'search'));
-Route::get('/business/', array('uses' => 'HomeController@showBusiness', 'as' => 'business'));
+Route::group(array('prefix' => 'business'), function()
+{
+    Route::get('/', array('uses' => 'HomeController@showBusiness', 'as' => 'business'));
+    Route::get('/{page?}/', array('uses' => 'HomeController@showBusiness', 'as' => 'business.page'));
+});
 
 Route::group(array('prefix' => 'account'), function()
 {

@@ -47,9 +47,18 @@ class HomeController extends BaseController {
 		return View::make('front.home', $data);
 	}
 
-    public function showBusiness()
+    public function showBusiness($page = 'about')
     {
-        return View::make('front.business');
+        $page = addslashes(strip_tags($page));
+        if ($page != 'about' && $page != 'article' && $page != 'ad') {
+            $page = 'about';
+        }
+
+        $data = array(
+            'page' => $page
+        );
+
+        return View::make('front.business', $data);
     }
 
 }

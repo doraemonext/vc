@@ -11,16 +11,20 @@
 @section('leftbar')
     <div id="b_leftbar">
         <ul class="tabs">
-            <li id="tab1" class="active">关于金客网</li>
-            <li id="tab2">文章投稿</li>
-            <li id="tab4">广告合作</li>
+            <li id="tab1" <?php if($page=='about') echo 'class="active"'; ?>>关于金客网</li>
+            <li id="tab2" <?php if($page=='article') echo 'class="active"'; ?>>文章投稿</li>
+            <li id="tab4" <?php if($page=='ad') echo 'class="active"'; ?>>广告合作</li>
         </ul>
         <div class="clear"></div>
     </div>
 @stop
 
 @section('rightbar')
+    @if ($page == 'about')
     <div class="business_article tab1 tabanchor">
+    @else
+    <div class="business_article tab1 tabanchor" style="display:none">
+    @endif
         <div class="business_title">关于金客网</div>
         <div class="business_content">
             <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
@@ -28,7 +32,11 @@
             <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
         </div>
     </div>
+    @if ($page == 'article')
+    <div class="business_article tab2 tabanchor">
+    @else
     <div class="business_article tab2 tabanchor" style="display:none">
+    @endif
         <div class="business_title">文章投稿</div>
         <div class="business_content">
             <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
@@ -46,7 +54,11 @@
             <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
         </div>
     </div>
+    @if ($page == 'ad')
+    <div class="business_article tab4 tabanchor">
+    @else
     <div class="business_article tab4 tabanchor" style="display:none">
+    @endif
         <div class="business_title">广告合作</div>
         <div class="business_content">
             <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>

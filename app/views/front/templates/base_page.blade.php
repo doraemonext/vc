@@ -126,10 +126,10 @@
         <div id="footer">
             <div class="wrapper">
                 <div class="column_footer">
-                    <h3>25K</h3>
+                    <h3>KingCarat</h3>
                     <ul>
-                        <li><a href="">关于我们</a></li>
-                        <li><a href="">联系我们</a></li>
+                        <li><a href="{{ route('business.page', 'about') }}">关于我们</a></li>
+                        <li><a href="{{ route('business.page', 'ad') }}">联系我们</a></li>
                     </ul>
                 </div>
                 <div class="column_footer">
