@@ -176,11 +176,17 @@
             <div class="column_side_title">最新话题</div>
         </div>
         <div class="column_content">
-            @foreach ($discuss_hot as $hot)
-            <a class="topic_item" href="{{ route('discuss.item', $hot->id) }}">
-                <div class="topic_title">{{ $hot->title }}</div>
-                    <div class="topic_content">{{ $hot->content }}</div>
-                <div class="topic_info">赞({{ $hot->vote }}) 回复({{ $hot->comment_count }}) {{ $hot->datetime }}</div>
+            @foreach ($discuss_latest as $latest)
+            <a class="topic_item" href="{{ route('discuss.item', $latest->id) }}">
+                <div class="topic_title">{{ $latest->title }}</div>
+                <div class="topic_content">
+                    @if (mb_substr($latest->content, 0, 100, 'utf-8') != $latest->content)
+                    {{ mb_substr($latest->content, 0, 100, 'utf-8') }}...
+                    @else
+                    {{ mb_substr($latest->content, 0, 100, 'utf-8') }}
+                    @endif
+                </div>
+                <div class="topic_info">赞({{ $latest->vote }}) 回复({{ $latest->comment_count }}) {{ $latest->datetime }}</div>
             </a>
             @endforeach
         </div>

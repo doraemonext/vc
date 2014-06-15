@@ -123,7 +123,13 @@
                 @foreach ($discuss_hot as $hot)
                 <a class="topic_item" href="{{ route('discuss.item', $hot->id) }}">
                     <div class="topic_title">{{ $hot->title }}</div>
-                        <div class="topic_content">{{ $hot->content }}</div>
+                        <div class="topic_content">
+                            @if (mb_substr($hot->content, 0, 100, 'utf-8') != $hot->content)
+                            {{ mb_substr($hot->content, 0, 100, 'utf-8') }}...
+                            @else
+                            {{ mb_substr($hot->content, 0, 100, 'utf-8') }}
+                            @endif
+                        </div>
                     <div class="topic_info">赞({{ $hot->vote }}) 回复({{ $hot->comment_count }}) {{ $hot->datetime }}</div>
                 </a>
                 @endforeach

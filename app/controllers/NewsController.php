@@ -76,6 +76,9 @@ class NewsController extends BaseController {
         // 获取最热话题
         $discuss_hot = Discuss::orderBy('comment_count', 'DESC')->orderBy('vote', 'DESC')->take(3)->get();
 
+        // 获取最新话题
+        $discuss_latest = Discuss::orderBy('datetime', 'DESC')->take(3)->get();
+
         $data = array(
             'news' => $news,
             'comment_count' => $comment_count,
@@ -85,6 +88,7 @@ class NewsController extends BaseController {
             'vc_recommend' => Vc::getRecommendWithRating(intval(Setting::where('title', '=', 'paginate_home_sidebar_vc_recommend')->first()->value)),
             'rating_category' => VcRatingCategory::all(),
             'discuss_hot' => $discuss_hot,
+            'discuss_latest' => $discuss_latest,
         );
 
         return View::make('front.news_item', $data);
