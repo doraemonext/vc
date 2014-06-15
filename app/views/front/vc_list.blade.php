@@ -12,34 +12,20 @@
 <div id="leftbar">
     <div class="column_side">
         <div class="column_side_head">
-            <div class="column_side_title b_title">推荐投资方</div>
+            <div class="column_side_title">最新评论</div>
         </div>
-        <div class="column_content">
-            @foreach ($vc_recommend as $vc)
-            <div class="investor_item">
-                <a class="item_investor" href="{{ route('vc.item', $vc->id) }}">
-                    <div class="investor_head">
-                        <span class="investor_name red_title">
-                            @if (mb_substr($vc->name, 0, 13, 'utf-8') != $vc->name)
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}...
-                            @else
-                            {{ mb_substr($vc->name, 0, 13, 'utf-8') }}
-                            @endif
-                        </span>
-                    </div>
-                    <div class="investor_content">
-                        <div class="investor_mscore">
-                            <div class="investor_tscore">{{ round($vc->rating, 1) }}</div>
-                            <div class="investor_np">{{ $vc->ratings()->where('vc_rating_category_id', '=', 1)->count() }}人打分</div>
-                        </div>
-                        <ul class="investor_detail">
-                            @foreach ($rating_category as $category)
-                            <li>{{ $category->title }} {{ round($vc->score[$category->id], 1) }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </a>
-            </div>
+        <div class="column_content investment">
+            @foreach ($comment_latest as $latest)
+            <a class="topic_item" href="{{ route('vc.item', $latest->vc->id) }}">
+                <div class="topic_title">{{ $latest->vc->name }}</div>
+                <div class="topic_content"><span class="username">{{ $latest->user->username }}：</span>
+                    @if (mb_substr($latest->content, 0, 50, 'utf-8') != $latest->content)
+                    {{ mb_substr($latest->content, 0, 50, 'utf-8') }}...
+                    @else
+                    {{ mb_substr($latest->content, 0, 50, 'utf-8') }}
+                    @endif
+                </div>
+            </a>
             @endforeach
         </div>
     </div>
@@ -72,7 +58,7 @@
         <div class="column_content">
             @foreach ($vc_recommend as $vc)
             <a class="vc_item" href="{{ route('vc.item', $vc->id) }}">
-                <div class="vc_title">
+                <div class="vc_title red_title">
                     {{ $vc->name }}
                     <div class="vc_commentnum">评论({{ $vc->comment_count }})</div>
                 </div>

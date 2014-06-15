@@ -43,6 +43,7 @@ class VcController extends BaseController {
             'vc_list' => $vc_list,
             'rating_category' => VcRatingCategory::all(),
             'news_list' => $news_list,
+            'comment_latest' => VcComment::orderBy('datetime', 'DESC')->take(3)->get(),
         );
 
         return View::make('front.vc_list', $data);
