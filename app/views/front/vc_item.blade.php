@@ -117,7 +117,7 @@
         </div>
         <div class="comment_box">
             <div class="comment_info">
-                <span class="comment_count">项目评论({{ $comment_count }})</span>
+                <span class="comment_count">VC 评论({{ $comment_count }})</span>
                 <a class="comment_like" id="vote" href="##">赞(<span id="vote_count">{{ $vc->vote }}</span>)<span class="icon_like"></span></a>
             </div>
             <textarea class="comment_text" id="comment_text"></textarea>
