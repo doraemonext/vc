@@ -169,7 +169,7 @@
   margin-bottom: 5px;
 
   font-size: 16px;
-  font-weight: 900; 
+  font-weight: 900;
   border-bottom: 1px solid #faebcc;
 }
 
@@ -299,6 +299,10 @@
   text-indent: 2em;
   line-height: 1.5em;
   color: #666;
+}
+
+.project_content img, .topicitem_content img, .newsitem_content img, .vcitem_content img {
+  max-width: 450px !important;
 }
 
 .project_item {
@@ -578,7 +582,7 @@
   width: 150px;
   height: 18px;
   background-color: #f0f0f0;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
 }
 
 .stars_item label {

@@ -89,9 +89,9 @@
                     <li><a href="{{ route('business') }}">商业合作</a></li>
                 </ul>
                 <div class="search">
-                    <form action="{{ route('search') }}" method="get">
+                    <form action="{{ route('search') }}" method="get" id="search_form">
                         <input class="search_input" name="q" type="text">
-                        <span class="icon icon_search"></span>
+                        <span class="icon icon_search" id="search_submit"></span>
                     </form>
                 </div>
                 @if (isset($user) && Sentry::getUser()->inGroup(Sentry::findGroupByName('admin')))
@@ -221,6 +221,10 @@
                     }
                 });
                 return false;
+            });
+
+            $("#search_submit").click(function() {
+                $("#search_form").submit();
             });
         });
         </script>
